@@ -1,0 +1,86 @@
+[
+ {
+  "file": "colline-alba",
+  "focus": [
+   0.62,
+   0.68
+  ],
+  "alt": "Colline al tramonto con una strada che sale tra i cipressi",
+  "mood": "collina",
+  "tipo": "illustrazione generata al computer",
+  "fonte": "tools/illus.py (questo pacchetto)",
+  "licenza": "nessuna restrizione: creata per il prototipo",
+  "ritrae_luogo_reale": false,
+  "note": "Segnaposto: sostituire con fotografia con licenza mantenendo lo stesso nome file"
+ },
+ {
+  "file": "pianura-filari",
+  "focus": [
+   0.52,
+   0.62
+  ],
+  "alt": "Strada dritta in pianura tra campi e filari di pioppi",
+  "mood": "pianura",
+  "tipo": "illustrazione generata al computer",
+  "fonte": "tools/illus.py (questo pacchetto)",
+  "licenza": "nessuna restrizione: creata per il prototipo",
+  "ritrae_luogo_reale": false,
+  "note": "Segnaposto: sostituire con fotografia con licenza mantenendo lo stesso nome file"
+ },
+ {
+  "file": "argine-fiume",
+  "focus": [
+   0.42,
+   0.72
+  ],
+  "alt": "Sentiero sull'argine di un fiume al mattino, con alberi nella foschia",
+  "mood": "fiume",
+  "tipo": "illustrazione generata al computer",
+  "fonte": "tools/illus.py (questo pacchetto)",
+  "licenza": "nessuna restrizione: creata per il prototipo",
+  "ritrae_luogo_reale": false,
+  "note": "Segnaposto: sostituire con fotografia con licenza mantenendo lo stesso nome file"
+ },
+ {
+  "file": "sentiero-bosco",
+  "focus": [
+   0.5,
+   0.78
+  ],
+  "alt": "Sentiero in un bosco con luce filtrata tra i tronchi",
+  "mood": "bosco",
+  "tipo": "illustrazione generata al computer",
+  "fonte": "tools/illus.py (questo pacchetto)",
+  "licenza": "nessuna restrizione: creata per il prototipo",
+  "ritrae_luogo_reale": false,
+  "note": "Segnaposto: sostituire con fotografia con licenza mantenendo lo stesso nome file"
+ },
+ {
+  "file": "crinale",
+  "focus": [
+   0.45,
+   0.72
+  ],
+  "alt": "Crinali di montagna sovrapposti nella foschia, con un sentiero in primo piano",
+  "mood": "montagna",
+  "tipo": "illustrazione generata al computer",
+  "fonte": "tools/illus.py (questo pacchetto)",
+  "licenza": "nessuna restrizione: creata per il prototipo",
+  "ritrae_luogo_reale": false,
+  "note": "Segnaposto: sostituire con fotografia con licenza mantenendo lo stesso nome file"
+ },
+ {
+  "file": "sterrato-campi",
+  "focus": [
+   0.52,
+   0.74
+  ],
+  "alt": "Strada bianca tra campi di grano dorati e colline lontane",
+  "mood": "sterrato",
+  "tipo": "illustrazione generata al computer",
+  "fonte": "tools/illus.py (questo pacchetto)",
+  "licenza": "nessuna restrizione: creata per il prototipo",
+  "ritrae_luogo_reale": false,
+  "note": "Segnaposto: sostituire con fotografia con licenza mantenendo lo stesso nome file"
+ }
+]
