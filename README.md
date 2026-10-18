@@ -1,27 +1,53 @@
-# Trailo 2.0 · revisione 5: percorsi tuoi, meteo, energia, bacheca
+# Trailo 2.0 · revisione 6
 
-Trailo 2.0 per ciclismo e running.
+Trailo per ciclismo e running: immersivo quando esplori, tecnico durante l'attività, elegante quando analizzi.
 
-La revisione 5 aggiunge:
-- percorsi personalizzati, condivisibili;
-- meteo in Home e "cosa portare" (acqua, cibo, carboidrati, gel, sali);
-- report calorico;
-- foto e audio in chat;
-- bacheca "social mode": post, like, commenti, repost, tag e profili.
-
-Restano tutte le funzioni della revisione 4: mappa reale, percorsi famosi, natura, cosa c'è lungo il percorso, amici, chat ed eventi.
+La revisione 6 non aggiunge funzioni per fare numero: rende più chiare, affidabili e curate quelle che c'erano. Il dettaglio delle modifiche, con la diagnosi di partenza, è in `CHANGELOG.md`; il rapporto delle prove in `VERIFICA.md`.
 
 **L'app pubblicata oggi non viene toccata.** Questa versione usa lo stesso progetto Supabase per account e Community.
 
+## 0. In breve: cosa funziona davvero
+
+| Funzione | Stato | Da cosa dipende |
+|---|---|---|
+| Home "Oggi", proposta del giorno, Esplora, filtri, dettaglio percorso | **Operativa** | Dati dell'app; tracciati da BRouter |
+| Mappa stradale, satellite, rilievo, ciclovie, sentieri | **Operativa** | Servizi di tessere pubblici (OSM, Esri, OpenTopoMap, Waymarked Trails) |
+| Percorsi famosi, percorsi tuoi, percorso consigliato, tipi di strada | **Operativa** | BRouter (server pubblico gratuito) |
+| Natura, "Lungo il percorso", ricerca luoghi, nomi delle tappe | **Operativa** | Overpass e Nominatim (OpenStreetMap) |
+| Meteo e "Cosa portare", report calorico | **Operativa** | Open-Meteo; calcoli con regole dichiarate, non consigli medici |
+| Registrazione GPS | **Operativa, non provata su un telefono vero** | GPS del browser: con schermo bloccato o app in background il browser può sospenderlo |
+| Simulazione ×20 e modalità dimostrativa | **Simulazioni dichiarate** | Sempre separate dai dati reali |
+| Archivio attività, progressi, analisi, backup e ripristino | **Operativa** | Memoria del browser; nessun backup automatico sul cloud |
+| Uso senza rete e installazione sulla schermata Home | **Operativa** | Service worker (solo su https, cioè GitHub Pages o Netlify) |
+| Account, amici, chat con foto e audio, bacheca, eventi, condivisione | **Operativa** | Supabase: regole di accesso provate sul database vero |
+| Assistente IA, Strava, sensori, contatto di emergenza, notifiche push | **Non collegati** | Dichiarati nel Profilo; nessun pulsante finto |
+
 ## 1. Avvio
 
-- **GitHub Pages (consigliato):** https://michtru.github.io/trailo/ una volta attivato Pages nel repository (Settings → Pages → Branch `main`, cartella `/ (root)`).
-- **Netlify Drop:** trascina la cartella `trailo-prototipo-rev5` (quella con `index.html` e `assets/`) su app.netlify.com/drop. È il modo consigliato: mappe, ricerca e Community richiedono HTTPS e connessione.
-- **In locale:** dalla cartella esegui `python3 -m http.server 8080`, poi apri `http://localhost:8080`.
-- **Account:** se in Supabase è attiva la conferma via email, il link di conferma porta al "Site URL" impostato in Supabase → Authentication. Va impostato sull'indirizzo da cui apri l'app (GitHub Pages o Netlify).
-- **Strumenti del prototipo** (Profilo, in alto a destra, poi in fondo alla pagina): modalità dimostrativa, intro, onboarding, design system, ricomincia da capo.
+- **GitHub Pages (consigliato):** https://michtru.github.io/trailo/ (repository `MichTru/trailo`, Pages su branch `main`, cartella `/ (root)`). Basta caricare il contenuto di questa cartella: `index.html`, `sw.js`, `manifest.webmanifest`, `assets/`.
+- **Su iPhone:** apri il link in Safari → Condividi → "Aggiungi alla schermata Home". Così Trailo si apre a schermo intero, funziona senza rete e Safari non cancella l'archivio dopo settimane senza visite.
+- **Netlify Drop:** trascina la cartella su app.netlify.com/drop.
+- **In locale:** `python3 -m http.server 8080` nella cartella, poi `http://localhost:8080`.
+- **Account:** in Supabase → Authentication → URL Configuration, il "Site URL" deve essere l'indirizzo da cui apri l'app.
+- **Strumenti del prototipo** (Profilo, in fondo): modalità dimostrativa, intro, onboarding, design system, ricomincia da capo.
 
-## 2. Novità della revisione 5
+## 1-bis. Limiti tecnici ancora presenti
+
+- **GPS in background:** nel browser la registrazione si interrompe o perde posizioni con lo schermo bloccato. Lo dichiarano sia la schermata di avvio sia l'attività. Per un tracciamento affidabile in tasca serve un'app nativa (o un contenitore come Capacitor). **Nessuna prova su dispositivi fisici** è stata fatta da qui.
+- **Dati locali:**
+  - attività e percorsi vivono nel browser; il backup va scaricato a mano;
+  - su iPhone, senza installazione sulla schermata Home, Safari può cancellarli dopo settimane senza visite;
+  - non c'è sincronizzazione cloud (non viene simulata).
+- **Servizi gratuiti esterni:** BRouter, Overpass, Nominatim e Open-Meteo hanno limiti d'uso. Open-Meteo è gratuito per uso non commerciale; Esri e OpenTopoMap hanno termini da verificare per un uso commerciale con molti utenti. Per un lancio pubblico servono istanze proprie o contratti.
+- **Prove:** tutte automatiche, con Chromium e servizi simulati. Le regole del database sono provate sul server vero; mappe, BRouter, Overpass, Nominatim e Open-Meteo veri no (la rete esterna è bloccata da qui).
+- **Transizioni:** la continuità tra scheda e dettaglio usa le View Transitions. Ci sono su Safari 18+ e Chrome recenti; altrove il passaggio è diretto.
+- **Community:**
+  - non ci sono "segnala" e "blocca utente", né notifiche push;
+  - un file foto o audio è leggibile da chi ha un account e conosce il nome esatto del file (i nomi sono casuali e non elencabili).
+- **Logo:** mancano il vettoriale ufficiale del simbolo e una versione chiara del wordmark per i fondi scuri, per questo la scheda "Oggi" non porta il logo.
+- **Fotografie:** sono ancora illustrazioni generate, sempre etichettate "Illustrazione". Servono foto con licenza dei luoghi veri.
+
+## 2. Funzioni della revisione 5 (aggiornate nella 6)
 
 **Percorsi personalizzati** (Esplora → "I tuoi percorsi" → "Crea un percorso").
 - Tocchi la mappa per aggiungere le tappe, in ordine.
@@ -308,7 +334,7 @@ Si filtra per categoria, e i punti compaiono anche sulla mappa. Dal percorso si 
 | Bacheca, like, commenti, repost, tag, profili | Reale (Supabase) | Automatico con tre utenti: post solo amici e pubblici, tag, like e tolto, commento, repost, repost vietato se non visibile, profili, griglia foto, Taggato, cancellazioni. Regole di accesso provate anche sul database vero | Nessuna notifica push: novità visibili aprendo l'app; nessuna segnalazione o blocco di utenti |
 | Tutto quanto della revisione 3 (intro, onboarding, Move, GPS, archivio, Progressi, layout) | Come prima | Automatico, ripetuto | Vedi revisione 3 |
 
-**Prove automatiche: 286, tutte riuscite** (107 nuove per la revisione 5). Il dettaglio è in `VERIFICA.md`.
+**Prove automatiche: 341, tutte riuscite** (108 per la revisione 5 e 54 per la 6). Il dettaglio è in `VERIFICA.md`.
 
 In questo ambiente la rete esterna è bloccata. Mappe, BRouter, Overpass, Nominatim, Open-Meteo e Supabase (database e spazio per i file) sono stati simulati (`strumenti/mock.py`) per provare il comportamento dell'app. Le prove dicono che l'app usa correttamente le risposte di questi servizi e gestisce i loro errori. **Non dicono** che i servizi veri rispondano: va verificato aprendo l'app da GitHub Pages o Netlify. Nessun test su dispositivi fisici.
 
@@ -340,13 +366,13 @@ In questo ambiente la rete esterna è bloccata. Mappe, BRouter, Overpass, Nomina
 
 ## 7. Contenuto del pacchetto
 
-- `index.html` e `assets/`: l'app.
-- `LEGGIMI.md` e `VERIFICA.md`.
+- `index.html`, `sw.js`, `manifest.webmanifest` e `assets/`: l'app, pronta per GitHub Pages.
+- `LEGGIMI.md`, `CHANGELOG.md` e `VERIFICA.md` (rapporto di verifica).
 - `sql/`: modifiche del database (revisioni 4 e 5, entrambe applicate).
 - `anteprime/`:
   - schermate della revisione 3 (numerate 01–22);
-  - schermate della revisione 4 (30–41) e della revisione 5 (42–50), fatte con servizi simulati: lo sfondo a griglia sostituisce le tessere vere e la foto verde è un'immagine di prova.
+  - schermate delle revisioni 4 (30–41), 5 (42–50) e 6 (51–56), più `rev6/` con le schermate principali su tre misure di iPhone. Sono fatte con servizi simulati: lo sfondo a griglia sostituisce le tessere vere e la foto verde è un'immagine di prova.
 - `strumenti/`:
   - sorgenti `src/` e `build.py`;
   - script degli asset (`logo_assets.py`, `illus.py`);
-  - test (`t_full.py`, `t_tabbar.py`, `t_new.py`, `t_rev5.py`, `t_rev5b.py`), servizi simulati (`mock.py`) e `verifica.py` che scrive VERIFICA.md.
+  - test (`t_full.py`, `t_tabbar.py`, `t_new.py`, `t_rev5.py`, `t_rev5b.py`, `t_rev6.py`), servizi simulati (`mock.py`) e `verifica.py` che scrive VERIFICA.md.
