@@ -427,6 +427,19 @@ button.av{cursor:pointer}
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;border-radius:14px;overflow:hidden}
 .pgrid button{aspect-ratio:1;padding:0;background:var(--paper2)}.pgrid img{width:100%;height:100%;object-fit:cover;display:block}
 .cmt p{font-size:15px}
+
+/* tappe e percorso consigliato */
+.wpl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--hair);border-radius:var(--r-m)}
+.wpl li{display:flex;align-items:center;gap:8px;padding:8px 10px;border-top:1px solid var(--hair);min-height:58px}.wpl li:first-child{border-top:0}
+.wpn{width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px;flex:none}
+.wpn.first{background:#1D7A52}.wpn.last{background:#B4380C}
+.wpname{text-align:left;min-width:0}.wpname b{display:block;font-size:15px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.wpname small{display:block;font-size:13px;color:var(--ink3);font-weight:600}
+.icon-btn.sm2{width:40px;height:40px}.icon-btn[disabled]{opacity:.35}
+.mix{display:flex;flex-direction:column;gap:8px}.mixbar{display:flex;height:12px;border-radius:6px;overflow:hidden;background:var(--paper2)}.mixbar i{display:block;height:100%}
+.mixl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:14px}.mixl li{display:flex;gap:8px;align-items:center}.mixl li>i{width:10px;height:10px;border-radius:3px;flex:none}.mixl .muted{min-width:58px;text-align:right}
+.autobtn{gap:14px;text-align:left;border:1.5px solid var(--ink)}.autobtn .ni{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--acc-soft);color:var(--acc-t);flex:none}
+.autobtn2{width:100%;gap:10px;text-align:left;margin-top:10px;padding:12px 14px;border-radius:14px;background:var(--acc-soft);font-size:15px}.autobtn2 svg{flex:none;color:var(--acc-t)}
+.acand.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
 </style>
 </head>
 <body>
@@ -813,7 +826,21 @@ function routeGeo(r){if(ROUTE_GEO[r.id])return Promise.resolve(ROUTE_GEO[r.id]);
   return getJSON(url,{},30000).then(function(j){var f=j.features[0],pr=f.properties||{},co=f.geometry.coordinates;if(!co||co.length<2)throw new Error('vuoto');
     var pts=thin(co.map(function(x){return [Math.round(x[1]*1e5)/1e5,Math.round(x[0]*1e5)/1e5,x[2]==null?null:Math.round(x[2])]}),1500);
     var g=geoFromPts(pts);g.km=Number(pr['track-length'])/1000||g.km;if(pr['filtered ascend']!=null)g.up=Math.round(Number(pr['filtered ascend']));g.computed=true;g.src='BRouter · OpenStreetMap';
-    ROUTE_GEO[r.id]=g;cachePut('rt.'+r.id,g);return g})}
+    g.mix=roadMix(pr.messages);ROUTE_GEO[r.id]=g;cachePut('rt.'+r.id,g);return g})}
+/* tipi di strada lungo il tracciato, dai tag OpenStreetMap che BRouter riporta per ogni tratto (km per categoria) */
+function roadClass(t){var h=(/(?:^| )highway=(\S+)/.exec(t)||[])[1]||'',s=(/(?:^| )surface=(\S+)/.exec(t)||[])[1]||'';
+  if(h==='cycleway'||/(?:^| )bicycle=designated/.test(t)||/(?:^| )cycleway(?::\w+)?=(lane|track|shared_lane|opposite_lane|opposite_track)/.test(t)||/route_bicycle_\w+=yes/.test(t))return 'cycle';
+  if(/^(track|path|bridleway|footway)$/.test(h)||/^(gravel|unpaved|dirt|ground|compacted|fine_gravel|grass|earth|pebblestone|sand)$/.test(s))return 'trail';
+  if(/^(trunk|trunk_link|primary|primary_link|motorway|motorway_link)$/.test(h))return 'main';
+  if(/^(secondary|secondary_link)$/.test(h))return 'busy';return 'quiet'}
+function roadMix(msgs){if(!Array.isArray(msgs)||msgs.length<2||!Array.isArray(msgs[0]))return null;var H=msgs[0],iD=H.indexOf('Distance'),iW=H.indexOf('WayTags');if(iD<0||iW<0)return null;
+  var m={cycle:0,quiet:0,trail:0,busy:0,main:0};for(var i=1;i<msgs.length;i++){var d=Number(msgs[i][iD])/1000;if(!(d>0))continue;m[roadClass(String(msgs[i][iW]||''))]+=d}
+  for(var k in m)m[k]=Math.round(m[k]*100)/100;return m}
+var MIX_L={cycle:['Ciclabili e itinerari ciclabili','#0F766E'],quiet:['Strade secondarie tranquille','#3E7C3A'],trail:['Sterrati e sentieri','#9A6408'],busy:['Strade provinciali','#C2410C'],main:['Strade statali o trafficate','#B4380C']};
+function mixShare(m){if(!m)return null;var t=0,k;for(k in m)t+=m[k];return t>0?(m.cycle+m.quiet+m.trail)/t:null}
+function mixHtml(m){if(!m)return '';var t=0,k;for(k in m)t+=m[k];if(!(t>0))return '';var ks=['cycle','quiet','trail','busy','main'].filter(function(x){return m[x]>0});
+  return '<div class="mix"><div class="mixbar" role="img" aria-label="'+ks.map(function(x){return MIX_L[x][0]+' '+Math.round(m[x]/t*100)+'%'}).join(', ')+'">'+ks.map(function(x){return '<i style="width:'+(m[x]/t*100).toFixed(1)+'%;background:'+MIX_L[x][1]+'"></i>'}).join('')+'</div>'+
+    '<ul class="mixl">'+ks.map(function(x){return '<li><i style="background:'+MIX_L[x][1]+'"></i><span class="grow">'+MIX_L[x][0]+'</span><b class="num">'+Math.round(m[x]/t*100)+'%</b><span class="muted num">'+nf(m[x],m[x]<10?1:0)+' km</span></li>'}).join('')+'</ul></div>'}
 function geoFromPts(pts){var d=[0];for(var i=1;i<pts.length;i++)d.push(d[i-1]+hav(pts[i-1],pts[i])/1000);var ele=pts.map(function(p){return p[2]}),hasE=ele.every(function(e){return e!=null}),up=0;
   if(hasE){var ref=ele[0];for(i=1;i<ele.length;i++){if(ele[i]-ref>=3){up+=ele[i]-ref;ref=ele[i]}else if(ref-ele[i]>=3)ref=ele[i]}}
   return {pts:pts.map(function(p){return [p[0],p[1]]}),dist:d,ele:hasE?ele:null,km:d[d.length-1],up:hasE?Math.round(up):null}}
@@ -1237,6 +1264,7 @@ function exMarkers(){if(!EXMAP)return;var t=S.ex.tab,mk=[];
 function paintExList(){var box=$('#exList');if(!box)return;var t=S.ex.tab,h='';
   if(t==='famous'){var mine=myRoutes(S.sport);
     h+='<section class="myr" aria-labelledby="myrT"><div class="row"><h2 id="myrT" class="grow" style="font-size:20px">I tuoi percorsi</h2><button type="button" class="btn btn-ink sm" data-act="plan">'+ICON.path+'Crea un percorso</button></div>'+
+      '<button type="button" class="row autobtn2" data-act="planAuto">'+ICON.spark+'<span class="grow"><b>Percorso consigliato</b> <span class="muted">· '+(S.sport==='run'?'sentieri e strade tranquille':'ciclabili, secondarie e sterrati')+'</span></span>'+ICON.chev+'</button>'+
       (mine.length?'<div class="stack" style="gap:8px;margin-top:10px">'+mine.map(function(r){return routeChip(r)}).join('')+'</div>':'<p class="muted" style="font-size:14px;margin-top:6px">Disegna un percorso toccando la mappa: il tracciato segue strade e sentieri. Resta in questo browser e puoi condividerlo.</p>')+'</section>';
     var f=S.filters,list=filtered().sort(function(a,b){return distKm(S.ex.c,a.wp[0])-distKm(S.ex.c,b.wp[0])}),n=activeFilters();
     h+='<div class="stack" style="gap:14px"><div class="fgroup"><p class="eye" id="fgD">Distanza</p><div class="chips" role="group" aria-labelledby="fgD">'+BANDS[S.sport].map(function(b,i){return '<button type="button" class="chip" data-f="band" data-v="'+i+'" aria-pressed="'+(f.band===i)+'">'+b.l+'</button>'}).join('')+'</div></div>'+
@@ -1298,6 +1326,8 @@ function viewRoute(){var r=famousById(S.routeId);if(!r)return viewExplore();var 
   '<div class="rd-sheet"><div><p class="eye">'+esc(r.region)+' · '+(r.sport==='run'?'Running':'Ciclismo')+(r.custom?'':r.shared?'':' · percorso famoso')+'</p><h1 style="margin-top:4px">'+esc(r.name)+'</h1><p style="margin-top:8px;color:var(--ink2);font-size:16px">'+esc(r.about)+'</p></div>'+
   '<div class="kv" id="rdKv">'+rdKv(r)+'</div><p class="est" id="rdEst">'+esc(e.rule)+'</p>'+
   '<div class="map rmap" id="rdMap"></div><p class="muted" id="rdSrc" style="font-size:13px;margin-top:-10px">'+rdSrc(r)+'</p>'+
+  '<section class="sect" id="rdMixS"'+(ROUTE_GEO[r.id]&&ROUTE_GEO[r.id].mix?'':' hidden')+'><h2>Su che strade passa</h2>'+(ROUTE_GEO[r.id]?mixHtml(ROUTE_GEO[r.id].mix):'')+'<p class="muted" style="font-size:13px">Tipi di strada di OpenStreetMap lungo il tracciato calcolato.</p></section>'+
+  ((r.custom||r.shared)?'<section class="sect" id="rdWp"><h2>Tappe</h2>'+routeWpHtml(r)+'</section>':'')+
   '<section class="sect" id="rdProf"></section>'+
   (r.shared&&!myRoute(r.id)?'<div class="banner info">'+ICON.info+'<div>Percorso condiviso'+(r.from?' da <b>'+esc(r.from)+'</b>':'')+'. Salvalo per ritrovarlo tra i tuoi.</div></div><button type="button" class="btn btn-ink" data-act="saveShared" data-route="'+r.id+'">Salva nei miei percorsi</button>':'')+
   '<button type="button" class="btn btn-pri xl" data-act="start" data-route="'+r.id+'">'+ICON.play+W('Pedala questo percorso','Corri questo percorso')+'</button>'+
@@ -1313,7 +1343,9 @@ function afterRoute(){var r=famousById(S.routeId);if(!r)return;RD.pois=null;RD.s
   RD.map.setLines([{pts:r.wp,dash:'2 9',w:4,casing:false,color:'#141A22'}]);RD.map.setMarkers([{ll:r.wp[0],cls:'pin-start',html:'A',label:'Partenza'},{ll:r.wp[r.wp.length-1],cls:'pin-end',html:'B',label:'Arrivo'}]);paintPois();
   var id=r.id;paintRouteKit(r);routeGeo(r).then(function(g){if(S.view!=='route'||S.routeId!==id)return;RD.state='ok';if(r.custom&&(Math.abs(r.km-g.km)>.05||r.up!==g.up)){r.km=g.km;r.up=g.up||0;persistMy()}drawRoute(r,g);loadPois(r,g);paintRouteKit(r)}).catch(function(){if(S.view!=='route'||S.routeId!==id)return;RD.state='err';var g=wpGeo(r);$('#rdSrc').textContent=rdSrc(r);
     $('#rdProf').innerHTML='<div class="empty">Altimetria non disponibile: il servizio di calcolo del tracciato non risponde.</div>';loadPois(r,g)})}
-function drawRoute(r,g){RD.map.setLines([{pts:g.pts}]);RD.map.fit(g.pts,30);$('#rdKv').innerHTML=rdKv(r);$('#rdEst').textContent=estimate(r).rule;$('#rdSrc').textContent=rdSrc(r);
+function routeWpHtml(r){var g=ROUTE_GEO[r.id],n=r.wp.length,cum=0;return '<ol class="wpl">'+r.wp.map(function(p,i){if(i)cum+=distKm(r.wp[i-1],p);var km=g&&g.computed?(i===n-1?g.km:along(g,p).km):cum,nm=r.wpn&&r.wpn[i],role=i===0?'Partenza':i===n-1?'Arrivo':'Tappa '+(i+1);
+  return '<li><span class="wpn'+(i===0?' first':i===n-1?' last':'')+'" aria-hidden="true">'+(i+1)+'</span><span class="grow wpname"><b>'+esc(nm||role)+'</b><small>'+(nm?role+' · ':'')+'km '+nf(km,1)+'</small></span></li>'}).join('')+'</ol>'}
+function drawRoute(r,g){RD.map.setLines([{pts:g.pts}]);var ms=$('#rdMixS');if(ms&&g.mix){ms.hidden=false;ms.innerHTML='<h2>Su che strade passa</h2>'+mixHtml(g.mix)+'<p class="muted" style="font-size:13px">Tipi di strada di OpenStreetMap lungo il tracciato calcolato.</p>'}var wl=$('#rdWp');if(wl)wl.innerHTML='<h2>Tappe</h2>'+routeWpHtml(r);RD.map.fit(g.pts,30);$('#rdKv').innerHTML=rdKv(r);$('#rdEst').textContent=estimate(r).rule;$('#rdSrc').textContent=rdSrc(r);
   var pf=$('#rdProf');if(g.ele){pf.innerHTML='<div class="row"><h2 class="grow">Altimetria</h2><span class="muted" id="pfRead" style="font-size:14px;font-variant-numeric:tabular-nums">Tocca o scorri il grafico</span></div><div class="prof" id="pf"></div><p class="muted" style="font-size:13px">Il punto sulla mappa segue il grafico. Quote dal modello del terreno di BRouter.</p>';profileChart($('#pf'),g,RD.map,$('#pfRead'))}
   else pf.innerHTML='<div class="empty">Quote non disponibili per questo tracciato.</div>'}
 function loadPois(r,g){RD.g=g;$('#poiList').innerHTML='<p class="muted" style="padding:10px 2px">Cerco cosa c\'è lungo il percorso…</p>';
@@ -1470,14 +1502,15 @@ function dlText(txt,name,type){try{var u=URL.createObjectURL(new Blob([txt],{typ
    in chat, in bacheca e negli eventi (solo le tappe: chi lo riceve ricalcola lo stesso tracciato). */
 var MYR=LS.get('myroutes',[]),SHARED={};if(!Array.isArray(MYR))MYR=[];
 function hashStr(s){var h=5381;for(var i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return (h>>>0).toString(36)}
-var PROFS={bike:[['fastbike','Strada veloce','asfalto','Asfalto, anche strade trafficate'],['safety','Strade tranquille','asfalto','Ciclabili e strade secondarie'],['trekking','Anche sterrato','misto','Ciclabili, strade bianche, argini']],
+var PROFS={bike:[['safety','Strade tranquille','asfalto','Ciclabili e strade secondarie asfaltate'],['trekking','Anche sterrato','misto','Ciclabili, strade bianche, argini'],['fastbike','Strada veloce','asfalto','Asfalto, anche strade trafficate']],
   run:[['shortest','Strada','asfalto','Il percorso più breve tra le tappe'],['hiking-mountain','Sentieri','sentiero','Preferisce sentieri e mulattiere']]};
 function profInfo(sp,p){var l=PROFS[sp]||PROFS.bike;for(var i=0;i<l.length;i++)if(l[i][0]===p)return l[i];return l[0]}
 function routeKey(wp,pr){return 'u'+hashStr(pr+'|'+wp.map(function(p){return p[0].toFixed(5)+','+p[1].toFixed(5)}).join(';'))}
 function diffOf(km,up,sp){var r=up/Math.max(.1,km);if(sp==='run')return km>15||r>30?'Impegnativo':km>8||r>12?'Medio':'Facile';return km>90||up>1500||r>25?'Impegnativo':km>45||up>500||r>12?'Medio':'Facile'}
 function photoOf(sp,surf,up,km){return surf==='sentiero'?'sentiero-bosco':surf==='misto'?'sterrato-campi':up/Math.max(.1,km)>15?'crinale':sp==='run'?'argine-fiume':'pianura-filari'}
 function makeRoute(o){var pi=profInfo(o.sport,o.prof),km=Number(o.km)||0,up=Math.round(Number(o.up)||0);
-  return {id:o.id||routeKey(o.wp,pi[0]),custom:!o.shared,shared:!!o.shared,from:o.from||null,sport:o.sport,name:String(o.name||'Percorso senza nome').slice(0,80),wp:o.wp,prof:pi[0],km:km,up:up,
+  var wpn=Array.isArray(o.wpn)&&o.wpn.length===o.wp.length?o.wpn.map(function(n){return n?String(n).slice(0,60):''}):null;
+  return {wpn:wpn,id:o.id||routeKey(o.wp,pi[0]),custom:!o.shared,shared:!!o.shared,from:o.from||null,sport:o.sport,name:String(o.name||'Percorso senza nome').slice(0,80),wp:o.wp,prof:pi[0],km:km,up:up,
     surface:pi[2],diff:diffOf(km,up,o.sport),photo:photoOf(o.sport,pi[2],up,km),region:o.shared?'Percorso condiviso':'Il tuo percorso',tag:[],created:o.created||new Date().toISOString(),
     about:o.shared?'Condiviso'+(o.from?' da '+o.from:'')+'. Il tracciato viene ricalcolato da BRouter sulle '+o.wp.length+' tappe scelte da chi l\'ha creato.':'Creato da te con '+o.wp.length+' tappe. Tracciato calcolato da BRouter su strade e sentieri OpenStreetMap.'}}
 MYR=MYR.filter(function(r){return r&&r.wp&&r.wp.length>1}).map(function(r){return makeRoute(r)});
@@ -1485,59 +1518,80 @@ function myRoute(id){for(var i=0;i<MYR.length;i++)if(MYR[i].id===id)return MYR[i
 function myRoutes(sp){return MYR.filter(function(r){return !sp||r.sport===sp})}
 /* da qui in poi un id può indicare un percorso famoso, uno tuo o uno ricevuto */
 var famousOnly=famousById;famousById=function(id){return famousOnly(id)||myRoute(id)||SHARED[id]||null};
-function persistMy(){if(!LS.set('myroutes',MYR.map(function(r){return {id:r.id,sport:r.sport,name:r.name,wp:r.wp,prof:r.prof,km:r.km,up:r.up,created:r.created}}))){toast('Percorso non salvato: memoria del browser non disponibile');return false}return true}
-function saveMyRoute(r,oldId){var c=makeRoute({id:r.id,sport:r.sport,name:r.name,wp:r.wp,prof:r.prof,km:r.km,up:r.up,created:r.created});
+function persistMy(){if(!LS.set('myroutes',MYR.map(function(r){return {id:r.id,sport:r.sport,name:r.name,wp:r.wp,wpn:r.wpn,prof:r.prof,km:r.km,up:r.up,created:r.created}}))){toast('Percorso non salvato: memoria del browser non disponibile');return false}return true}
+function saveMyRoute(r,oldId){var c=makeRoute({id:r.id,sport:r.sport,name:r.name,wp:r.wp,wpn:r.wpn,prof:r.prof,km:r.km,up:r.up,created:r.created});
   MYR=MYR.filter(function(x){return x.id!==c.id&&x.id!==oldId});MYR.unshift(c);delete SHARED[c.id];return persistMy()?c:null}
 function delMyRoute(id){MYR=MYR.filter(function(x){return x.id!==id});persistMy()}
 /* formato compatto per link, chat, post ed eventi: solo nome, sport, profilo e tappe */
-function routeObj(r){var o={v:1,n:r.name,s:r.sport,p:r.prof,k:Math.round(rKm(r)*10)/10,u:rUp(r),w:r.wp.map(function(p){return [Math.round(p[0]*1e5),Math.round(p[1]*1e5)]})};if(famousOnly(r.id))o.f=r.id;return o}
+function routeObj(r){var o={v:1,n:r.name,s:r.sport,p:r.prof,k:Math.round(rKm(r)*10)/10,u:rUp(r),w:r.wp.map(function(p){return [Math.round(p[0]*1e5),Math.round(p[1]*1e5)]})};if(famousOnly(r.id))o.f=r.id;if(r.wpn&&r.wpn.some(Boolean))o.m=r.wpn.map(function(n){return n||''});return o}
 function b64u(s){return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
 function unb64u(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return decodeURIComponent(escape(atob(s)))}
 function shareLink(r){return location.href.split('#')[0]+'#r='+b64u(JSON.stringify(routeObj(r)))}
 /* percorso ricevuto: si controlla tutto prima di usarlo (arriva da altri) */
 function routeFromObj(o,from){if(o&&typeof o.f==='string'&&famousOnly(o.f))return famousOnly(o.f);if(!o||typeof o!=='object'||!Array.isArray(o.w)||o.w.length<2||o.w.length>40||(o.s!=='bike'&&o.s!=='run'))return null;
   var wp=[];for(var i=0;i<o.w.length;i++){var p=o.w[i];if(!Array.isArray(p)||!isFinite(p[0])||!isFinite(p[1]))return null;var la=p[0]/1e5,lo=p[1]/1e5;if(Math.abs(la)>85||Math.abs(lo)>180)return null;wp.push([la,lo])}
-  var r=makeRoute({shared:true,from:from||null,sport:o.s,name:String(o.n||'Percorso condiviso').slice(0,80),wp:wp,prof:String(o.p||''),km:Math.max(0,Math.min(2000,Number(o.k)||0)),up:Math.max(0,Math.min(20000,Number(o.u)||0))});
+  var r=makeRoute({shared:true,from:from||null,sport:o.s,name:String(o.n||'Percorso condiviso').slice(0,80),wp:wp,wpn:Array.isArray(o.m)&&o.m.length===wp.length?o.m.map(function(n){return typeof n==='string'?n:''}):null,prof:String(o.p||''),km:Math.max(0,Math.min(2000,Number(o.k)||0)),up:Math.max(0,Math.min(20000,Number(o.u)||0))});
   var mine=myRoute(r.id);if(mine)return mine;if(famousOnly(r.id))return famousOnly(r.id);if(!SHARED[r.id])SHARED[r.id]=r;return SHARED[r.id]}
 function routeFromLink(h){var m=/[#&]r=([A-Za-z0-9_-]+)/.exec(h||'');if(!m)return null;try{return routeFromObj(JSON.parse(unb64u(m[1])),null)}catch(e){return null}}
 function routeChip(r,extra){return '<button type="button" class="rchip" data-act="route" data-route="'+r.id+'">'+sportIcon(r.sport)+'<span class="grow"><b>'+esc(r.name)+'</b><small>'+(extra?esc(extra)+' · ':'')+rkm1(rKm(r))+' km · '+rUp(r)+' m'+(r.custom?' · tuo':r.shared?' · condiviso':' · famoso')+'</small></span>'+ICON.chev+'</button>'}
 
 /* ---- editor ---- */
-var PLAN={wp:[],prof:null,name:'',g:null,st:'',map:null,t:null,editId:null,sport:null};
-function openPlan(editId){var r=editId?famousById(editId):null;
+var PLAN={wp:[],prof:null,name:'',g:null,st:'',map:null,t:null,editId:null,sport:null},WPN={};
+function openPlan(editId,auto){var r=editId?famousById(editId):null;if(r&&r.wpn)r.wp.forEach(function(p,i){if(r.wpn[i])WPN[wpKey(p)]=r.wpn[i]});AUTO={st:'',cands:[],show:-1,err:'',open:!!auto};
   PLAN={wp:r?r.wp.map(function(p){return [p[0],p[1]]}):[],prof:r?r.prof:PROFS[S.sport][0][0],name:r?r.name:'',g:null,st:'',map:null,t:null,editId:r&&r.custom?r.id:null,sport:r?r.sport:S.sport};
   if(r&&r.sport!==S.sport)setSport(r.sport,true);go('plan')}
 function viewPlan(){var sp=PLAN.sport||S.sport;
   return '<button type="button" class="btn-ghost row" data-act="backEx" style="align-self:flex-start;gap:4px">'+ICON.back+'Esplora</button>'+
   '<header><p class="eye">'+(PLAN.editId?'Modifica percorso':'Nuovo percorso')+' · '+(sp==='run'?'Running':'Ciclismo')+'</p><h1 style="font-size:clamp(28px,8vw,34px);margin-top:4px">Disegna il tuo percorso</h1>'+
     '<p class="muted" style="margin-top:6px">Tocca la mappa per aggiungere le tappe, nell\'ordine. Il tracciato segue strade e sentieri. Tocca un numero per togliere quella tappa.</p></header>'+
-  '<form id="planFind" class="row" role="search" style="gap:8px"><label class="sr" for="planQ">Vai a un luogo</label><input id="planQ" class="inp grow" type="search" placeholder="Vai a un luogo, es. Lugo" autocomplete="off"><button type="submit" class="btn btn-sec" style="min-height:48px">Vai</button></form>'+
+  '<button type="button" class="card pad row autobtn" data-act="autoOpen"><span class="ni">'+ICON.spark+'</span><span class="grow"><b style="display:block">Proponi un percorso consigliato</b><span class="muted" style="font-size:14px">'+(sp==='run'?'Parchi, sentieri e strade tranquille':'Ciclabili, strade secondarie e sterrati ciclabili')+': poi lo modifichi come vuoi</span></span>'+ICON.chev+'</button>'+
+  '<form id="planFind" class="row" role="search" style="gap:8px;flex-wrap:wrap"><label class="sr" for="planQ">Cerca un luogo</label><input id="planQ" class="inp grow" type="search" placeholder="Cerca un luogo, es. Lugo" autocomplete="off" style="min-width:180px"><button type="submit" class="btn btn-sec" style="min-height:48px">Vai</button><button type="button" class="btn btn-sec" data-act="planAddPlace" style="min-height:48px">+ Tappa</button></form>'+
   '<div class="map plan-map" id="planMap"></div>'+
+  '<div id="autoBox" aria-live="polite"></div>'+
   '<div class="row plan-tools" style="gap:8px;flex-wrap:wrap"><button type="button" class="btn btn-sec sm" data-act="planUndo">Togli l\'ultima</button><button type="button" class="btn btn-sec sm" data-act="planLoop">Torna alla partenza</button><button type="button" class="btn btn-sec sm" data-act="planLocate">Vicino a me</button><button type="button" class="btn btn-sec sm" data-act="planClear">Ricomincia</button></div>'+
   '<div class="card pad stack" id="planStat" aria-live="polite" style="gap:6px"></div>'+
+  '<section class="sect" aria-labelledby="wpT"><h2 id="wpT">Tappe</h2><p class="sub">In ordine di passaggio. Sposta con le frecce, tocca il nome per vederla sulla mappa.</p><ol class="wpl" id="wpList"></ol></section>'+
   '<fieldset class="stack" style="border:0;padding:0;margin:0;gap:8px"><legend class="eye" style="margin-bottom:6px">Che strade preferire</legend>'+PROFS[sp].map(function(p){return '<label class="opt"><input type="radio" name="pprof" value="'+p[0]+'"'+(PLAN.prof===p[0]?' checked':'')+'><span><b>'+p[1]+'</b><span class="muted" style="display:block;font-size:13px">'+p[3]+'</span></span></label>'}).join('')+'</fieldset>'+
   '<label class="fld"><span>Nome del percorso</span><input class="inp" id="planName" maxlength="80" value="'+esc(PLAN.name)+'" placeholder="Es. Giro dei calanchi"></label>'+
   '<button type="button" class="btn btn-pri xl" data-act="planSave">Salva il percorso</button>'+
   '<p class="muted" style="font-size:13px">Resta in questo browser. Dal percorso salvato puoi condividerlo con un link, in chat, in bacheca o in un evento. Controlla sempre il tracciato prima di partire.</p>'}
 function afterPlan(){if(PLAN.map)PLAN.map.destroy();var c=PLAN.wp.length?PLAN.wp[0]:S.ex.c;
   PLAN.map=new MiniMap($('#planMap'),{center:c,zoom:Math.max(11,S.ex.z),label:'Mappa per disegnare il percorso. Tocca per aggiungere una tappa.',ontap:function(ll){planAdd(ll)}});
-  if(PLAN.wp.length>1)PLAN.map.fit(PLAN.wp,40);planPaint();if(PLAN.wp.length>1)planCompute(true)}
-function planAdd(ll){if(PLAN.wp.length>=30){toast('Al massimo 30 tappe');return}PLAN.wp.push([Math.round(ll[0]*1e5)/1e5,Math.round(ll[1]*1e5)/1e5]);planCompute()}
+  if(PLAN.wp.length>1)PLAN.map.fit(PLAN.wp,40);planPaint();if(PLAN.wp.length>1)planCompute(true);if(AUTO.open){AUTO.open=false;autoDialog()}else paintAuto()}
+function planAdd(ll){if(AUTO.st){AUTO={st:'',cands:[],show:-1,err:'',run:(AUTO.run||0)+1};paintAuto()}if(PLAN.wp.length>=30){toast('Al massimo 30 tappe');return}PLAN.wp.push([Math.round(ll[0]*1e5)/1e5,Math.round(ll[1]*1e5)/1e5]);planCompute()}
 function planKm(){var g=PLAN.g;if(g&&PLAN.st==='ok')return g.km;var k=0;for(var i=1;i<PLAN.wp.length;i++)k+=distKm(PLAN.wp[i-1],PLAN.wp[i]);return k}
-function planPaint(){var m=PLAN.map;if(!m)return;var wp=PLAN.wp,n=wp.length,loop=n>2&&wp[0][0]===wp[n-1][0]&&wp[0][1]===wp[n-1][1];
+function planPaint(){var m=PLAN.map;if(!m)return;if(AUTO.st==='ok'&&AUTO.show>=0){var st0=$('#planStat');paintWpList();return autoPreview()}var wp=PLAN.wp,n=wp.length,loop=n>2&&wp[0][0]===wp[n-1][0]&&wp[0][1]===wp[n-1][1];
   m.setMarkers(wp.map(function(p,i){var last=i===n-1&&n>1;if(loop&&last)return null;return {ll:p,cls:'pin-n'+(i===0?' first':last?' last':''),html:i===0&&loop?'1↺':String(i+1),label:(i===0&&loop?'Partenza e arrivo':'Tappa '+(i+1))+': tocca per toglierla',onClick:function(){PLAN.wp.splice(i,1);if(i===0&&loop)PLAN.wp.pop();planCompute();toast('Tappa '+(i+1)+' tolta')}}}).filter(Boolean));
   m.setLines(PLAN.g&&PLAN.st==='ok'?[{pts:PLAN.g.pts}]:wp.length>1?[{pts:wp,dash:'2 9',w:4,casing:false,color:'#141A22'}]:[]);
   var st=$('#planStat');if(!st)return;var sp=PLAN.sport||S.sport,n=wp.length,km=planKm(),tmp={sport:sp,id:'_p',km:km,up:PLAN.g&&PLAN.st==='ok'&&PLAN.g.up!=null?PLAN.g.up:0};
+  paintWpList();
   if(n<2){st.innerHTML='<b>'+(n?'1 tappa: tocca la mappa per la seconda.':'Nessuna tappa: tocca la mappa per la partenza.')+'</b><span class="muted" style="font-size:14px">Servono almeno due tappe.</span>';return}
   var e=estimateFor(tmp);
   st.innerHTML='<div class="row" style="gap:16px;flex-wrap:wrap"><span><b class="num" style="font-size:24px">'+rkm1(km)+' km</b></span>'+(PLAN.st==='ok'&&PLAN.g.up!=null?'<span><b class="num" style="font-size:24px">'+PLAN.g.up+' m</b> <span class="muted">di salita</span></span>':'')+'<span><b class="num" style="font-size:24px">'+dur(e.sec)+'</b> <span class="muted">stimati</span></span></div>'+
-    '<span class="muted" style="font-size:14px">'+n+' tappe · '+(PLAN.st==='load'?'calcolo il tracciato…':PLAN.st==='ok'?'tracciato calcolato da BRouter su OpenStreetMap':'tracciato non calcolato (servizio non raggiungibile): linea tratteggiata in linea d\'aria, non è una strada')+'</span>'}
+    (PLAN.st==='ok'&&PLAN.g.mix?mixHtml(PLAN.g.mix):'')+'<span class="muted" style="font-size:14px">'+n+' tappe · '+(PLAN.st==='load'?'calcolo il tracciato…':PLAN.st==='ok'?'tracciato calcolato da BRouter su OpenStreetMap':'tracciato non calcolato (servizio non raggiungibile): linea tratteggiata in linea d\'aria, non è una strada')+'</span>'}
+function wpKey(p){return p[0].toFixed(5)+','+p[1].toFixed(5)}
+/* elenco delle tappe: nome (dalla ricerca o da OpenStreetMap), km lungo il percorso, sposta, togli */
+function paintWpList(){var box=$('#wpList');if(!box)return;var wp=PLAN.wp,n=wp.length,g=PLAN.st==='ok'?PLAN.g:null,cum=0;
+  if(!n){box.innerHTML='<li class="muted" style="list-style:none;padding:8px 0">Ancora nessuna tappa.</li>';return}
+  box.innerHTML=wp.map(function(p,i){if(i)cum+=distKm(wp[i-1],p);var km=g?(i===n-1?g.km:along(g,p).km):cum,nm=WPN[wpKey(p)],role=i===0?'Partenza':i===n-1&&n>1?'Arrivo':'Tappa '+(i+1);
+    return '<li><span class="wpn'+(i===0?' first':i===n-1&&n>1?' last':'')+'" aria-hidden="true">'+(i+1)+'</span><button type="button" class="grow wpname" data-act="planFocus" data-i="'+i+'"><b>'+esc(nm||role)+'</b><small>'+(nm?role+' · ':'')+'km '+nf(km,1)+(g?'':' in linea d\'aria')+'</small></button>'+
+      '<button type="button" class="icon-btn sm2" data-act="planMove" data-i="'+i+'" data-d="-1" aria-label="Sposta la tappa '+(i+1)+' prima"'+(i?'':' disabled')+'>'+I('<path d="m6 15 6-6 6 6"/>',18)+'</button>'+
+      '<button type="button" class="icon-btn sm2" data-act="planMove" data-i="'+i+'" data-d="1" aria-label="Sposta la tappa '+(i+1)+' dopo"'+(i<n-1?'':' disabled')+'>'+I('<path d="m6 9 6 6 6-6"/>',18)+'</button>'+
+      '<button type="button" class="icon-btn sm2" data-act="planDel" data-i="'+i+'" aria-label="Togli la tappa '+(i+1)+'">'+ICON.close+'</button></li>'}).join('');
+  nameQueue()}
+var NQ={busy:false};
+function nameQueue(){if(NQ.busy||S.view!=='plan')return;var p=PLAN.wp.filter(function(x){return WPN[wpKey(x)]==null})[0];if(!p)return;NQ.busy=true;var k=wpKey(p);
+  reversePlace(p).then(function(nm){WPN[k]=nm||''}).catch(function(){WPN[k]=''}).then(function(){NQ.busy=false;if(S.view==='plan'){paintWpList()}})}
+function reversePlace(ll){var key='rp.'+wpKey(ll),c=cacheGet(key,90*864e5);if(c!=null)return Promise.resolve(c);var wait=Math.max(0,1100-(Date.now()-nomLast));
+  return new Promise(function(res){setTimeout(res,wait)}).then(function(){nomLast=Date.now();return getJSON('https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=17&accept-language=it&lat='+ll[0]+'&lon='+ll[1],{},10000)})
+    .then(function(j){var a=j&&j.address||{},town=a.village||a.town||a.city||a.hamlet||a.municipality||'',road=a.road||a.cycleway||a.path||a.footway||'',n=(road?road+(town?', ':''):'')+town||(j&&j.name)||'';cachePut(key,n);return n})}
+function planMove(i,d){var w=PLAN.wp,j=i+d;if(j<0||j>=w.length)return;var t=w[i];w[i]=w[j];w[j]=t;planCompute();toast('Tappa '+(i+1)+' spostata')}
 function planCompute(now){clearTimeout(PLAN.t);PLAN.g=null;if(PLAN.wp.length<2){PLAN.st='';planPaint();return}PLAN.st='load';planPaint();
   var key=routeKey(PLAN.wp,PLAN.prof),tmp={id:key,wp:PLAN.wp.slice(),prof:PLAN.prof};
   PLAN.t=setTimeout(function(){routeGeo(tmp).then(function(g){if(S.view!=='plan'||routeKey(PLAN.wp,PLAN.prof)!==key)return;PLAN.g=g;PLAN.st='ok';planPaint()}).catch(function(){if(S.view!=='plan'||routeKey(PLAN.wp,PLAN.prof)!==key)return;PLAN.st='err';planPaint()})},now?0:600)}
 function planSave(){if(PLAN.wp.length<2){toast('Servono almeno due tappe');return}var nm=($('#planName')||{}).value||'';nm=nm.trim()||((PLAN.sport==='run'?'Corsa':'Giro')+' del '+new Date().toLocaleDateString('it-IT',{day:'numeric',month:'short'}));
   var ok=PLAN.st==='ok'&&PLAN.g,id=routeKey(PLAN.wp,PLAN.prof);
-  var r=saveMyRoute({id:id,sport:PLAN.sport||S.sport,name:nm,wp:PLAN.wp.slice(),prof:PLAN.prof,km:ok?PLAN.g.km:planKm(),up:ok&&PLAN.g.up!=null?PLAN.g.up:0},PLAN.editId);if(!r)return;
+  var r=saveMyRoute({id:id,sport:PLAN.sport||S.sport,name:nm,wpn:PLAN.wp.map(function(p){return WPN[wpKey(p)]||''}),wp:PLAN.wp.slice(),prof:PLAN.prof,km:ok?PLAN.g.km:planKm(),up:ok&&PLAN.g.up!=null?PLAN.g.up:0},PLAN.editId);if(!r)return;
   if(ok)ROUTE_GEO[id]=PLAN.g;S.routeId=id;go('route');toast(ok?'Percorso salvato':'Percorso salvato con le sole tappe: il tracciato si calcolerà quando il servizio risponde')}
 function estimateFor(r){var P=prof(),lv=P.level;if(r.sport==='run'){var p=REF.run[lv];return {sec:r.km*p+r.up/CLIMB.run*60}}return {sec:r.km/REF.bike[lv]*3600+r.up/CLIMB.bike*60}}
 
@@ -1665,8 +1719,12 @@ function paintKit(){var P=kitInput(),box=$('#kitOut');if(!box)return;var key=JSO
 document.addEventListener('change',function(e){var t=e.target;if(t.id==='kitSrc'){KIT.src=t.value;paintKit()}else if(t.id==='kitAt'){KIT.at=t.value||null;paintKit()}
   else if(t.id==='kitKg'||t.id==='profKg'){var v=Number(t.value);if(t.value===''){saveProf({weight:null});if(t.id==='kitKg')paintKit();return}if(!(v>=30&&v<=250)){toast('Peso tra 30 e 250 kg');return}saveProf({weight:Math.round(v)});toast('Peso salvato in questo browser');if(t.id==='kitKg')paintKit()}
   else if(t.name==='pprof'&&S.view==='plan'){PLAN.prof=t.value;planCompute()}});
-document.addEventListener('submit',function(e){if(e.target.id!=='planFind')return;e.preventDefault();var q=($('#planQ')||{}).value||'';if(q.trim().length<3){toast('Scrivi almeno 3 lettere');return}
-  searchPlaces(q).then(function(pl){if(!pl.length){toast('Nessun luogo trovato');return}if(PLAN.map){if(pl[0].bb)PLAN.map.fit(pl[0].bb,20);else PLAN.map.setView(pl[0].ll,13);if(PLAN.map.z<11)PLAN.map.setView(PLAN.map.c,11)}toast(pl[0].name)}).catch(function(){toast('Ricerca luoghi non disponibile in questo momento')})});
+function planFind(add){var q=($('#planQ')||{}).value||'';if(q.trim().length<3){toast('Scrivi almeno 3 lettere');return}
+  searchPlaces(q).then(function(pl){if(!pl.length){toast('Nessun luogo trovato');return}var P=pl[0];
+    if(add){var ll=[Math.round(P.ll[0]*1e5)/1e5,Math.round(P.ll[1]*1e5)/1e5];WPN[wpKey(ll)]=P.name;planAdd(ll);if(PLAN.map&&PLAN.wp.length===1)PLAN.map.setView(ll,13);toast('Tappa aggiunta: '+P.name);var qi=$('#planQ');if(qi)qi.value='';return}
+    if(PLAN.map){if(P.bb)PLAN.map.fit(P.bb,20);else PLAN.map.setView(P.ll,13);if(PLAN.map.z<11)PLAN.map.setView(PLAN.map.c,11)}toast(P.name)}).catch(function(){toast('Ricerca luoghi non disponibile in questo momento')})}
+document.addEventListener('input',function(e){if(e.target.id==='planName')PLAN.name=e.target.value});
+document.addEventListener('submit',function(e){if(e.target.id!=='planFind')return;e.preventDefault();planFind(false)});
 
 /* ---- Home: meteo e riepilogo ---- */
 function homeWx(){return '<section class="sect" aria-labelledby="hWxT"><div class="row"><h2 id="hWxT" class="grow">Meteo e cosa portare</h2><button type="button" class="btn-ghost" data-go="kit">Tutto l\'occorrente</button></div><div class="card pad stack" id="wxBox" style="gap:12px" aria-live="polite"><p class="muted">Carico il meteo…</p></div></section>'}
@@ -1689,6 +1747,100 @@ function paintRouteKit(r){var box=$('#rdKit');if(!box)return;var now=Date.now(),
 function actEnergy(a){var E=burn(a.sport,a.distanceKm,a.ascentM||0,a.movingSec),h=a.movingSec/3600,C=carbPlan(a.sport,h);
   return '<section class="sect" aria-labelledby="enT"><h2 id="enT">Energia</h2>'+energyHtml(E,C)+'<p style="font-size:15px">'+(h>=1.5?'Per recuperare: carboidrati e 20–30 g di proteine entro un\'ora; se domani ti alleni ancora, circa '+Math.round(E.kg)+'–'+Math.round(E.kg*1.2)+' g di carboidrati nelle ore successive.':'Per recuperare basta un pasto normale con carboidrati e proteine.')+'</p>'+
     (a.source!=='gps'?'<p class="muted" style="font-size:13px">'+(a.source==='sim'?'Attività simulata':'Attività dimostrativa')+': valori solo indicativi.</p>':'')+'</section>'}
+
+/* ================= PERCORSO CONSIGLIATO (automatico) =================
+   Non è intelligenza artificiale: regole dichiarate. Si provano anelli in più direzioni attorno alla partenza,
+   ognuno calcolato da BRouter con il profilo che preferisce ciclabili, strade secondarie e sterrati percorribili
+   (bici: "trekking"; corsa: "hiking-mountain"). Poi si misura su che strade passa davvero ogni anello (tag OpenStreetMap)
+   e si tengono i migliori: più ciclabili, strade tranquille e sterrati, meno strade trafficate, distanza vicina a quella chiesta. */
+var AUTO={st:'',cands:[],show:-1,err:'',open:false},AUTOPREF=LS.get('autoPref',{km:{bike:40,run:8},dir:'any',surf:'mix',shape:'loop'});
+function llOff(ll,brg,km){var b=brg*Math.PI/180;return [Math.round((ll[0]+km/111.32*Math.cos(b))*1e5)/1e5,Math.round((ll[1]+km/(111.32*Math.cos(ll[0]*Math.PI/180))*Math.sin(b))*1e5)/1e5]}
+function loopWps(st,brg,R){var c=llOff(st,brg,R),back=(brg+180)%360;return [st,llOff(c,back+90,R),llOff(c,brg,R),llOff(c,back-90,R),st]}
+function autoProf(sp,surf){return sp==='run'?(surf==='paved'?'shortest':'hiking-mountain'):(surf==='paved'?'safety':'trekking')}
+function brgOf(a,b){var y=(b[1]-a[1])*Math.cos((a[0]+b[0])/2*Math.PI/180),x=b[0]-a[0];return (Math.atan2(y,x)*180/Math.PI+360)%360}
+/* quota del tracciato che ripassa su strade già fatte (anelli "strani"): celle di circa 40 m */
+function overlapShare(g){var seen={},rep=0,tot=0;for(var i=1;i<g.pts.length;i++){var p=g.pts[i],k=Math.round(p[0]/4e-4)+'_'+Math.round(p[1]/5.5e-4),d=g.dist[i]-g.dist[i-1];tot+=d;
+    if(seen[k]!=null&&seen[k]<i-12)rep+=d;else if(seen[k]==null)seen[k]=i}return tot>0?rep/tot:0}
+function autoScore(g,target,surf,shape){var m=g.mix,err=target?Math.abs(g.km/target-1):0,good;
+  if(m){var tot=m.cycle+m.quiet+m.trail+m.busy+m.main||1;good=(m.cycle*1.15+m.quiet+(surf==='paved'?m.trail*.2:m.trail*.9)+m.busy*.35)/tot-(m.main/tot)*.8}else good=.5;
+  var ov=shape==='back'?0:overlapShare(g);return good-err*1.4-ov*.9}
+var SHAPES={loop:['Anello','Parti e torni dallo stesso punto, senza ripassare dalle stesse strade'],back:['Andata e ritorno','Arrivi a un punto e torni indietro'],ab:['Da A a B','Da un punto a un altro, sulle strade più tranquille']};
+function autoDialog(){var sp=PLAN.sport||S.sport,km=AUTOPREF.km[sp],hasWp=PLAN.wp.length>0,pres=sp==='run'?[5,8,10,15,21]:[20,40,60,80,100],shape=AUTOPREF.shape||'loop';
+  var body='<p class="muted" style="font-size:14px">Trailo calcola diverse strade possibili e tiene quelle con più '+(sp==='run'?'parchi, sentieri e strade tranquille':'ciclabili, strade secondarie e sterrati ciclabili')+'. Il risultato si modifica come un percorso disegnato da te.</p>'+
+    '<form id="autoForm" class="stack" style="gap:14px" novalidate><fieldset class="stack" style="border:0;padding:0;margin:0;gap:8px"><legend class="eye" style="margin-bottom:6px">Tipo di giro</legend>'+
+      Object.keys(SHAPES).map(function(k){return '<label class="opt"><input type="radio" name="shape" value="'+k+'"'+(shape===k?' checked':'')+'><span><b>'+SHAPES[k][0]+'</b><span class="muted" style="display:block;font-size:13px">'+SHAPES[k][1]+'</span></span></label>'}).join('')+'</fieldset>'+
+    '<fieldset class="stack" style="border:0;padding:0;margin:0;gap:8px"><legend class="eye" style="margin-bottom:6px">Partenza</legend>'+
+      (hasWp?'<label class="opt"><input type="radio" name="from" value="wp" checked><span><b>La prima tappa</b><span class="muted" style="display:block;font-size:13px">'+esc(WPN[wpKey(PLAN.wp[0])]||'già sulla mappa')+'</span></span></label>':'')+
+      '<label class="opt"><input type="radio" name="from" value="map"'+(hasWp?'':' checked')+'><span><b>Il centro della mappa</b><span class="muted" style="display:block;font-size:13px">Sposta la mappa o cerca un luogo prima</span></span></label>'+
+      '<label class="opt"><input type="radio" name="from" value="gps"><span><b>Dove sono adesso</b><span class="muted" style="display:block;font-size:13px">La posizione viene chiesta solo ora</span></span></label></fieldset>'+
+    '<div class="fld" data-for="ab"><span>Arrivo</span><input class="inp" name="dest" type="search" autocomplete="off" placeholder="'+(PLAN.wp.length>1?'Vuoto = l\'ultima tappa':'Un luogo, es. Bagnacavallo')+'"></div>'+
+    '<div class="fld" data-for="len"><span>Distanza circa (km)</span><div class="row" style="gap:8px;flex-wrap:wrap"><input class="inp" name="km" type="number" min="'+(sp==='run'?2:5)+'" max="'+(sp==='run'?50:200)+'" step="1" inputmode="numeric" value="'+km+'" style="width:110px">'+
+      pres.map(function(v){return '<button type="button" class="chip" data-kmp="'+v+'">'+v+'</button>'}).join('')+'</div></div>'+
+    '<fieldset class="stack" style="border:0;padding:0;margin:0;gap:8px"><legend class="eye" style="margin-bottom:6px">Strade</legend>'+
+      '<label class="opt"><input type="radio" name="surf" value="mix"'+(AUTOPREF.surf!=='paved'?' checked':'')+'><span><b>'+(sp==='run'?'Sentieri, parchi e strade tranquille':'Ciclabili, secondarie e sterrati ciclabili')+'</b><span class="muted" style="display:block;font-size:13px">'+(sp==='run'?'Anche fondo naturale':'Strade bianche e argini compresi: adatto a gravel e trekking')+'</span></span></label>'+
+      '<label class="opt"><input type="radio" name="surf" value="paved"'+(AUTOPREF.surf==='paved'?' checked':'')+'><span><b>Solo asfalto tranquillo</b><span class="muted" style="display:block;font-size:13px">Ciclabili e strade secondarie asfaltate'+(sp==='run'?'':', per bici da corsa')+'</span></span></label></fieldset>'+
+    '<label class="fld" data-for="len"><span>Direzione preferita</span><select class="inp" name="dir">'+[['any','Qualsiasi: provo tutte'],['0','Verso nord'],['90','Verso est'],['180','Verso sud'],['270','Verso ovest']].map(function(o){return '<option value="'+o[0]+'"'+(String(AUTOPREF.dir)===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join('')+'</select></label>'+
+    '<p class="ferr" id="autoErr" role="alert"></p></form>';
+  var D=openDialog({title:'Percorso consigliato',body:body,initial:'input[name=shape]:checked',actions:[{label:ICON.spark+'Proponi i percorsi',cls:'btn-ink',id:'autoGo',onClick:function(D,btn){var fd=new FormData($('#autoForm',D.box)),k=Number(fd.get('km')),lo=sp==='run'?2:5,hi=sp==='run'?50:200,err=$('#autoErr',D.box),sh=fd.get('shape');
+      if(sh!=='ab'&&!(k>=lo&&k<=hi)){err.textContent='Distanza tra '+lo+' e '+hi+' km.';return}
+      var o={km:k,surf:fd.get('surf'),dir:fd.get('dir'),from:fd.get('from'),shape:sh};AUTOPREF.km[sp]=k||AUTOPREF.km[sp];AUTOPREF.surf=o.surf;AUTOPREF.dir=o.dir;AUTOPREF.shape=sh;LS.set('autoPref',AUTOPREF);
+      var withStart=function(st){if(sh!=='ab'){D.close(true);autoGen(st,o);return}var q=String(fd.get('dest')||'').trim();
+        var fin=function(dest,name){if(distKm(st,dest)<1){err.textContent='Arrivo troppo vicino alla partenza.';return}if(distKm(st,dest)>150){err.textContent='Arrivo troppo lontano (oltre 150 km in linea d\'aria).';return}o.dest=dest;o.destName=name;D.close(true);autoGen(st,o)};
+        if(!q){if(PLAN.wp.length>1){var l=PLAN.wp[PLAN.wp.length-1];fin(l,WPN[wpKey(l)]||'l\'ultima tappa')}else err.textContent='Scrivi dove vuoi arrivare.';return}
+        if(q.length<3){err.textContent='Scrivi almeno 3 lettere per l\'arrivo.';return}err.textContent='Cerco l\'arrivo…';
+        searchPlaces(q).then(function(pl){if(!pl.length){err.textContent='Arrivo non trovato: prova un altro nome.';return}err.textContent='';var d=[Math.round(pl[0].ll[0]*1e5)/1e5,Math.round(pl[0].ll[1]*1e5)/1e5];WPN[wpKey(d)]=pl[0].name;fin(d,pl[0].name)}).catch(function(){err.textContent='Ricerca luoghi non disponibile in questo momento.'})};
+      if(o.from==='wp')withStart(PLAN.wp[0]);else if(o.from==='map')withStart(PLAN.map?PLAN.map.c:S.ex.c);
+      else{if(!navigator.geolocation){err.textContent='Questo browser non fornisce la posizione.';return}err.textContent='Cerco la tua posizione…';
+        navigator.geolocation.getCurrentPosition(function(p){withStart([Math.round(p.coords.latitude*1e5)/1e5,Math.round(p.coords.longitude*1e5)/1e5])},function(e){err.textContent=e.code===1?'Posizione negata: scegli il centro della mappa.':'Posizione non disponibile.'},{timeout:15000,maximumAge:300000})}}}]});
+  var sync=function(){var sh=($('input[name=shape]:checked',D.box)||{}).value;$$('[data-for=ab]',D.box).forEach(function(x){x.hidden=sh!=='ab'});$$('[data-for=len]',D.box).forEach(function(x){x.hidden=sh==='ab'})};sync();
+  D.box.addEventListener('change',sync);D.box.addEventListener('click',function(e){var b=e.target.closest('[data-kmp]');if(b)$('[name=km]',D.box).value=b.dataset.kmp})}
+function autoGen(st,o){var sp=PLAN.sport||S.sport,pr=autoProf(sp,o.surf),sh=o.shape||'loop',run=AUTO.run=(AUTO.run||0)+1,out=[],fails=0,tasks,dirs=o.dir==='any'||sh==='ab'?[0,60,120,180,240,300]:[-35,0,35].map(function(d){return (Number(o.dir)+d+360)%360});
+  st=[Math.round(st[0]*1e5)/1e5,Math.round(st[1]*1e5)/1e5];
+  var mk=function(t){if(sh==='loop')return loopWps(st,t.brg,t.R);if(sh==='back')return [st,llOff(st,t.brg,t.R),st];
+    if(!t.off)return [st,o.dest];var D=distKm(st,o.dest),b=brgOf(st,o.dest),mid=llOff(st,b,D/2);return [st,llOff(mid,b+90,t.off*D),o.dest]};
+  if(sh==='loop')tasks=dirs.map(function(d){return {brg:d,R:o.km/(2*Math.PI)/1.25}});else if(sh==='back')tasks=dirs.map(function(d){return {brg:d,R:o.km/2/1.25}});
+  else tasks=[0,.18,-.18,.35,-.35].map(function(f,i){return {off:f,brg:i}});
+  var target=sh==='ab'?null:o.km;
+  AUTO={st:'load',cands:[],show:-1,err:'',run:run,total:tasks.length,done:0,target:target,surf:o.surf,pr:pr,start:st,shape:sh,destName:o.destName};paintAuto();
+  if(PLAN.map){if(sh==='ab')PLAN.map.fit([st,o.dest],40);else PLAN.map.setView(st,Math.max(10,Math.min(13,13-Math.log2(o.km/20))))}
+  var one=function(t){var wp=mk(t);return routeGeo({id:routeKey(wp,pr),wp:wp,prof:pr}).then(function(g){return {wp:wp,g:g,brg:t.brg,R:t.R,off:t.off,score:autoScore(g,target,o.surf,sh)}},function(){fails++;return null})
+    .then(function(c){if(AUTO.run!==run)return null;AUTO.done++;if(c)out.push(c);paintAuto();return c})};
+  var pool=function(list){var i=0,res=[];return new Promise(function(done){var n=0,next=function(){if(i>=list.length){if(!n)done(res);return}var t=list[i++];n++;one(t).then(function(c){if(c)res.push(c);n--;next()})};next();next()})};
+  pool(tasks).then(function(){if(AUTO.run!==run||sh==='ab')return;
+    /* seconda passata: riaggiusta la grandezza dei migliori per avvicinarsi alla distanza chiesta */
+    var best=out.slice().sort(function(a,b){return b.score-a.score}).slice(0,2).filter(function(c){return Math.abs(c.g.km/o.km-1)>.08}).map(function(c){return {brg:c.brg,R:c.R*Math.max(.5,Math.min(1.8,o.km/c.g.km))}});
+    AUTO.total+=best.length;paintAuto();return pool(best)}).then(function(){if(AUTO.run!==run)return;
+    if(sh==='ab'&&out.length){var mn=Math.min.apply(null,out.map(function(c){return c.g.km}));out.forEach(function(c){var dt=c.g.km/mn;c.detour=dt;if(dt>1.15)c.score-=(dt-1.15)*1.2})}
+    var seen={},ok=out.filter(function(c){return sh==='ab'?c.detour<=1.7:Math.abs(c.g.km/o.km-1)<=.35}).sort(function(a,b){return b.score-a.score}).filter(function(c){var k=sh==='ab'?Math.round(c.g.km*2):c.brg;if(seen[k])return false;seen[k]=1;return true});
+    AUTO.cands=ok.slice(0,3);AUTO.st=AUTO.cands.length?'ok':'err';
+    AUTO.err=AUTO.cands.length?'':!out.length?'Il servizio di calcolo (BRouter) non risponde: riprova tra poco o disegna le tappe a mano.':sh==='ab'?'Nessuna strada utile trovata tra partenza e arrivo.':'Nessun percorso vicino a '+o.km+' km in questa zona: prova un\'altra distanza o un\'altra partenza.';
+    AUTO.show=AUTO.cands.length?0:-1;paintAuto();var mp=$('#planMap');if(mp&&AUTO.cands.length)mp.scrollIntoView({block:'start',behavior:REDUCED?'auto':'smooth'})})}
+function autoName(c){var dn=function(b){return ['nord','nord-est','est','sud-est','sud','sud-ovest','ovest','nord-ovest'][Math.round(b/45)%8]},sh=AUTO.shape||'loop';
+  if(sh==='ab')return 'Verso '+(AUTO.destName||'l\'arrivo')+' · '+rkm1(c.g.km)+' km'+(c.off?(c.off>0?' (variante a destra)':' (variante a sinistra)'):'');
+  return (sh==='back'?'Andata e ritorno ':'Anello ')+rkm1(c.g.km)+' km verso '+dn(c.brg)}
+function paintAuto(){var box=$('#autoBox');if(!box)return;var A=AUTO;
+  if(!A.st){box.innerHTML='';if(PLAN.map&&S.view==='plan'){}return}
+  if(A.st==='load'){box.innerHTML='<div class="card pad stack" style="gap:8px"><b>Cerco i percorsi migliori… '+A.done+' di '+A.total+'</b><span class="bar" role="img" aria-label="'+A.done+' di '+A.total+'"><i style="width:'+Math.round(A.done/Math.max(1,A.total)*100)+'%"></i></span><span class="muted" style="font-size:14px">Ogni anello viene calcolato su strade reali e misurato per tipo di strada.</span><button type="button" class="btn btn-sec sm" data-act="autoStop" style="align-self:flex-start">Annulla</button></div>';return}
+  if(A.st==='err'){box.innerHTML=banner('err',esc(A.err)+' <button type="button" class="link" data-act="autoOpen">Riprova</button>');return}
+  box.innerHTML='<div class="stack" style="gap:8px"><div class="row"><h2 class="grow" style="font-size:20px">Percorsi consigliati</h2><button type="button" class="btn-ghost" data-act="autoClose">Chiudi</button></div>'+
+    A.cands.map(function(c,i){var sh=mixShare(c.g.mix);return '<div class="card pad stack acand'+(A.show===i?' on':'')+'" style="gap:8px"><button type="button" class="row" data-act="autoShow" data-i="'+i+'" style="text-align:left;gap:10px" aria-pressed="'+(A.show===i)+'"><span class="wpn first" aria-hidden="true">'+(i+1)+'</span><span class="grow"><b style="display:block">'+autoName(c)+'</b><span class="muted" style="font-size:14px">'+rkm1(c.g.km)+' km · '+(c.g.up||0)+' m di salita'+(sh!=null?' · '+Math.round(sh*100)+'% '+(PLAN.sport==='run'?'su sentieri e strade tranquille':'su ciclabili, secondarie e sterrati'):'')+'</span></span></button>'+
+      (A.show===i?mixHtml(c.g.mix)+'<button type="button" class="btn btn-ink" data-act="autoUse" data-i="'+i+'">Usa questo e modificalo</button>':'')+'</div>'}).join('')+
+    '<p class="muted" style="font-size:13px">Proposte automatiche con regole fisse, non intelligenza artificiale: tracciato BRouter, tipi di strada da OpenStreetMap. Controlla sempre prima di partire.</p></div>';
+  autoPreview()}
+function autoPreview(){if(!PLAN.map||AUTO.st!=='ok'||AUTO.show<0)return;var c=AUTO.cands[AUTO.show];PLAN.map.setLines(AUTO.cands.map(function(x,i){return i===AUTO.show?null:{pts:x.g.pts,color:'#5C6370',w:3,op:.55,casing:false}}).filter(Boolean).concat([{pts:c.g.pts}]));
+  var e=c.wp[c.wp.length-1],lp=e[0]===c.wp[0][0]&&e[1]===c.wp[0][1];PLAN.map.setMarkers(lp?[{ll:c.wp[0],cls:'pin-n first',html:'1↺',label:'Partenza e arrivo'}]:[{ll:c.wp[0],cls:'pin-n first',html:'A',label:'Partenza'},{ll:e,cls:'pin-n last',html:'B',label:'Arrivo'}]);PLAN.map.fit(c.g.pts,30)}
+function autoUse(i){var c=AUTO.cands[i];if(!c)return;var an=autoName(c);var go=function(){PLAN.wp=c.wp.map(function(p){return [p[0],p[1]]});PLAN.prof=AUTO.pr;PLAN.g=c.g;PLAN.st='ok';AUTO={st:'',cands:[],show:-1,err:''};
+    var nm=$('#planName');if(!(nm&&nm.value.trim())&&!PLAN.name)PLAN.name=an;render(true);toast('Percorso pronto: sposta, aggiungi o togli tappe per modificarlo')};
+  if(PLAN.wp.length>1)confirmDlg('Sostituire le tappe?','Le tappe che hai già messo verranno sostituite dal percorso consigliato.','Sostituisci',go);else go()}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-act]');if(!b)return;var a=b.dataset.act;
+  if(a==='autoOpen')autoDialog();
+  else if(a==='autoStop'||a==='autoClose'){AUTO={st:'',cands:[],show:-1,err:'',run:(AUTO.run||0)+1};paintAuto();planPaint()}
+  else if(a==='autoShow'){AUTO.show=AUTO.show===Number(b.dataset.i)?-1:Number(b.dataset.i);paintAuto();if(AUTO.show<0)planPaint();refocus('[data-act=autoShow][data-i="'+b.dataset.i+'"]')}
+  else if(a==='autoUse')autoUse(Number(b.dataset.i));
+  else if(a==='planFocus'){var p=PLAN.wp[Number(b.dataset.i)];if(p&&PLAN.map){PLAN.map.setView(p,Math.max(PLAN.map.z,14));$('#planMap').scrollIntoView({block:'center',behavior:REDUCED?'auto':'smooth'})}}
+  else if(a==='planMove')planMove(Number(b.dataset.i),Number(b.dataset.d));
+  else if(a==='planDel'){var i=Number(b.dataset.i);PLAN.wp.splice(i,1);planCompute();toast('Tappa '+(i+1)+' tolta')}
+  else if(a==='planAddPlace')planFind(true)});
 
 /* ================= FOTO E AUDIO (Supabase Storage, spazio privato "media") =================
    Ognuno carica solo nella cartella col proprio id. I file si leggono con link firmati che scadono dopo un'ora. */
@@ -2070,6 +2222,7 @@ document.addEventListener('click',function(e){
   else if(act==='editMe')editMeDialog();
   else if(act==='profile')go('profile');
   else if(act==='plan')openPlan(null);
+  else if(act==='planAuto')openPlan(null,true);
   else if(act==='editRoute')openPlan(b.dataset.route);
   else if(act==='planUndo'){if(PLAN.wp.length){PLAN.wp.pop();planCompute()}}
   else if(act==='planClear'){if(PLAN.wp.length)confirmDlg('Ricominciare?','Tutte le tappe verranno tolte.','Togli le tappe',function(){PLAN.wp=[];planCompute()})}
@@ -2193,7 +2346,7 @@ window.addEventListener('hashchange',function(){if(/[#&]r=/.test(location.hash))
 function socialBoot(){if(!Social.on())return;Social.loading=true;Social.ensureProfile().then(function(){return Social.refresh()}).then(function(){Social.loading=false;Social.startPoll();if(['home','social','explore'].indexOf(S.view)>=0&&!M)softRefresh()}).catch(function(){Social.loading=false})}
 try{boot();socialBoot();openLinked()}catch(err){endIntro();try{enterApp()}catch(e2){}if(window.console)console.error(err)}
 window.TRAILO_PROTO={S:S,Store:Store,T:T,go:go,setSport:setSport,Social:Social,FAMOUS:FAMOUS,ROUTE_GEO:ROUTE_GEO,exMap:function(){return EXMAP},rdMap:function(){return RD.map},startMove:function(rid,src){var r=rid?famousById(rid):suggestRoute().r;if((src||'sim')==='gps')return startMove({id:r.id,name:r.name},'gps',false);return simRoute(r).then(function(sr){startMove(sr,'sim',false)})},M:function(){return M},endMove:function(){if(M)endMove()},
-  playIntro:playIntro,DEMO:DEMO,filtered:filtered,dataset:dataset,estimate:estimate,dur:dur,inBand:inBand,openStart:openStart,LAYERS:LAYERS,tab:function(){return tabIdx},PLAN:function(){return PLAN},planMap:function(){return PLAN.map},myRoutes:function(){return MYR},shareLink:function(id){return shareLink(famousById(id))},kitFor:kitFor,burn:burn,wxSpan:wxSpan,loadWx:loadWx,MEDIA:MEDIA,famousById:function(id){return famousById(id)}};
+  playIntro:playIntro,DEMO:DEMO,filtered:filtered,dataset:dataset,estimate:estimate,dur:dur,inBand:inBand,openStart:openStart,LAYERS:LAYERS,tab:function(){return tabIdx},PLAN:function(){return PLAN},planMap:function(){return PLAN.map},myRoutes:function(){return MYR},shareLink:function(id){return shareLink(famousById(id))},kitFor:kitFor,overlapShare:overlapShare,burn:burn,wxSpan:wxSpan,loadWx:loadWx,MEDIA:MEDIA,famousById:function(id){return famousById(id)}};
 
 })();
 </script>

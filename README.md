@@ -44,6 +44,39 @@ Restano tutte le funzioni della revisione 4: mappa reale, percorsi famosi, natur
 - Si condividono nome e tappe: chi lo apre vede lo stesso tracciato e può "Salvarlo nei suoi percorsi". Il link funziona anche senza account.
 - Se BRouter non risponde, il percorso si salva con le sole tappe e la linea tratteggiata è dichiarata "non è una strada".
 
+**Elenco delle tappe** (nell'editor, sotto la mappa).
+- Ogni tappa ha nome della via e del paese, presi da OpenStreetMap (Nominatim, una richiesta al secondo), e i km lungo il percorso.
+- Nell'editor della bici la scelta predefinita è "Strade tranquille" (ciclabili e strade secondarie).
+- Con le frecce cambi l'ordine; con la ✕ la togli; toccando il nome la mappa ci va sopra.
+- "+ Tappa" aggiunge come tappa un luogo cercato per nome.
+- I nomi restano nel percorso salvato, compaiono nel dettaglio e arrivano anche a chi riceve il link.
+
+**Percorso consigliato** (Esplora → "Percorso consigliato", oppure nell'editor → "Proponi un percorso consigliato").
+- Scegli:
+  - tipo di giro: **anello**, **andata e ritorno**, oppure **da A a B** (scrivi il nome dell'arrivo, o usa l'ultima tappa);
+  - partenza: centro della mappa, dove sei, o la prima tappa;
+  - distanza (non serve per "da A a B");
+  - strade: ciclabili, secondarie e sterrati ciclabili, oppure solo asfalto tranquillo;
+  - direzione preferita.
+- Per anelli e andata e ritorno Trailo prova 6 direzioni (3 se ne scegli una) e riaggiusta la grandezza dei migliori per avvicinarsi alla distanza. Per "da A a B" prova la strada diretta e 4 varianti a destra e a sinistra, e scarta quelle che allungano troppo (oltre il 70% in più della più corta).
+- Ogni anello è calcolato da BRouter con il profilo che preferisce ciclabili e strade secondarie:
+  - bici: "trekking", oppure "safety" per il solo asfalto;
+  - corsa: "hiking-mountain".
+- Poi misura su che strade passa davvero e tiene le 3 proposte migliori:
+  - più ciclabili, strade tranquille e sterrati;
+  - meno strade trafficate;
+  - distanza vicina a quella chiesta;
+  - meno tratti fatti due volte (gli anelli che ripassano sulle stesse strade sono penalizzati).
+- Le vedi sulla mappa con la ripartizione per tipo di strada. "Usa questo e modificalo" la trasforma in un percorso tuo: aggiungi, sposti o togli tappe come vuoi.
+- **Non è intelligenza artificiale**: sono regole fisse, dichiarate nell'app. Per scegliere strade vere è più affidabile di un modello linguistico, che non conosce le strade e può inventarle.
+
+**Su che strade passa** (nell'editor e nel dettaglio di ogni percorso, anche famoso). Percentuale e km per tipo di strada, dai tag OpenStreetMap che BRouter riporta tratto per tratto:
+- ciclabili e itinerari ciclabili;
+- strade secondarie tranquille;
+- sterrati e sentieri;
+- strade provinciali;
+- strade statali o trafficate.
+
 **Meteo in Home** (Open-Meteo, gratuito e senza chiave).
 - Condizioni attuali e prossime ore.
 - Posizione usata: il centro della mappa di Esplora, oppure la tua posizione se tocchi "Usa la mia posizione" (chiesta solo allora).
@@ -267,13 +300,15 @@ Si filtra per categoria, e i punti compaiono anche sulla mappa. Dal percorso si 
 | GPX e Google Maps | Reale | Automatico: contenuto GPX, link con le tappe | Google Maps riceve al massimo 8 tappe intermedie |
 | Account, amici, chat, eventi, attività condivise | Reale (Supabase) | Automatico con un **sostituto locale** di Supabase e tre utenti: registrazione, errori di accesso, amicizia, chat nei due sensi, letture, eventi pubblici e solo amici, posti esauriti, chat evento, .ics, annullamento, database non aggiornato, condivisione, applausi, uscita | **Non provato contro il server vero da qui** (rete esterna bloccata): va provato da Netlify dopo l'ok all'SQL |
 | Percorsi personalizzati e condivisione | Reale (BRouter, memoria del browser) | Automatico: tocchi sulla mappa, tappe tolte, anello, profilo di strade, salvataggio, modifica senza doppioni, GPX, simulazione, link aperto da un altro telefono, link rovinato, nome con codice HTML, BRouter assente | Il percorso vive in un solo browser: cancellando i dati del sito si perde (esportazione non ancora prevista) |
+| Elenco delle tappe | Reale (Nominatim per i nomi) | Automatico: nomi e km, spostamento, prima/ultima bloccate, tappa da luogo cercato, rimozione, centratura, nomi nel dettaglio e nel link | Nomi a livello di via: dove OSM non ha la via resta "Tappa N" |
+| Percorso consigliato e tipi di strada | Reale (BRouter + tag OpenStreetMap) | Automatico con BRouter simulato: avanzamento, distanza fuori misura, proposte entro ±35% della distanza, profili trekking/safety/hiking-mountain, direzione, andata e ritorno, da A a B con arrivo cercato, arrivo non trovato, penalità per i tratti ripetuti, uso e modifica, preferenze ricordate, corsa, BRouter assente | Fino a 8 calcoli BRouter per ogni proposta (qualche secondo); le varianti "da A a B" sono 5 e non coprono ogni strada possibile; qualità legata a quanto è completa OSM nella zona |
 | Meteo e "cosa portare" | Reale (Open-Meteo) | Automatico con meteo simulato: valori mostrati, 1 h / 4 h, alba, caldo con pioggia e vento, peso, servizio assente | Regole generali, non personalizzate; previsione nel punto di partenza, non lungo tutto il tracciato |
 | Report calorico | Stima con regola dichiarata | Automatico: 700 kcal per 10 km a 70 kg, 1750 kcal per 60 km a 24 km/h, salita | Margine ±20%; senza cardiofrequenzimetro o potenza non si può fare di meglio |
 | Foto e audio in chat | Reale (Supabase Storage) | Automatico con server simulato: foto ridotta a 1600 px, cartella giusta, visibile all'altro, audio registrato (microfono finto di Chromium) e annullato, percorso in chat | Audio registrato su iPhone in formato MP4 e su Android/Chrome in WebM: verificare la riproduzione incrociata sui telefoni veri |
 | Bacheca, like, commenti, repost, tag, profili | Reale (Supabase) | Automatico con tre utenti: post solo amici e pubblici, tag, like e tolto, commento, repost, repost vietato se non visibile, profili, griglia foto, Taggato, cancellazioni. Regole di accesso provate anche sul database vero | Nessuna notifica push: novità visibili aprendo l'app; nessuna segnalazione o blocco di utenti |
 | Tutto quanto della revisione 3 (intro, onboarding, Move, GPS, archivio, Progressi, layout) | Come prima | Automatico, ripetuto | Vedi revisione 3 |
 
-**Prove automatiche: 248, tutte riuscite** (69 nuove per la revisione 5). Il dettaglio è in `VERIFICA.md`.
+**Prove automatiche: 286, tutte riuscite** (107 nuove per la revisione 5). Il dettaglio è in `VERIFICA.md`.
 
 In questo ambiente la rete esterna è bloccata. Mappe, BRouter, Overpass, Nominatim, Open-Meteo e Supabase (database e spazio per i file) sono stati simulati (`strumenti/mock.py`) per provare il comportamento dell'app. Le prove dicono che l'app usa correttamente le risposte di questi servizi e gestisce i loro errori. **Non dicono** che i servizi veri rispondano: va verificato aprendo l'app da GitHub Pages o Netlify. Nessun test su dispositivi fisici.
 
@@ -310,8 +345,8 @@ In questo ambiente la rete esterna è bloccata. Mappe, BRouter, Overpass, Nomina
 - `sql/`: modifiche del database (revisioni 4 e 5, entrambe applicate).
 - `anteprime/`:
   - schermate della revisione 3 (numerate 01–22);
-  - schermate della revisione 4 (30–41) e della revisione 5 (42–48), fatte con servizi simulati: lo sfondo a griglia sostituisce le tessere vere e la foto verde è un'immagine di prova.
+  - schermate della revisione 4 (30–41) e della revisione 5 (42–50), fatte con servizi simulati: lo sfondo a griglia sostituisce le tessere vere e la foto verde è un'immagine di prova.
 - `strumenti/`:
   - sorgenti `src/` e `build.py`;
   - script degli asset (`logo_assets.py`, `illus.py`);
-  - test (`t_full.py`, `t_tabbar.py`, `t_new.py`, `t_rev5.py`), servizi simulati (`mock.py`) e `verifica.py` che scrive VERIFICA.md.
+  - test (`t_full.py`, `t_tabbar.py`, `t_new.py`, `t_rev5.py`, `t_rev5b.py`), servizi simulati (`mock.py`) e `verifica.py` che scrive VERIFICA.md.
