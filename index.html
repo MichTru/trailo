@@ -379,6 +379,54 @@ textarea.inp{min-height:84px;resize:vertical;font-family:inherit}
 .dsep{align-self:center;font-size:12px;font-weight:800;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
 .sendrow{display:flex;gap:8px;align-items:center;position:sticky;bottom:calc(var(--nav-h) + 8px + env(safe-area-inset-bottom,0px));background:var(--paper);padding:8px 0}
 .me-btn svg{color:var(--ink2)}
+/* ================= revisione 5: percorsi tuoi, meteo, energia, media, bacheca ================= */
+.map.plan-map{height:min(56vh,460px);border-radius:var(--r-m);overflow:hidden;border:1px solid var(--hair)}
+.mm-pin.pin-n{width:30px;height:30px;margin:-15px 0 0 -15px;background:var(--ink);color:#fff;font-size:13px}
+.mm-pin.pin-n.first{background:#1D7A52;width:auto;min-width:30px;padding:0 6px;border-radius:15px}.mm-pin.pin-n.last{background:#B4380C}
+.mm-pin.pin-my{background:#fff;color:var(--ink);border-color:var(--ink)}
+.rchip{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;border-radius:14px;background:var(--paper);border:1px solid var(--hair2);color:var(--ink)}
+.rchip svg{flex:none}.rchip b{display:block;font-size:15px;line-height:1.25}.rchip small{display:block;font-size:13px;color:var(--ink3);font-weight:600}
+.bub.me .rchip{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);color:#fff}.bub.me .rchip small{color:rgba(255,255,255,.8)}
+.myr{padding:14px;border-radius:var(--r-m);background:var(--card);border:1px solid var(--hair);margin-bottom:16px}
+.wxnow{gap:14px}.wxnow svg{flex:none;color:var(--ink)}
+.hstrip{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.hstrip::-webkit-scrollbar{display:none}
+.hstrip>div{flex:1 0 46px;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px;border-radius:12px;background:var(--paper);font-size:13px;font-weight:700;color:var(--ink2)}
+.hstrip b{font-size:15px;color:var(--ink);font-family:var(--display)}.hstrip small{font-size:11px;color:var(--blue-t);min-height:14px}
+.kitsum{padding:12px 14px;border-radius:14px;background:var(--paper);display:flex;flex-direction:column;gap:8px}
+.kitsum ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}.kitsum li{display:flex;gap:10px;align-items:center;font-weight:700;font-size:15px}.kitsum li svg{flex:none;color:var(--acc-t)}
+.wxline{gap:12px}.wxline svg{flex:none}
+.kit ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:4px}
+.kit li label{display:flex;gap:10px;align-items:flex-start;min-height:40px;padding:6px 0;font-size:15px;line-height:1.4;cursor:pointer}
+.kit li input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--ink)}
+.kit li input:checked+span{color:var(--ink3);text-decoration:line-through}
+.fileinp{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}
+label.icon-btn.att,.icon-btn.att{position:relative;overflow:hidden;width:44px;height:44px}
+.sendrow .inp{min-width:0}
+.recbar{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:14px;background:#FCE4DA;color:#7A2405;font-weight:700;flex-wrap:wrap}
+.rdot{width:12px;height:12px;border-radius:50%;background:#D03A0E;animation:rp 1s infinite}
+@keyframes rp{50%{opacity:.25}}
+.bub.media{padding:6px;white-space:normal}
+.bimgb,.pimgb{display:block;width:100%;padding:0;border-radius:12px;overflow:hidden;background:var(--paper2)}
+.bimg{display:block;width:100%;max-width:260px;min-height:120px;object-fit:cover}
+.pimg{display:block;width:100%;max-height:70vh;min-height:160px;object-fit:cover}
+img.ld{background:linear-gradient(90deg,var(--paper2),#F8F5EE,var(--paper2));background-size:200% 100%;animation:sh 1.2s infinite}
+img.gone{min-height:60px;background:var(--paper2)}
+@keyframes sh{to{background-position:-200% 0}}
+.baud{display:flex;flex-direction:column;gap:4px;padding:4px}.baud audio{width:240px;max-width:100%;height:40px}.baud span{font-size:13px;opacity:.85}
+button.av{cursor:pointer}
+.nlink{font-weight:800;color:var(--ink);text-align:left}.nlink:hover{text-decoration:underline}
+.pbody{white-space:pre-wrap;word-wrap:break-word;font-size:16px}
+.ptags{display:flex;gap:6px;align-items:center;font-size:14px;color:var(--ink2)}.ptags .nlink{font-weight:700}
+.quote{border:1px solid var(--hair2);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--paper)}
+.pact{flex-wrap:wrap}.pact .btn[aria-pressed="true"]{background:#FCE4E4;color:#9B1C1C;border-color:#F3B4B4}
+.tagpick{display:flex;flex-wrap:wrap;gap:8px}.tagc{position:relative;cursor:pointer}.tagc input{position:absolute;opacity:0;width:1px;height:1px}
+.tagc:has(input:checked){background:var(--ink);color:#fff;border-color:var(--ink)}.tagc:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:2px}
+.ppv{position:relative;border-radius:14px;overflow:hidden}.ppv img{display:block;width:100%;max-height:260px;object-fit:cover}.ppv .icon-btn{position:absolute;top:8px;right:8px}
+.uhead{display:flex;align-items:center;gap:16px}.av.big{width:72px;height:72px;font-size:30px}
+.ustats{gap:18px;flex-wrap:wrap;font-size:14px;color:var(--ink2)}.ustats b{font-size:20px;color:var(--ink);margin-right:3px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;border-radius:14px;overflow:hidden}
+.pgrid button{aspect-ratio:1;padding:0;background:var(--paper2)}.pgrid img{width:100%;height:100%;object-fit:cover;display:block}
+.cmt p{font-size:15px}
 </style>
 </head>
 <body>
@@ -469,7 +517,7 @@ function goalsFor(choice){return choice==='run'?['Correre con costanza','Prepara
 var S={profile:LS.get('profile',null),sport:LS.get('sport','run'),demo:!!LS.get('demo',false),dataSrc:null,
   view:'home',routeId:null,actId:null,from:null,filters:{band:null,flat:false,surface:null},q:'',evWeek:null,histAll:false,adv:null};
 function prof(){var p=S.profile||{};var lv=p.level==null?1:p.level;return {choice:p.choice||'both',level:lv,goal:p.goal==null?null:p.goal,dataLevel:p.dataLevel==null?lv:p.dataLevel,
-  weekly:{run:(p.weekly&&p.weekly.run)||WEEKLY.run[lv],bike:(p.weekly&&p.weekly.bike)||WEEKLY.bike[lv]},skipped:!!p.skipped}}
+  weekly:{run:(p.weekly&&p.weekly.run)||WEEKLY.run[lv],bike:(p.weekly&&p.weekly.bike)||WEEKLY.bike[lv]},skipped:!!p.skipped,weight:p.weight==null?null:p.weight}}
 function saveProf(patch){var p=prof();for(var k in patch)p[k]=patch[k];S.profile=p;if(!LS.set('profile',p))toast('Preferenze non salvate: memoria del browser non disponibile')}
 if(S.profile&&S.profile.choice&&S.profile.choice!=='both')S.sport=S.profile.choice;
 if(S.sport!=='run'&&S.sport!=='bike')S.sport='run';
@@ -529,7 +577,16 @@ var ICON={play:'<svg width="22" height="22" viewBox="0 0 24 24" fill="currentCol
   chat:I('<path d="M4 5h16v11H9l-5 4z"/>',20),
   send:I('<path d="M4 12 20 4l-6 16-3-7z"/>',20),
   user:I('<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>',22),
-  heart:I('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',20)};
+  heart:I('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',20),
+  image:I('<rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m20.5 16-5-5-8 8"/>',20),
+  mic:I('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>',20),
+  path:I('<circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="6" r="2.2"/><path d="M8 18h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7"/>',20),
+  repost:I('<path d="M17 3l3 3-3 3M4 11V9a3 3 0 0 1 3-3h13M7 21l-3-3 3-3M20 13v2a3 3 0 0 1-3 3H4"/>',20),
+  trash:I('<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',18),
+  tagu:I('<circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-3.5 3.6-5.2 7-5.2s6 1.7 7 5.2"/>',16),
+  drop:I('<path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/>',20),
+  gel:I('<path d="M9 3h6l-1 3v13a2 2 0 0 1-4 0V6z"/><path d="M10 11h4"/>',20),
+  flame:I('<path d="M12 21c4 0 7-2.7 7-6.6 0-3.5-2.6-5.6-4-8.4-.6 2-1.6 3-3 3.6C12 6.8 10.8 4.6 9 3c0 3.6-4 6.3-4 11.4C5 18.3 8 21 12 21z"/>',20)};
 function sportIcon(sp){return sp==='bike'?ICON.bike:ICON.run}
 function img(name,size,cls,extra){var p=PHOTO[name];return '<img src="assets/foto/'+name+(size==='s'?'-800':'')+'.jpg" srcset="assets/foto/'+name+'-800.jpg 800w, assets/foto/'+name+'.jpg 1600w" sizes="(max-width:560px) 100vw, 560px" alt="'+esc(p.alt)+'" style="object-position:'+Math.round(p.f[0]*100)+'% '+Math.round(p.f[1]*100)+'%" loading="'+(extra||'lazy')+'" decoding="async"'+(cls?' class="'+cls+'"':'')+'>'}
 
@@ -607,7 +664,7 @@ var MM_PREF=LS.get('map',{base:'map',over:{}});
 function prj(lat,lon){var s=Math.sin(Math.max(-85.0511,Math.min(85.0511,lat))*Math.PI/180);return [(lon+180)/360*256,(.5-Math.log((1+s)/(1-s))/(4*Math.PI))*256]}
 function unprj(x,y){var lon=x/256*360-180,n=Math.PI-2*Math.PI*y/256;return [180/Math.PI*Math.atan(.5*(Math.exp(n)-Math.exp(-n))),lon]}
 function MiniMap(el,o){o=o||{};var m=this;m.el=el;m.z=o.zoom||6;m.c=o.center||[42.5,12.6];m.base=o.base||MM_PREF.base||'map';m.over=Object.assign({},o.over||MM_PREF.over||{});
-  m.lines=[];m.marks=[];m.dot=null;m.tiles={};m.err=0;m.ok=0;m.onmove=o.onmove||null;m.minZ=2;m.interactive=o.interactive!==false;
+  m.lines=[];m.marks=[];m.dot=null;m.tiles={};m.err=0;m.ok=0;m.onmove=o.onmove||null;m.ontap=o.ontap||null;m.minZ=2;m.interactive=o.interactive!==false;
   el.classList.add('mm');el.innerHTML='<div class="mm-tiles"></div><svg class="mm-vec" aria-hidden="true"></svg><div class="mm-mk"></div>'+
     (o.controls===false?'':'<div class="mm-zoom"><button type="button" data-z="1" aria-label="Avvicina">+</button><button type="button" data-z="-1" aria-label="Allontana">−</button></div>')+
     '<div class="mm-attr"></div><div class="mm-msg" role="status" hidden></div>';
@@ -672,11 +729,13 @@ MiniMap.prototype={
       if(ids.length===1&&last){var dx=e.clientX-last[0],dy=e.clientY-last[1];moved+=Math.abs(dx)+Math.abs(dy);if(moved>3)m.pan(dx,dy);last=[e.clientX,e.clientY]}});
     var up=function(e){if(!pts[e.pointerId])return;delete pts[e.pointerId];if(Object.keys(pts).length<2&&pinch){pinch=null;var k=Object.keys(pts);last=k.length?pts[k[0]]:null;
         if(Math.abs(m.z-Math.round(m.z))>.02)m.zoomBy(0)}
-      if(!Object.keys(pts).length){last=null;if(moved<4&&e.type==='pointerup'){var now=Date.now(),r=el.getBoundingClientRect();if(now-lastTap<320){m.zoomAround(Math.round(m.z)+1,e.clientX-r.left,e.clientY-r.top);lastTap=0}else lastTap=now}}};
+      if(!Object.keys(pts).length){last=null;if(moved<4&&e.type==='pointerup'){var now=Date.now(),r=el.getBoundingClientRect(),tx=e.clientX-r.left,ty=e.clientY-r.top;clearTimeout(m.tapT);
+        if(now-lastTap<320){m.zoomAround(Math.round(m.z)+1,tx,ty);lastTap=0}
+        else{lastTap=now;/* tocco singolo: si attende un eventuale secondo tocco (zoom) prima di consegnarlo */if(m.ontap)m.tapT=setTimeout(function(){m.ontap(m.toLL(tx,ty))},330)}}}};
     el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);
     el.addEventListener('wheel',function(e){e.preventDefault();var r=el.getBoundingClientRect();m.zoomAround(m.z-e.deltaY*(e.deltaMode===1?.05:.0022),e.clientX-r.left,e.clientY-r.top);clearTimeout(m.wt);m.wt=setTimeout(function(){m.zoomBy(0)},220)},{passive:false});
     el.addEventListener('keydown',function(e){if(e.target!==el)return;var k=e.key,st=80;if(k==='ArrowLeft')m.pan(st,0);else if(k==='ArrowRight')m.pan(-st,0);else if(k==='ArrowUp')m.pan(0,st);else if(k==='ArrowDown')m.pan(0,-st);else if(k==='+'||k==='=')m.zoomBy(1);else if(k==='-')m.zoomBy(-1);else return;e.preventDefault()})},
-  destroy:function(){if(this.ro)this.ro.disconnect();clearTimeout(this.mt)}};
+  destroy:function(){if(this.ro)this.ro.disconnect();clearTimeout(this.mt);clearTimeout(this.tapT)}};
 
 var PHOTO={ /* illustrazioni generate: punto focale in frazioni (x,y) */
   'colline-alba':{f:[.62,.68],alt:'Illustrazione: colline al tramonto con una strada tra i cipressi'},
@@ -849,7 +908,7 @@ var Social={sess:LS.get('sess',null),me:null,people:{},friends:[],incoming:[],ou
       if(j&&j.access_token){self.setSess(j);return self.ensureProfile(nick).then(function(){return {ok:true}})}return {confirm:true}})},
   signIn:function(email,pw){var self=this;return this.fetch('/auth/v1/token?grant_type=password',{method:'POST',anon:true,body:{email:email,password:pw}}).then(function(j){self.setSess(j);return self.ensureProfile()})},
   signOut:function(){var self=this;var p=this.sess?this.fetch('/auth/v1/logout',{method:'POST'}).catch(function(){}):Promise.resolve();return p.then(function(){self.setSess(null);self.reset()})},
-  reset:function(){this.me=null;this.people={};this.friends=[];this.incoming=[];this.outgoing=[];this.msgs=[];this.rides=[];this.feed=[];this.loaded=false;clearInterval(this.pollT);this.pollT=null},
+  reset:function(){this.posts=[];this.pmap={};this.boardLoaded=false;this.boardErr='';MEDIA.urls={};this.me=null;this.people={};this.friends=[];this.incoming=[];this.outgoing=[];this.msgs=[];this.rides=[];this.feed=[];this.loaded=false;clearInterval(this.pollT);this.pollT=null},
   get:function(t,q){return this.fetch('/rest/v1/'+t+(q?'?'+q:''))},
   post:function(t,b,ret){return this.fetch('/rest/v1/'+t,{method:'POST',body:b,prefer:ret?'return=representation':'return=minimal'})},
   patch:function(t,q,b){return this.fetch('/rest/v1/'+t+'?'+q,{method:'PATCH',body:b,prefer:'return=minimal'})},
@@ -874,7 +933,7 @@ var Social={sess:LS.get('sess',null),me:null,people:{},friends:[],incoming:[],ou
       self.msgs=(r[1]||[]).reverse();self.rides=r[2]||[];self.feed=r[3]||[];self.ext=self.rides.length?('visibility' in self.rides[0]):self.ext;
       var ids=self.friends.concat(self.incoming,self.outgoing,self.rides.map(function(x){return x.creator}),self.feed.map(function(x){return x.user_id}));self.rides.forEach(function(x){(x.ride_members||[]).forEach(function(m){ids.push(m.user_id)})});
       return self.loadPeople(ids)}).then(function(){self.loaded=true;self.badge()}).catch(function(e){self.err=self.nice(e);if(/sessione scaduta|accedi di nuovo/i.test(self.err)){self.reset()}throw e})},
-  startPoll:function(){var self=this;if(this.pollT)return;this.pollT=setInterval(function(){if(!self.on()||document.hidden)return;self.refresh().then(function(){if(S.view==='social'||S.view==='chat'||S.view==='event')softRefresh()}).catch(function(){})},20000)},
+  startPoll:function(){var self=this;if(this.pollT)return;this.pollT=setInterval(function(){if(!self.on()||document.hidden)return;self.refresh().then(function(){if((S.view==='social'&&S.soc==='feed')||S.view==='post')return self.loadBoard().catch(function(){})}).then(function(){if(S.view==='social'||S.view==='chat'||S.view==='event'||S.view==='post')softRefresh()}).catch(function(){})},20000)},
   unread:function(){var u=this.uid();return this.msgs.filter(function(m){return m.recipient===u&&!m.read_at}).length},
   badge:function(){var n=this.unread()+this.incoming.length,b=$('#nav [data-go=social]');if(!b)return;var d=$('.nb',b);if(n){if(!d){d=document.createElement('span');d.className='nb';b.appendChild(d)}d.textContent=n>9?'9+':n;b.setAttribute('aria-label','Community, '+n+' novità')}else{if(d)d.remove();b.removeAttribute('aria-label')}},
   search:function(q){var u=this.uid(),qq=q.replace(/[%*,()]/g,'').trim();return this.get('profiles','select=id,nick,zone&id=neq.'+u+'&nick=ilike.*'+encodeURIComponent(qq)+'*&limit=20')},
@@ -892,10 +951,10 @@ var Social={sess:LS.get('sess',null),me:null,people:{},friends:[],incoming:[],ou
   members:function(r){return (r.ride_members||[]).map(function(m){return m.user_id})},
   joined:function(r){return r.creator===this.uid()||this.members(r).indexOf(this.uid())>=0},
   createRide:function(d){var self=this,row={creator:this.uid(),title:d.title,sport:d.sport,starts_at:d.at,meet:d.meet||null,km:d.km||null,up:d.up||null,notes:d.notes||null,
-      visibility:d.visibility,lat:d.ll?d.ll[0]:null,lon:d.ll?d.ll[1]:null,route_ref:d.route||null,max_people:d.max||null};
+      visibility:d.visibility,lat:d.ll?d.ll[0]:null,lon:d.ll?d.ll[1]:null,route_ref:d.route||null,max_people:d.max||null};if(d.routeObj)row.route=d.routeObj;
     return this.post('group_rides',row,true).catch(function(e){
       if(/column|schema cache|PGRST204/i.test(String(e.message)+e.code)){self.ext=false;
-        if(d.visibility==='friends'||d.max)throw new Error('Eventi "solo amici" e posti massimi richiedono l\'aggiornamento del database non ancora applicato.');
+        if(d.visibility==='friends'||d.max||d.routeObj)throw new Error('Eventi "solo amici", posti massimi e percorsi tuoi richiedono l\'aggiornamento del database non ancora applicato.');
         var base={creator:row.creator,title:row.title,sport:row.sport,starts_at:row.starts_at,meet:row.meet,km:row.km,up:row.up,notes:row.notes};return self.post('group_rides',base,true)}throw e})
       .then(function(a){var r=a&&a[0];if(!r)throw new Error('Evento non creato');return self.post('ride_members',{ride_id:r.id,user_id:self.uid()}).catch(function(){}).then(function(){return self.refresh()}).then(function(){return r})})},
   join:function(r,on){var self=this;return (on?this.post('ride_members',{ride_id:r.id,user_id:this.uid()}):this.del('ride_members','ride_id=eq.'+r.id+'&user_id=eq.'+this.uid())).then(function(){return self.refresh()})},
@@ -911,18 +970,18 @@ function getRaw(url,opt){var ctl=window.AbortController?new AbortController():nu
 function softRefresh(){if(LAYERS.length||M)return;var ae=document.activeElement;if(ae&&/^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)&&$('#main').contains(ae))return;var y=window.scrollY;render(true);window.scrollTo(0,y)}
 
 /* ================= navigazione ================= */
-var EXP={home:'home',explore:'explore',route:'explore',place:'home',evolve:'evolve',act:'evolve',profile:'home',system:'home',onb:'home',social:'social',event:'social',chat:'social'};
+var EXP={home:'home',explore:'explore',route:'explore',place:'home',evolve:'evolve',act:'evolve',profile:'home',system:'home',onb:'home',social:'social',event:'social',chat:'social',plan:'home',kit:'home',post:'social',user:'social'};
 function setSport(sp,quiet){if(sp!=='bike'&&sp!=='run')return;if(M)return;S.sport=sp;LS.set('sport',sp);document.body.classList.toggle('run',sp==='run');
   $$('#sportTg button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.s===sp))});
   if(S.view==='route'&&famousById(S.routeId)&&famousById(S.routeId).sport!==sp)S.view='explore';
   if(S.view==='act'){var a=findAct(S.actId);if(a&&a.sport!==sp)S.view='evolve'}
   S.filters={band:null,flat:false,surface:null};S.evWeek=null;S.histAll=false;render(true);if(!quiet)toast(sp==='run'?'Running: passo, km e intertempi':'Ciclismo: velocità, km e salita')}
-function go(v,opt){if(v==='start'){openStart(null);return}clearInterval(CH.t);clearInterval(EV.chatT);S.view=v;if(opt)for(var k in opt)S[k]=opt[k];render();window.scrollTo(0,0)}
+function go(v,opt){if(v==='start'){openStart(null);return}clearInterval(CH.t);clearInterval(EV.chatT);if(REC)recStop(true);S.view=v;if(opt)for(var k in opt)S[k]=opt[k];render();window.scrollTo(0,0)}
 function render(soft){document.body.dataset.exp=EXP[S.view]||'home';var m=$('#main');m.innerHTML='<div class="view'+(soft||REDUCED?'':' enter')+'">'+VIEWS[S.view]()+'</div>';
-  var map={route:'explore',place:'explore',act:'evolve',event:'social',chat:'social'},cur=map[S.view]||S.view;
+  var map={route:'explore',place:'explore',plan:'explore',kit:'home',act:'evolve',event:'social',chat:'social',post:'social',user:'social'},cur=map[S.view]||S.view;
   $$('#nav button').forEach(function(b){b.removeAttribute('aria-current');if(b.dataset.go===cur)b.setAttribute('aria-current','page')});
   var ti=TABS.indexOf(cur);if(ti>=0)setTab(ti);
-  var af=AFTER[S.view];if(af)af()}
+  var af=AFTER[S.view];if(af)af();fillMedia(m)}
 
 /* ================= PROGRESSI ================= */
 function srcSwitch(){if(S.demo)return '';var all=personal(S.sport),R=all.filter(function(a){return a.source==='gps'}).length,Sm=all.filter(function(a){return a.source==='sim'}).length;if(!R||!Sm)return '';var cur=srcFor();
@@ -1008,6 +1067,7 @@ function viewAct(){var a=findAct(S.actId);if(!a)return '<button type="button" cl
   else if(a.routeId&&famousById(a.routeId))h+='<div class="map rmap" id="actMap"></div><p class="muted" style="font-size:13px;margin-top:-10px">'+(a.source==='sim'?'Percorso simulato: ':'Attività dimostrativa: ')+esc(famousById(a.routeId).name)+'. Non è una traccia registrata.</p>';
   if(a.source==='gps'&&!a.demo){if(Social.on())h+=a.sharedId?'<p class="tag gps" style="align-self:flex-start">Condivisa con gli amici</p>':'<button type="button" class="btn btn-sec" data-act="shareAct" data-id="'+a.id+'">'+ICON.people+'Condividi con gli amici</button>';
     else h+='<p class="muted" style="font-size:14px">Accedi alla Community per condividere questa attività con gli amici.</p>'}
+  h+=actEnergy(a);
   var spl=a.splits||[],u=a.splitKm||1;
   h+='<section class="sect" aria-labelledby="spT"><h2 id="spT">Intertempi</h2><p class="sub">'+(run?'Ogni chilometro. Barre più alte = più veloce; la scala parte dall\'85% del km più lento per mostrare le differenze.':'Ogni '+u+' km. Barre più alte = più veloce; la scala non parte da zero.')+'</p>';
   if(spl.length){var sp=spl.map(function(s){return u/(s/3600)}),best=sp.indexOf(Math.max.apply(null,sp));
@@ -1043,6 +1103,7 @@ function viewProfile(){var P=prof(),n=Store.list(),kb=Math.round(Store.bytes()/1
     segs('level',[[0,'Principiante'],[1,'Intermedio'],[2,'Esperto']],P.level,'Livello · usato per le stime di durata')+
     segs('dataLevel',[[0,'Essenziale'],[1,'Standard'],[2,'Completa']],P.dataLevel,'Quantità di dati · indipendente dal livello')+
     '<div class="fgroup"><p class="eye" id="pl_goal">Obiettivo principale · orienta proposte e suggerimenti</p><div class="stack" style="gap:8px" role="group" aria-labelledby="pl_goal">'+gl.map(function(g,i){return '<button type="button" class="opt" data-pref="goal" data-v="'+i+'" aria-pressed="'+(P.goal===i)+'" style="min-height:52px;padding:10px 14px"><b>'+g+'</b></button>'}).join('')+'</div></div>'+
+    '<label class="fld"><span>Peso in kg · per calorie e alimentazione, resta in questo browser</span><input class="inp" id="profKg" type="number" min="30" max="250" step="1" inputmode="numeric" value="'+(weightKg()||'')+'" placeholder="Non indicato (uso 70 kg)"></label>'+
     '<div class="row"><div class="grow"><b>Obiettivo settimanale</b><div class="muted" style="font-size:14px">Ciclismo '+P.weekly.bike+' km · Running '+P.weekly.run+' km</div></div><button type="button" class="btn btn-sec" data-act="goal" style="min-height:44px">Modifica</button></div></section>'+
   '<section class="sect" aria-labelledby="intT"><h2 id="intT" style="font-family:var(--display);font-weight:800;font-size:20px">Collegamenti</h2><div class="card" style="padding:0 16px">'+
     [['Strava'],['Sensori: cardio e potenza'],['Attrezzatura: bici e scarpe'],['Sicurezza e contatto di emergenza']].map(function(x,i){return '<div class="row" style="min-height:60px;'+(i?'border-top:1px solid var(--hair)':'')+'"><b class="grow">'+x[0]+'</b><span class="tag na">Non disponibile nel prototipo</span></div>'}).join('')+'</div>'+
@@ -1087,9 +1148,9 @@ function renderOnb(focusH){var st=OB.step,m=$('#main'),body;
   m.innerHTML='<div class="onb">'+head+body+foot+'</div>';if(focusH){var h=$('#main h1');if(h)h.focus()}}
 function opt(v,t,s,bg,fg,ic){return '<button type="button" class="opt" data-ob="choice" data-v="'+v+'" aria-pressed="'+(OB.choice===v)+'"><span class="ic" style="background:'+bg+';color:'+fg+'">'+ic+'</span><span><b style="font-size:17px">'+t+'</b><span class="muted" style="display:block;font-size:14px">'+s+'</span></span></button>'}
 function finishOnb(skip){var prev=prof(),ch=OB.choice||(skip?prev.choice:'both'),lv=OB.level==null?(skip?prev.level:1):OB.level;
-  var p={choice:ch,level:lv,goal:OB.goal==null?(skip?prev.goal:null):OB.goal,dataLevel:lv,weekly:{run:WEEKLY.run[lv],bike:WEEKLY.bike[lv]},skipped:!!skip};
+  var p={choice:ch,level:lv,goal:OB.goal==null?(skip?prev.goal:null):OB.goal,dataLevel:lv,weekly:{run:WEEKLY.run[lv],bike:WEEKLY.bike[lv]},skipped:!!skip,weight:prev.weight};
   if(S.profile&&S.profile.weekly&&!OB.fresh)p.weekly=S.profile.weekly;
-  S.profile=p;LS.set('profile',p);if(ch!=='both')S.sport=ch;enterApp();toast(skip?'Puoi impostare le preferenze dal Profilo':'Preferenze salvate')}
+  S.profile=p;LS.set('profile',p);if(ch!=='both')S.sport=ch;enterApp();toast(skip?'Puoi impostare le preferenze dal Profilo':'Preferenze salvate');openPending()}
 function enterApp(){S.view='home';$('#top').hidden=false;$('#nav').hidden=false;$('#sportTg').hidden=!(prof().choice==='both');setSport(S.sport,true)}
 
 /* ================= Chiedi a Trailo ================= */
@@ -1126,6 +1187,7 @@ function viewHome(){var P=prof(),list=dataset(),has=list.length>0,last=list[0],w
     '<button type="button" class="pcard" data-act="route" data-route="'+sg.r.id+'">'+img(sg.r.photo,'s')+'<span class="scr"></span><span class="why">'+esc(sg.why.split(':')[0])+'</span><span class="ill">Illustrazione</span>'+
     '<span class="txt"><span class="eye" style="color:#EDE8DE">'+esc(sg.r.region)+' · percorso famoso</span><h3>'+esc(sg.r.name)+'</h3><span class="meta">'+routeMeta(sg.r)+'</span></span></button>'+
     '<p class="muted" style="font-size:14px">Regola: '+esc(sg.why)+'</p></section>';
+  h+=homeWx();
   h+=homeEvents();
   if(has){var pct=Math.min(100,Math.round(wk.km/goal*100)),met=wk.km>=goal;
     h+='<section class="sect" aria-labelledby="hProg"><h2 id="hProg">I tuoi progressi</h2><div class="card pad wk"><div class="row" style="align-items:baseline"><span class="num big">'+kmTxt(wk.km)+'</span><span class="muted" style="font-weight:700">di '+goal+' km questa settimana</span></div>'+
@@ -1167,12 +1229,16 @@ function viewExplore(){
 function afterExplore(){var box=$('#exMap');if(EXMAP)EXMAP.destroy();EXMAP=new MiniMap(box,{center:S.ex.c,zoom:S.ex.z,label:'Mappa di Esplora',onmove:function(m){S.ex.c=m.c;S.ex.z=m.z;LS.set('ex',S.ex);if(S.ex.tab==='nature')loadNature();else if(S.ex.tab==='famous')paintExList()}});
   paintExList();if(S.ex.tab==='nature')loadNature()}
 function exMarkers(){if(!EXMAP)return;var t=S.ex.tab,mk=[];
+  if(t==='famous'){myRoutes(S.sport).forEach(function(r){mk.push({ll:r.wp[0],cls:'pin-my',html:ICON.path,label:'Tuo percorso: '+r.name,onClick:function(){S.routeId=r.id;go('route')}})})}
   if(t==='famous')filtered().forEach(function(r){mk.push({ll:r.wp[0],cls:'pin-r',html:sportIcon(r.sport),label:'Percorso: '+r.name,onClick:function(){S.routeId=r.id;go('route')}})});
   else if(t==='nature')natureList().slice(0,80).forEach(function(p){mk.push({ll:p.ll,cls:'pin-'+p.kind,html:KIND[p.kind].ic,label:p.sub+': '+p.name,onClick:function(){openPlace(p)}})});
   else if(t==='events'&&Social.on())Social.rides.filter(function(r){return r.lat!=null}).forEach(function(r){mk.push({ll:[r.lat,r.lon],cls:'pin-e',html:ICON.cal,label:'Evento: '+r.title,onClick:function(){S.rideId=r.id;go('event')}})});
   EXMAP.setMarkers(mk);var sel=t==='famous'&&S.hl?famousById(S.hl):null;EXMAP.setLines(sel&&ROUTE_GEO[sel.id]?[{pts:ROUTE_GEO[sel.id].pts}]:[])}
 function paintExList(){var box=$('#exList');if(!box)return;var t=S.ex.tab,h='';
-  if(t==='famous'){var f=S.filters,list=filtered().sort(function(a,b){return distKm(S.ex.c,a.wp[0])-distKm(S.ex.c,b.wp[0])}),n=activeFilters();
+  if(t==='famous'){var mine=myRoutes(S.sport);
+    h+='<section class="myr" aria-labelledby="myrT"><div class="row"><h2 id="myrT" class="grow" style="font-size:20px">I tuoi percorsi</h2><button type="button" class="btn btn-ink sm" data-act="plan">'+ICON.path+'Crea un percorso</button></div>'+
+      (mine.length?'<div class="stack" style="gap:8px;margin-top:10px">'+mine.map(function(r){return routeChip(r)}).join('')+'</div>':'<p class="muted" style="font-size:14px;margin-top:6px">Disegna un percorso toccando la mappa: il tracciato segue strade e sentieri. Resta in questo browser e puoi condividerlo.</p>')+'</section>';
+    var f=S.filters,list=filtered().sort(function(a,b){return distKm(S.ex.c,a.wp[0])-distKm(S.ex.c,b.wp[0])}),n=activeFilters();
     h+='<div class="stack" style="gap:14px"><div class="fgroup"><p class="eye" id="fgD">Distanza</p><div class="chips" role="group" aria-labelledby="fgD">'+BANDS[S.sport].map(function(b,i){return '<button type="button" class="chip" data-f="band" data-v="'+i+'" aria-pressed="'+(f.band===i)+'">'+b.l+'</button>'}).join('')+'</div></div>'+
       '<div class="fgroup"><p class="eye" id="fgS">Salita e fondo</p><div class="chips" role="group" aria-labelledby="fgS"><button type="button" class="chip" data-f="flat" aria-pressed="'+f.flat+'">Poco dislivello</button>'+SURF.map(function(s){return '<button type="button" class="chip" data-f="surface" data-v="'+s+'" aria-pressed="'+(f.surface===s)+'">'+cap(s)+'</button>'}).join('')+'</div>'+
       '<p class="muted" style="font-size:13px;margin-top:2px">Poco dislivello: meno di '+FLAT[S.sport]+' m di salita per km.</p></div></div>'+
@@ -1229,20 +1295,23 @@ function locateMe(){if(!navigator.geolocation){toast('Questo browser non fornisc
 var RD={map:null,pois:null,state:'',err:'',cats:{sleep:1,eat:1,water:1,bike:1,see:1}};
 function viewRoute(){var r=famousById(S.routeId);if(!r)return viewExplore();var g=ROUTE_GEO[r.id],e=estimate(r);
   return '<section class="rd-hero">'+img(r.photo,'l','','eager')+'<span class="scr"></span><button type="button" class="back" data-act="backEx">'+ICON.back+'Esplora</button><span class="ill">Illustrazione: non ritrae questo luogo</span></section>'+
-  '<div class="rd-sheet"><div><p class="eye">'+esc(r.region)+' · '+(r.sport==='run'?'Running':'Ciclismo')+' · percorso famoso</p><h1 style="margin-top:4px">'+esc(r.name)+'</h1><p style="margin-top:8px;color:var(--ink2);font-size:16px">'+esc(r.about)+'</p></div>'+
+  '<div class="rd-sheet"><div><p class="eye">'+esc(r.region)+' · '+(r.sport==='run'?'Running':'Ciclismo')+(r.custom?'':r.shared?'':' · percorso famoso')+'</p><h1 style="margin-top:4px">'+esc(r.name)+'</h1><p style="margin-top:8px;color:var(--ink2);font-size:16px">'+esc(r.about)+'</p></div>'+
   '<div class="kv" id="rdKv">'+rdKv(r)+'</div><p class="est" id="rdEst">'+esc(e.rule)+'</p>'+
   '<div class="map rmap" id="rdMap"></div><p class="muted" id="rdSrc" style="font-size:13px;margin-top:-10px">'+rdSrc(r)+'</p>'+
   '<section class="sect" id="rdProf"></section>'+
+  (r.shared&&!myRoute(r.id)?'<div class="banner info">'+ICON.info+'<div>Percorso condiviso'+(r.from?' da <b>'+esc(r.from)+'</b>':'')+'. Salvalo per ritrovarlo tra i tuoi.</div></div><button type="button" class="btn btn-ink" data-act="saveShared" data-route="'+r.id+'">Salva nei miei percorsi</button>':'')+
   '<button type="button" class="btn btn-pri xl" data-act="start" data-route="'+r.id+'">'+ICON.play+W('Pedala questo percorso','Corri questo percorso')+'</button>'+
+  '<button type="button" class="btn btn-sec" data-act="shareRoute" data-route="'+r.id+'">'+ICON.send+'Condividi il percorso</button>'+
   '<button type="button" class="btn btn-sec" data-act="newEvent" data-route="'+r.id+'">'+ICON.cal+'Crea un evento su questo percorso</button><div class="row" style="gap:8px"><a class="btn btn-sec grow" id="rdGm" href="'+gmapsDir(r.wp)+'" target="_blank" rel="noopener">Apri in Google Maps</a><button type="button" class="btn btn-sec grow" data-act="gpx" data-route="'+r.id+'">Scarica GPX</button></div>'+
-  '<p class="muted" style="font-size:13px">Durante l\'attività Trailo registra i tuoi dati; non ti guida a voce lungo il percorso. Verifica sempre chiusure e condizioni della strada.</p>'+
+  (r.custom?'<div class="row" style="gap:8px"><button type="button" class="btn btn-sec grow" data-act="editRoute" data-route="'+r.id+'">Modifica le tappe</button><button type="button" class="btn btn-danger grow" data-act="delRoute" data-route="'+r.id+'">Elimina</button></div>':'')+
+  '<p class="muted" style="font-size:13px">Durante l\'attività Trailo registra i tuoi dati; non ti guida a voce lungo il percorso. Verifica sempre chiusure e condizioni della strada.</p>'+routeKitHtml()+
   '<section class="sect" aria-labelledby="poiT"><h2 id="poiT">Lungo il percorso</h2><p class="sub">Dormire, mangiare, acqua, officine e cose da vedere vicino al tracciato. Dati OpenStreetMap: orari e informazioni possono non essere aggiornati.</p>'+
     '<div class="chips" role="group" aria-label="Categorie">'+Object.keys(POI_CATS).map(function(k){return '<button type="button" class="chip" data-poicat="'+k+'" aria-pressed="'+!!RD.cats[k]+'"><i class="cdot" style="background:'+POI_CATS[k].c+'"></i>'+POI_CATS[k].n+'</button>'}).join('')+'</div><div id="poiList"></div></section></div>'}
 function rdKv(r){var g=ROUTE_GEO[r.id],e=estimate(r),ok=g&&g.computed;return '<div><b>'+rkm1(rKm(r))+' km</b><span>Distanza'+(ok?'':' indicativa')+'</span></div><div><b>'+rUp(r)+' m</b><span>Dislivello in salita'+(ok?'':' indicativo')+'</span></div><div><b style="font-size:22px">'+dur(e.sec)+'</b><span>Durata stimata</span></div><div><b style="font-size:22px">'+r.diff+'</b><span>Difficoltà · fondo '+r.surface+'</span></div>'}
-function rdSrc(r){var g=ROUTE_GEO[r.id];if(!g)return RD.state==='err'?'Tracciato non calcolato: la linea tratteggiata unisce le tappe e non è una strada.':'Calcolo il tracciato con BRouter…';return g.computed?'Tracciato calcolato da BRouter su strade OpenStreetMap tra '+r.wp.length+' tappe. Controlla sempre prima di partire.':'Linea tratteggiata tra le tappe: non è una strada.'}
+function rdSrc(r){var g=ROUTE_GEO[r.id];if(!g||!g.computed)if(r.custom||r.shared)return g&&!g.computed?'Linea tratteggiata tra le tappe: non è una strada.':RD.state==='err'?'Tracciato non calcolato: la linea tratteggiata unisce le tappe e non è una strada.':'Calcolo il tracciato con BRouter…';if(!g)return RD.state==='err'?'Tracciato non calcolato: la linea tratteggiata unisce le tappe e non è una strada.':'Calcolo il tracciato con BRouter…';return g.computed?'Tracciato calcolato da BRouter su strade OpenStreetMap tra '+r.wp.length+' tappe. Controlla sempre prima di partire.':'Linea tratteggiata tra le tappe: non è una strada.'}
 function afterRoute(){var r=famousById(S.routeId);if(!r)return;RD.pois=null;RD.state='load';if(RD.map)RD.map.destroy();RD.map=new MiniMap($('#rdMap'),{label:'Mappa del percorso '+r.name});RD.map.fit(r.wp,30);
   RD.map.setLines([{pts:r.wp,dash:'2 9',w:4,casing:false,color:'#141A22'}]);RD.map.setMarkers([{ll:r.wp[0],cls:'pin-start',html:'A',label:'Partenza'},{ll:r.wp[r.wp.length-1],cls:'pin-end',html:'B',label:'Arrivo'}]);paintPois();
-  var id=r.id;routeGeo(r).then(function(g){if(S.view!=='route'||S.routeId!==id)return;RD.state='ok';drawRoute(r,g);loadPois(r,g)}).catch(function(){if(S.view!=='route'||S.routeId!==id)return;RD.state='err';var g=wpGeo(r);$('#rdSrc').textContent=rdSrc(r);
+  var id=r.id;paintRouteKit(r);routeGeo(r).then(function(g){if(S.view!=='route'||S.routeId!==id)return;RD.state='ok';if(r.custom&&(Math.abs(r.km-g.km)>.05||r.up!==g.up)){r.km=g.km;r.up=g.up||0;persistMy()}drawRoute(r,g);loadPois(r,g);paintRouteKit(r)}).catch(function(){if(S.view!=='route'||S.routeId!==id)return;RD.state='err';var g=wpGeo(r);$('#rdSrc').textContent=rdSrc(r);
     $('#rdProf').innerHTML='<div class="empty">Altimetria non disponibile: il servizio di calcolo del tracciato non risponde.</div>';loadPois(r,g)})}
 function drawRoute(r,g){RD.map.setLines([{pts:g.pts}]);RD.map.fit(g.pts,30);$('#rdKv').innerHTML=rdKv(r);$('#rdEst').textContent=estimate(r).rule;$('#rdSrc').textContent=rdSrc(r);
   var pf=$('#rdProf');if(g.ele){pf.innerHTML='<div class="row"><h2 class="grow">Altimetria</h2><span class="muted" id="pfRead" style="font-size:14px;font-variant-numeric:tabular-nums">Tocca o scorri il grafico</span></div><div class="prof" id="pf"></div><p class="muted" style="font-size:13px">Il punto sulla mappa segue il grafico. Quote dal modello del terreno di BRouter.</p>';profileChart($('#pf'),g,RD.map,$('#pfRead'))}
@@ -1282,18 +1351,18 @@ function afterPlace(){var p=PLACES[S.placeId];if(!p)return;if(PL.map)PL.map.dest
     .catch(function(){var box=$('#plPoi');if(box)box.innerHTML='<div class="empty">Dati della zona non disponibili: il servizio OpenStreetMap non risponde.</div>'})}
 
 /* ================= COMMUNITY ================= */
-S.soc=LS.get('soc','events');S.evf='all';
+S.soc=LS.get('soc','feed');if(['feed','events','friends','chat'].indexOf(S.soc)<0)S.soc='feed';S.evf='all';
 function fmtWhen(iso,long){var d=new Date(iso);return cap(d.toLocaleDateString('it-IT',long?{weekday:'long',day:'numeric',month:'long'}:{weekday:'short',day:'numeric',month:'short'}))+' · '+d.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})}
 function evCard(r){var d=new Date(r.starts_at),n=Social.members(r).length,mine=Social.joined(r),fr=r.visibility==='friends',full=r.max_people&&n>=r.max_people;
   return '<button type="button" class="evc" data-act="openEvent" data-id="'+r.id+'"><span class="evd"><b>'+d.getDate()+'</b><span>'+d.toLocaleDateString('it-IT',{month:'short'})+'</span></span><span class="grow"><b style="display:block;font-size:17px">'+esc(r.title)+'</b>'+
     '<span class="muted" style="font-size:14px;display:block">'+fmtWhen(r.starts_at)+(r.meet?' · '+esc(r.meet):'')+'</span><span class="row" style="gap:6px;flex-wrap:wrap;margin-top:6px"><span class="tag">'+(r.sport==='run'?'Running':'Ciclismo')+'</span><span class="tag'+(fr?' demo':'')+'">'+(fr?'Solo amici':'Pubblico')+'</span>'+
     '<span class="tag">'+n+(r.max_people?' su '+r.max_people:'')+(n===1&&!r.max_people?' partecipante':' partecipanti')+'</span>'+(mine?'<span class="tag gps">'+(r.creator===Social.uid()?'Organizzi tu':'Partecipi')+'</span>':full?'<span class="tag sim">Completo</span>':'')+'</span></span></button>'}
-function viewSocial(){var h='<header class="ev-head"><p class="eye" style="color:var(--ink3)">Community</p><h1 style="font-family:var(--display);font-weight:800;font-size:30px">Esci con gli altri</h1></header>';
+function viewSocial(){var h='<header class="ev-head"><p class="eye" style="color:var(--ink3)">Community</p><div class="row" style="align-items:flex-end"><h1 class="grow" style="font-family:var(--display);font-weight:800;font-size:30px">Esci con gli altri</h1>'+(Social.on()&&Social.me?'<button type="button" class="btn btn-sec sm" data-act="openUser" data-id="'+Social.uid()+'">'+ICON.user+'Il tuo profilo</button>':'')+'</div></header>';
   if(!Social.on())return h+authCard();
   if(Social.loaded&&!Social.me)return h+nickCard();
   if(Social.err)h+=banner('err',esc(Social.err)+' <button type="button" class="link" data-act="socRetry">Riprova</button>');
   var un=Social.unread(),inc=Social.incoming.length;
-  h+='<div class="seg" role="tablist" aria-label="Sezioni della Community">'+[['events','Eventi',0],['friends','Amici',inc],['chat','Chat',un],['feed','Attività',0]].map(function(t){return '<button type="button" role="tab" data-soc="'+t[0]+'" aria-selected="'+(S.soc===t[0])+'" aria-pressed="'+(S.soc===t[0])+'">'+t[1]+(t[2]?' <span class="cnt">'+t[2]+'</span>':'')+'</button>'}).join('')+'</div>';
+  h+='<div class="seg" role="tablist" aria-label="Sezioni della Community">'+[['feed','Bacheca',0],['events','Eventi',0],['friends','Amici',inc],['chat','Chat',un]].map(function(t){return '<button type="button" role="tab" data-soc="'+t[0]+'" aria-selected="'+(S.soc===t[0])+'" aria-pressed="'+(S.soc===t[0])+'">'+t[1]+(t[2]?' <span class="cnt">'+t[2]+'</span>':'')+'</button>'}).join('')+'</div>';
   if(!Social.loaded)return h+'<p class="muted">Carico…</p>';
   if(S.soc==='events'){var me=Social.uid(),list=Social.rides.filter(function(r){return S.evf==='friends'?Social.friends.indexOf(r.creator)>=0:S.evf==='mine'?Social.joined(r):true});
     h+='<div class="row" style="gap:8px;flex-wrap:wrap"><div class="chips grow" role="group" aria-label="Filtra eventi">'+[['all','Tutti'],['friends','Dei miei amici'],['mine','A cui partecipo']].map(function(c){return '<button type="button" class="chip" data-evf="'+c[0]+'" aria-pressed="'+(S.evf===c[0])+'">'+c[1]+'</button>'}).join('')+'</div></div>'+
@@ -1309,13 +1378,9 @@ function viewSocial(){var h='<header class="ev-head"><p class="eye" style="color
     h+=conv.length?'<div class="card alist" style="padding:0 12px">'+conv.map(function(c){return '<button type="button" class="arow" data-act="openChat" data-id="'+c.id+'"><span class="av" aria-hidden="true">'+esc(Social.nick(c.id).charAt(0).toUpperCase())+'</span><span class="grow"><b style="display:block">'+esc(Social.nick(c.id))+'</b><span class="muted" style="font-size:14px">'+(c.last?esc((c.last.sender===u?'Tu: ':'')+c.last.body).slice(0,60):'Nessun messaggio')+'</span></span>'+(c.un?'<span class="cnt">'+c.un+'</span>':'')+'</button>'}).join('')+'</div>'
       :'<div class="empty">La chat è tra amici: aggiungi qualcuno dalla sezione Amici.</div>';
     h+='<p class="muted" style="font-size:13px">I messaggi si aggiornano ogni pochi secondi mentre la chat è aperta.</p>'}
-  else{var me2=Social.uid();h+=Social.feed.length?'<div class="stack" style="gap:10px">'+Social.feed.map(function(a){var k=(a.kudos||[]).map(function(x){return x.user_id}),mine=k.indexOf(me2)>=0,sp=a.minutes?a.km/(a.minutes/60):0;
-      return '<article class="card pad stack" style="gap:6px"><div class="row"><span class="av" aria-hidden="true">'+esc(Social.nick(a.user_id).charAt(0).toUpperCase())+'</span><div class="grow"><b>'+esc(Social.nick(a.user_id))+'</b><div class="muted" style="font-size:13px">'+dateTxt(a.ride_date)+' · '+(a.sport==='run'?'Running':'Ciclismo')+'</div></div></div>'+
-        '<b style="font-size:18px">'+esc(a.name)+'</b><p class="num" style="font-size:16px;color:var(--ink2)">'+nf(a.km,1)+' km · '+dur((a.minutes||0)*60)+(sp?' · '+(a.sport==='run'?paceStr(3600/sp)+' /km':nf(sp,1)+' km/h'):'')+(a.up?' · '+a.up+' m':'')+'</p>'+
-        '<button type="button" class="btn btn-sec sm" data-act="kudo" data-id="'+a.id+'" aria-pressed="'+mine+'" style="align-self:flex-start">'+ICON.heart+(mine?'Applaudito':'Applaudi')+(k.length?' · '+k.length:'')+'</button></article>'}).join('')+'</div>'
-      :'<div class="empty">Qui compaiono le attività che i tuoi amici condividono. Puoi condividere le tue registrazioni GPS dal loro dettaglio in Progressi.</div>'}
+  else h+=boardHtml();
   return h}
-function personRow(id,actions){var p=Social.people[id]||{};return '<div class="arow"><span class="av" aria-hidden="true">'+esc((p.nick||'?').charAt(0).toUpperCase())+'</span><span class="grow"><b style="display:block">'+esc(p.nick||'Utente')+'</b>'+(p.zone?'<span class="muted" style="font-size:14px">'+esc(p.zone)+'</span>':'')+'</span><span class="row" style="gap:6px">'+actions+'</span></div>'}
+function personRow(id,actions){var p=Social.people[id]||{};return '<div class="arow">'+avBtn(id)+'<span class="grow"><button type="button" class="nlink" data-act="openUser" data-id="'+id+'" style="display:block">'+esc(p.nick||'Utente')+'</button>'+(p.zone?'<span class="muted" style="font-size:14px">'+esc(p.zone)+'</span>':'')+'</span><span class="row" style="gap:6px">'+actions+'</span></div>'}
 var AUTH={mode:'in'};
 function authCard(){var up=AUTH.mode==='up';
   return '<div class="card pad stack"><p style="font-size:17px">Con un account puoi aggiungere amici, scrivere in chat, creare eventi pubblici o solo per gli amici e iscriverti alle uscite degli altri.</p>'+
@@ -1326,25 +1391,26 @@ function authCard(){var up=AUTH.mode==='up';
   '<p id="authErr" class="ferr" role="alert"></p><button type="submit" class="btn btn-ink">'+(up?'Crea account':'Accedi')+'</button></form>'+
   '<p class="muted" style="font-size:13px">Gli altri vedono solo il tuo nome e la zona, se la indichi. L\'email non viene mostrata. Le attività restano nel tuo browser finché non scegli di condividerle.</p></div>'}
 function nickCard(){return '<div class="card pad stack"><b style="font-size:18px">Scegli come ti vedranno gli altri</b><form id="nickForm" class="stack" style="gap:12px" novalidate><label class="fld"><span>Nome nella community</span><input class="inp" name="nick" required maxlength="40"></label><label class="fld"><span>Zona (facoltativa)</span><input class="inp" name="zone" maxlength="60" placeholder="Es. Lugo, Romagna"></label><p class="ferr" id="nickErr" role="alert"></p><button type="submit" class="btn btn-ink">Salva</button></form></div>'}
-function afterSocial(){if(Social.on()&&!Social.loaded&&!Social.loading){Social.loading=true;Social.ensureProfile().then(function(){return Social.refresh()}).then(function(){Social.loading=false;Social.startPoll();if(S.view==='social')render(true)}).catch(function(){Social.loading=false;if(S.view==='social')render(true)})}}
+function afterSocial(){if(Social.on()&&!Social.loaded&&!Social.loading){Social.loading=true;Social.ensureProfile().then(function(){return Social.refresh()}).then(function(){Social.loading=false;Social.startPoll();if(S.view==='social')render(true)}).catch(function(){Social.loading=false;if(S.view==='social')render(true)})}
+  else if(Social.on()&&Social.loaded&&Social.me&&S.soc==='feed'&&!Social.boardLoaded&&!Social.boardLoading)Social.loadBoard().then(function(){if(S.view==='social'&&S.soc==='feed')softRefresh()}).catch(function(){if(S.view==='social')render(true)})}
 
 /* ---- dettaglio evento ---- */
 var EV={map:null,chatT:null,msgs:[]};
 function viewEvent(){var r=Social.ride(S.rideId);if(!r)return '<button type="button" class="btn-ghost row" data-act="backSoc">'+ICON.back+'Community</button><div class="empty">Evento non trovato: potrebbe essere stato annullato.</div>';
-  var me=Social.uid(),mem=Social.members(r),joined=Social.joined(r),own=r.creator===me,full=r.max_people&&mem.length>=r.max_people,route=r.route_ref&&famousById(r.route_ref),past=new Date(r.starts_at)<Date.now();
+  var me=Social.uid(),mem=Social.members(r),joined=Social.joined(r),own=r.creator===me,full=r.max_people&&mem.length>=r.max_people,route=(r.route_ref&&famousById(r.route_ref))||(r.route&&routeFromObj(r.route,r.creator===Social.uid()?null:Social.nick(r.creator))),past=new Date(r.starts_at)<Date.now();
   var h='<button type="button" class="btn-ghost row" data-act="backSoc" style="align-self:flex-start;gap:4px">'+ICON.back+'Community</button>'+
   '<header><p class="eye">'+(r.sport==='run'?'Running':'Ciclismo')+' · '+(r.visibility==='friends'?'solo amici':'evento pubblico')+'</p><h1 style="font-size:clamp(28px,8vw,36px);margin-top:4px">'+esc(r.title)+'</h1><p class="muted" style="margin-top:6px">Organizza '+esc(Social.nick(r.creator))+'</p></header>'+
   '<div class="kv"><div><b style="font-size:19px">'+fmtWhen(r.starts_at,true)+'</b><span>Data e ora</span></div><div><b style="font-size:19px">'+esc(r.meet||'Da definire')+'</b><span>Ritrovo</span></div>'+
     '<div><b>'+(r.km?nf(r.km,r.km<20?1:0)+' km':'–')+'</b><span>Distanza</span></div><div><b>'+(r.up?r.up+' m':'–')+'</b><span>Salita</span></div></div>'+
   ((r.lat!=null||route)?'<div class="map rmap" id="evMap"></div>':'')+
-  (route?'<button type="button" class="card pad row" data-act="route" data-route="'+route.id+'" style="text-align:left">'+sportIcon(route.sport)+'<span class="grow"><b style="display:block">'+esc(route.name)+'</b><span class="muted" style="font-size:14px">Percorso famoso collegato</span></span>'+ICON.chev+'</button>':'')+
+  (route?'<button type="button" class="card pad row" data-act="route" data-route="'+route.id+'" style="text-align:left">'+sportIcon(route.sport)+'<span class="grow"><b style="display:block">'+esc(route.name)+'</b><span class="muted" style="font-size:14px">'+(route&&route.custom?'Tuo percorso collegato':route&&route.shared?'Percorso collegato · '+rkm1(rKm(route))+' km':'Percorso famoso collegato')+'</span></span>'+ICON.chev+'</button>':'')+
   (r.notes?'<div class="card pad"><p style="white-space:pre-wrap">'+esc(r.notes)+'</p></div>':'')+
   '<section class="sect"><h2>Partecipanti · '+mem.length+(r.max_people?' su '+r.max_people:'')+'</h2><div class="row" style="flex-wrap:wrap;gap:8px">'+mem.map(function(id){return '<span class="tag" style="font-size:14px;padding:6px 12px">'+esc(Social.nick(id))+'</span>'}).join('')+'</div></section>'+
   (past?'<div class="banner info">'+ICON.info+'<div>Evento già iniziato o concluso.</div></div>':own?'':(joined?'<button type="button" class="btn btn-sec" data-act="joinEv" data-on="0">Non partecipo più</button>':full?'<button type="button" class="btn btn-sec" disabled style="opacity:.6">Posti esauriti</button>':'<button type="button" class="btn btn-pri xl" data-act="joinEv" data-on="1">Partecipo</button>'))+
   '<div class="row" style="gap:8px;flex-wrap:wrap">'+(r.lat!=null?'<a class="btn btn-sec grow" href="'+gmapsAt([r.lat,r.lon])+'" target="_blank" rel="noopener">Indicazioni per il ritrovo</a>':'')+'<button type="button" class="btn btn-sec grow" data-act="ics">Aggiungi al calendario</button></div>'+
   '<section class="sect" aria-labelledby="evChatT"><h2 id="evChatT">Chat dell\'evento</h2>'+(Social.ext===false?'<div class="empty">La chat di gruppo arriva con l\'aggiornamento del database (in attesa di approvazione).</div>':joined?'<div class="chatbox" id="evChat" aria-live="polite"><p class="muted">Carico…</p></div><form class="sendrow" id="evSay"><label class="sr" for="evMsg">Messaggio</label><input id="evMsg" class="inp grow" maxlength="2000" autocomplete="off" placeholder="Scrivi al gruppo"><button type="submit" class="btn btn-ink" aria-label="Invia">'+ICON.send+'</button></form>':'<div class="empty">Partecipa per leggere e scrivere nella chat dell\'evento.</div>')+'</section>'+
   (own?'<button type="button" class="btn btn-danger" data-act="delEvent">Annulla l\'evento</button>':'');return h}
-function afterEvent(){var r=Social.ride(S.rideId);clearInterval(EV.chatT);if(!r)return;var box=$('#evMap'),route=r.route_ref&&famousById(r.route_ref);
+function afterEvent(){var r=Social.ride(S.rideId);clearInterval(EV.chatT);if(!r)return;var box=$('#evMap'),route=(r.route_ref&&famousById(r.route_ref))||(r.route&&routeFromObj(r.route));
   if(box){if(EV.map)EV.map.destroy();EV.map=new MiniMap(box,{label:'Mappa dell\'evento'});var pts=[];if(r.lat!=null)pts.push([r.lat,r.lon]);if(route)pts=pts.concat(route.wp);EV.map.fit(pts,40);
     if(r.lat!=null)EV.map.setMarkers([{ll:[r.lat,r.lon],cls:'pin-e',html:ICON.cal,label:'Ritrovo'}]);
     if(route){var g=ROUTE_GEO[route.id];if(g)EV.map.setLines([{pts:g.pts}]);else routeGeo(route).then(function(g2){if(S.view==='event'&&EV.map)EV.map.setLines([{pts:g2.pts}])}).catch(function(){})}}
@@ -1357,10 +1423,14 @@ var CH={t:null};
 function viewChat(){var id=S.chatWith;return '<button type="button" class="btn-ghost row" data-act="backSocChat" style="align-self:flex-start;gap:4px">'+ICON.back+'Chat</button>'+
   '<header class="row"><span class="av" aria-hidden="true">'+esc(Social.nick(id).charAt(0).toUpperCase())+'</span><h1 style="font-size:26px">'+esc(Social.nick(id))+'</h1></header>'+
   (Social.friends.indexOf(id)<0?'<div class="banner info">'+ICON.info+'<div>Potete scrivervi solo se siete amici.</div></div>':'')+
-  '<div class="chatbox tall" id="thread" aria-live="polite"></div><form class="sendrow" id="dmSay"><label class="sr" for="dmMsg">Messaggio per '+esc(Social.nick(id))+'</label><input id="dmMsg" class="inp grow" maxlength="2000" autocomplete="off" placeholder="Scrivi un messaggio"><button type="submit" class="btn btn-ink" aria-label="Invia">'+ICON.send+'</button></form>'}
+  '<div class="chatbox tall" id="thread" aria-live="polite"></div><div class="recbar" id="recBar" role="status" hidden></div>'+
+  '<form class="sendrow" id="dmSay"><label class="icon-btn att" title="Manda una foto"><span class="sr">Manda una foto</span>'+ICON.image+'<input type="file" id="dmPhoto" accept="image/*" class="fileinp"></label>'+
+  (recSupported()?'<button type="button" class="icon-btn att" data-act="dmRec" aria-label="Registra un messaggio vocale">'+ICON.mic+'</button>':'')+'<button type="button" class="icon-btn att" data-act="dmRoute" aria-label="Manda un percorso">'+ICON.path+'</button>'+
+  '<label class="sr" for="dmMsg">Messaggio per '+esc(Social.nick(id))+'</label><input id="dmMsg" class="inp grow" maxlength="1000" autocomplete="off" placeholder="Messaggio"><button type="submit" class="btn btn-ink" aria-label="Invia">'+ICON.send+'</button></form>'+
+  '<p class="muted" style="font-size:13px">Foto e audio sono visibili solo a voi due e a chi ha accesso al server; le foto vengono ridotte e private dei dati di posizione.</p>'}
 function drawThread(){var c=$('#thread');if(!c)return;var id=S.chatWith,me=Social.uid(),t=Social.thread(id),key=t.length+':'+(t.length?t[t.length-1].id:'');if(c.dataset.k===key)return;c.dataset.k=key;
   var day='';c.innerHTML=t.length?t.map(function(m){var d=new Date(m.created_at),dl=d.toLocaleDateString('it-IT',{weekday:'short',day:'numeric',month:'short'}),hd=dl!==day?'<p class="dsep">'+dl+'</p>':'';day=dl;
-    return hd+'<div class="bub'+(m.sender===me?' me':'')+'">'+esc(m.body)+'<small>'+d.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})+(m.sender===me&&m.read_at?' · letto':'')+'</small></div>'}).join(''):'<p class="muted">Nessun messaggio. Scrivi tu per primo.</p>';c.scrollTop=c.scrollHeight}
+    return hd+'<div class="bub'+(m.sender===me?' me':'')+(m.media_type||m.route?' media':'')+'">'+msgBody(m,m.sender===me)+'<small>'+d.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})+(m.sender===me&&m.read_at?' · letto':'')+'</small></div>'}).join(''):'<p class="muted">Nessun messaggio. Scrivi tu per primo.</p>';fillMedia(c);c.scrollTop=c.scrollHeight;$$('img',c).forEach(function(im){im.addEventListener('load',function(){c.scrollTop=c.scrollHeight},{once:true})})}
 function afterChat(){clearInterval(CH.t);var id=S.chatWith;drawThread();Social.markRead(id);
   var pull=function(){Social.pullThread(id).then(function(){if(S.view!=='chat'||S.chatWith!==id)return;drawThread();Social.markRead(id)}).catch(function(){})};pull();CH.t=setInterval(function(){if(!document.hidden&&S.view==='chat')pull()},4000)}
 
@@ -1368,13 +1438,13 @@ function afterChat(){clearInterval(CH.t);var id=S.chatWith;drawThread();Social.m
 function newEventDialog(o){o=o||{};if(!Social.on()){toast('Accedi alla Community per creare un evento');go('social');return}
   var route=o.route?famousById(o.route):null,place=o.pid?PLACES[o.pid]:null,here=o.here&&EXMAP?EXMAP.c:null;
   var ll=route?route.wp[0]:place?place.ll:here,t=new Date(Date.now()+864e5);t.setHours(8,30,0,0);var loc=new Date(t.getTime()-t.getTimezoneOffset()*6e4).toISOString().slice(0,16);
-  var sp=route?route.sport:S.sport,rs=famousFor(sp);
+  var sp=route?route.sport:S.sport,rs=myRoutes(sp).concat(famousFor(sp));if(route&&rs.indexOf(route)<0)rs.unshift(route);
   var body='<form id="evForm" class="stack" style="gap:12px" novalidate>'+
     '<label class="fld"><span>Titolo</span><input class="inp" name="title" required maxlength="120" value="'+esc(route?route.name:place?'Uscita: '+place.name:'')+'"></label>'+
     '<label class="fld"><span>Data e ora</span><input class="inp" name="at" type="datetime-local" required value="'+loc+'"></label>'+
     '<label class="fld"><span>Ritrovo</span><input class="inp" name="meet" maxlength="120" value="'+esc(route?'Partenza del percorso':place?place.name:'')+'" placeholder="Es. Piazza della Libertà"></label>'+
     '<p class="muted" style="font-size:13px;margin-top:-6px">'+(ll?'Punto sulla mappa: '+(route?'partenza del percorso':place?'posizione del luogo':'centro della mappa di Esplora')+'.':'Nessun punto sulla mappa: puoi crearlo dalla mappa di Esplora, da un percorso o da un luogo.')+'</p>'+
-    '<label class="fld"><span>Percorso famoso (facoltativo)</span><select class="inp" name="route"><option value="">Nessuno</option>'+rs.map(function(r){return '<option value="'+r.id+'"'+(route&&route.id===r.id?' selected':'')+'>'+esc(r.name)+'</option>'}).join('')+'</select></label>'+
+    '<label class="fld"><span>Percorso (facoltativo)</span><select class="inp" name="route"><option value="">Nessuno</option>'+rs.map(function(r){return '<option value="'+r.id+'"'+(route&&route.id===r.id?' selected':'')+'>'+esc(r.name)+(r.custom?' (tuo)':r.shared?' (condiviso)':'')+'</option>'}).join('')+'</select></label>'+
     '<div class="row" style="gap:10px"><label class="fld grow"><span>Distanza (km)</span><input class="inp" name="km" type="number" min="0" max="1000" step="0.1" inputmode="decimal" value="'+(route?Math.round(rKm(route)*10)/10:'')+'"></label><label class="fld grow"><span>Salita (m)</span><input class="inp" name="up" type="number" min="0" max="20000" step="1" inputmode="numeric" value="'+(route?rUp(route):'')+'"></label></div>'+
     '<fieldset class="stack" style="border:0;padding:0;margin:0;gap:8px"><legend class="eye" style="margin-bottom:6px">Chi può vederlo</legend><label class="opt"><input type="radio" name="vis" value="public" checked><span><b>Tutti</b><span class="muted" style="display:block;font-size:13px">Chiunque abbia un account può vederlo e iscriversi</span></span></label><label class="opt"><input type="radio" name="vis" value="friends"><span><b>Solo amici</b><span class="muted" style="display:block;font-size:13px">Lo vedono solo i tuoi amici</span></span></label></fieldset>'+
     '<label class="fld"><span>Posti massimi (facoltativo)</span><input class="inp" name="max" type="number" min="2" max="500" step="1" inputmode="numeric" placeholder="Senza limite"></label>'+
@@ -1388,12 +1458,420 @@ function newEventDialog(o){o=o||{};if(!Social.on()){toast('Accedi alla Community
       if(max!=null&&(max<2||max>500||Math.round(max)!==max)){err.textContent='I posti massimi vanno da 2 a 500.';$('[name=max]',f).focus();return}
       var rr=rid&&famousById(rid),pll=ll||(rr?rr.wp[0]:null);
       b.disabled=true;b.textContent='Creo…';err.textContent='';
-      Social.createRide({title:title,sport:sp,at:at.toISOString(),meet:String(fd.get('meet')||'').trim()||(rr?'Partenza: '+rr.name:''),km:km,up:up,notes:String(fd.get('notes')||'').trim(),visibility:fd.get('vis'),ll:pll,route:rid,max:max})
+      Social.createRide({title:title,sport:sp,at:at.toISOString(),meet:String(fd.get('meet')||'').trim()||(rr?'Partenza: '+rr.name:''),km:km,up:up,notes:String(fd.get('notes')||'').trim(),visibility:fd.get('vis'),ll:pll,route:rr&&!famousOnly(rr.id)?null:rid,routeObj:rr&&!famousOnly(rr.id)?routeObj(rr):null,max:max})
         .then(function(r){D.close(true);S.rideId=r.id;go('event');toast('Evento creato')}).catch(function(e){b.disabled=false;b.textContent='Crea evento';err.textContent=Social.nice(e)})}}],initial:'[name=title]'});
   $('[name=route]',D.box).addEventListener('change',function(){var rr=famousById(this.value),f=$('#evForm',D.box);if(!rr)return;$('[name=km]',f).value=Math.round(rKm(rr)*10)/10;$('[name=up]',f).value=rUp(rr);var m=$('[name=meet]',f);if(!m.value.trim())m.value='Partenza: '+rr.name;var t=$('[name=title]',f);if(!t.value.trim())t.value=rr.name})}
 function icsFor(r){var f=function(d){return d.toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'')},s=new Date(r.starts_at),e=new Date(s.getTime()+3*3600e3);
   return 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Trailo//IT\r\nBEGIN:VEVENT\r\nUID:'+r.id+'@trailo\r\nDTSTAMP:'+f(new Date())+'\r\nDTSTART:'+f(s)+'\r\nDTEND:'+f(e)+'\r\nSUMMARY:'+String(r.title).replace(/[,;\n]/g,' ')+'\r\nLOCATION:'+String(r.meet||'').replace(/[,;\n]/g,' ')+(r.lat!=null?'\r\nGEO:'+r.lat+';'+r.lon:'')+'\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n'}
 function dlText(txt,name,type){try{var u=URL.createObjectURL(new Blob([txt],{type:type})),l=document.createElement('a');l.href=u;l.download=name;document.body.appendChild(l);l.click();setTimeout(function(){URL.revokeObjectURL(u);l.remove()},500)}catch(e){toast('Download non riuscito')}}
+
+/* ================= PERCORSI PERSONALIZZATI =================
+   Tappe toccate sulla mappa, tracciato calcolato da BRouter. Salvati in questo browser; condivisibili con un link,
+   in chat, in bacheca e negli eventi (solo le tappe: chi lo riceve ricalcola lo stesso tracciato). */
+var MYR=LS.get('myroutes',[]),SHARED={};if(!Array.isArray(MYR))MYR=[];
+function hashStr(s){var h=5381;for(var i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return (h>>>0).toString(36)}
+var PROFS={bike:[['fastbike','Strada veloce','asfalto','Asfalto, anche strade trafficate'],['safety','Strade tranquille','asfalto','Ciclabili e strade secondarie'],['trekking','Anche sterrato','misto','Ciclabili, strade bianche, argini']],
+  run:[['shortest','Strada','asfalto','Il percorso più breve tra le tappe'],['hiking-mountain','Sentieri','sentiero','Preferisce sentieri e mulattiere']]};
+function profInfo(sp,p){var l=PROFS[sp]||PROFS.bike;for(var i=0;i<l.length;i++)if(l[i][0]===p)return l[i];return l[0]}
+function routeKey(wp,pr){return 'u'+hashStr(pr+'|'+wp.map(function(p){return p[0].toFixed(5)+','+p[1].toFixed(5)}).join(';'))}
+function diffOf(km,up,sp){var r=up/Math.max(.1,km);if(sp==='run')return km>15||r>30?'Impegnativo':km>8||r>12?'Medio':'Facile';return km>90||up>1500||r>25?'Impegnativo':km>45||up>500||r>12?'Medio':'Facile'}
+function photoOf(sp,surf,up,km){return surf==='sentiero'?'sentiero-bosco':surf==='misto'?'sterrato-campi':up/Math.max(.1,km)>15?'crinale':sp==='run'?'argine-fiume':'pianura-filari'}
+function makeRoute(o){var pi=profInfo(o.sport,o.prof),km=Number(o.km)||0,up=Math.round(Number(o.up)||0);
+  return {id:o.id||routeKey(o.wp,pi[0]),custom:!o.shared,shared:!!o.shared,from:o.from||null,sport:o.sport,name:String(o.name||'Percorso senza nome').slice(0,80),wp:o.wp,prof:pi[0],km:km,up:up,
+    surface:pi[2],diff:diffOf(km,up,o.sport),photo:photoOf(o.sport,pi[2],up,km),region:o.shared?'Percorso condiviso':'Il tuo percorso',tag:[],created:o.created||new Date().toISOString(),
+    about:o.shared?'Condiviso'+(o.from?' da '+o.from:'')+'. Il tracciato viene ricalcolato da BRouter sulle '+o.wp.length+' tappe scelte da chi l\'ha creato.':'Creato da te con '+o.wp.length+' tappe. Tracciato calcolato da BRouter su strade e sentieri OpenStreetMap.'}}
+MYR=MYR.filter(function(r){return r&&r.wp&&r.wp.length>1}).map(function(r){return makeRoute(r)});
+function myRoute(id){for(var i=0;i<MYR.length;i++)if(MYR[i].id===id)return MYR[i];return null}
+function myRoutes(sp){return MYR.filter(function(r){return !sp||r.sport===sp})}
+/* da qui in poi un id può indicare un percorso famoso, uno tuo o uno ricevuto */
+var famousOnly=famousById;famousById=function(id){return famousOnly(id)||myRoute(id)||SHARED[id]||null};
+function persistMy(){if(!LS.set('myroutes',MYR.map(function(r){return {id:r.id,sport:r.sport,name:r.name,wp:r.wp,prof:r.prof,km:r.km,up:r.up,created:r.created}}))){toast('Percorso non salvato: memoria del browser non disponibile');return false}return true}
+function saveMyRoute(r,oldId){var c=makeRoute({id:r.id,sport:r.sport,name:r.name,wp:r.wp,prof:r.prof,km:r.km,up:r.up,created:r.created});
+  MYR=MYR.filter(function(x){return x.id!==c.id&&x.id!==oldId});MYR.unshift(c);delete SHARED[c.id];return persistMy()?c:null}
+function delMyRoute(id){MYR=MYR.filter(function(x){return x.id!==id});persistMy()}
+/* formato compatto per link, chat, post ed eventi: solo nome, sport, profilo e tappe */
+function routeObj(r){var o={v:1,n:r.name,s:r.sport,p:r.prof,k:Math.round(rKm(r)*10)/10,u:rUp(r),w:r.wp.map(function(p){return [Math.round(p[0]*1e5),Math.round(p[1]*1e5)]})};if(famousOnly(r.id))o.f=r.id;return o}
+function b64u(s){return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function unb64u(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return decodeURIComponent(escape(atob(s)))}
+function shareLink(r){return location.href.split('#')[0]+'#r='+b64u(JSON.stringify(routeObj(r)))}
+/* percorso ricevuto: si controlla tutto prima di usarlo (arriva da altri) */
+function routeFromObj(o,from){if(o&&typeof o.f==='string'&&famousOnly(o.f))return famousOnly(o.f);if(!o||typeof o!=='object'||!Array.isArray(o.w)||o.w.length<2||o.w.length>40||(o.s!=='bike'&&o.s!=='run'))return null;
+  var wp=[];for(var i=0;i<o.w.length;i++){var p=o.w[i];if(!Array.isArray(p)||!isFinite(p[0])||!isFinite(p[1]))return null;var la=p[0]/1e5,lo=p[1]/1e5;if(Math.abs(la)>85||Math.abs(lo)>180)return null;wp.push([la,lo])}
+  var r=makeRoute({shared:true,from:from||null,sport:o.s,name:String(o.n||'Percorso condiviso').slice(0,80),wp:wp,prof:String(o.p||''),km:Math.max(0,Math.min(2000,Number(o.k)||0)),up:Math.max(0,Math.min(20000,Number(o.u)||0))});
+  var mine=myRoute(r.id);if(mine)return mine;if(famousOnly(r.id))return famousOnly(r.id);if(!SHARED[r.id])SHARED[r.id]=r;return SHARED[r.id]}
+function routeFromLink(h){var m=/[#&]r=([A-Za-z0-9_-]+)/.exec(h||'');if(!m)return null;try{return routeFromObj(JSON.parse(unb64u(m[1])),null)}catch(e){return null}}
+function routeChip(r,extra){return '<button type="button" class="rchip" data-act="route" data-route="'+r.id+'">'+sportIcon(r.sport)+'<span class="grow"><b>'+esc(r.name)+'</b><small>'+(extra?esc(extra)+' · ':'')+rkm1(rKm(r))+' km · '+rUp(r)+' m'+(r.custom?' · tuo':r.shared?' · condiviso':' · famoso')+'</small></span>'+ICON.chev+'</button>'}
+
+/* ---- editor ---- */
+var PLAN={wp:[],prof:null,name:'',g:null,st:'',map:null,t:null,editId:null,sport:null};
+function openPlan(editId){var r=editId?famousById(editId):null;
+  PLAN={wp:r?r.wp.map(function(p){return [p[0],p[1]]}):[],prof:r?r.prof:PROFS[S.sport][0][0],name:r?r.name:'',g:null,st:'',map:null,t:null,editId:r&&r.custom?r.id:null,sport:r?r.sport:S.sport};
+  if(r&&r.sport!==S.sport)setSport(r.sport,true);go('plan')}
+function viewPlan(){var sp=PLAN.sport||S.sport;
+  return '<button type="button" class="btn-ghost row" data-act="backEx" style="align-self:flex-start;gap:4px">'+ICON.back+'Esplora</button>'+
+  '<header><p class="eye">'+(PLAN.editId?'Modifica percorso':'Nuovo percorso')+' · '+(sp==='run'?'Running':'Ciclismo')+'</p><h1 style="font-size:clamp(28px,8vw,34px);margin-top:4px">Disegna il tuo percorso</h1>'+
+    '<p class="muted" style="margin-top:6px">Tocca la mappa per aggiungere le tappe, nell\'ordine. Il tracciato segue strade e sentieri. Tocca un numero per togliere quella tappa.</p></header>'+
+  '<form id="planFind" class="row" role="search" style="gap:8px"><label class="sr" for="planQ">Vai a un luogo</label><input id="planQ" class="inp grow" type="search" placeholder="Vai a un luogo, es. Lugo" autocomplete="off"><button type="submit" class="btn btn-sec" style="min-height:48px">Vai</button></form>'+
+  '<div class="map plan-map" id="planMap"></div>'+
+  '<div class="row plan-tools" style="gap:8px;flex-wrap:wrap"><button type="button" class="btn btn-sec sm" data-act="planUndo">Togli l\'ultima</button><button type="button" class="btn btn-sec sm" data-act="planLoop">Torna alla partenza</button><button type="button" class="btn btn-sec sm" data-act="planLocate">Vicino a me</button><button type="button" class="btn btn-sec sm" data-act="planClear">Ricomincia</button></div>'+
+  '<div class="card pad stack" id="planStat" aria-live="polite" style="gap:6px"></div>'+
+  '<fieldset class="stack" style="border:0;padding:0;margin:0;gap:8px"><legend class="eye" style="margin-bottom:6px">Che strade preferire</legend>'+PROFS[sp].map(function(p){return '<label class="opt"><input type="radio" name="pprof" value="'+p[0]+'"'+(PLAN.prof===p[0]?' checked':'')+'><span><b>'+p[1]+'</b><span class="muted" style="display:block;font-size:13px">'+p[3]+'</span></span></label>'}).join('')+'</fieldset>'+
+  '<label class="fld"><span>Nome del percorso</span><input class="inp" id="planName" maxlength="80" value="'+esc(PLAN.name)+'" placeholder="Es. Giro dei calanchi"></label>'+
+  '<button type="button" class="btn btn-pri xl" data-act="planSave">Salva il percorso</button>'+
+  '<p class="muted" style="font-size:13px">Resta in questo browser. Dal percorso salvato puoi condividerlo con un link, in chat, in bacheca o in un evento. Controlla sempre il tracciato prima di partire.</p>'}
+function afterPlan(){if(PLAN.map)PLAN.map.destroy();var c=PLAN.wp.length?PLAN.wp[0]:S.ex.c;
+  PLAN.map=new MiniMap($('#planMap'),{center:c,zoom:Math.max(11,S.ex.z),label:'Mappa per disegnare il percorso. Tocca per aggiungere una tappa.',ontap:function(ll){planAdd(ll)}});
+  if(PLAN.wp.length>1)PLAN.map.fit(PLAN.wp,40);planPaint();if(PLAN.wp.length>1)planCompute(true)}
+function planAdd(ll){if(PLAN.wp.length>=30){toast('Al massimo 30 tappe');return}PLAN.wp.push([Math.round(ll[0]*1e5)/1e5,Math.round(ll[1]*1e5)/1e5]);planCompute()}
+function planKm(){var g=PLAN.g;if(g&&PLAN.st==='ok')return g.km;var k=0;for(var i=1;i<PLAN.wp.length;i++)k+=distKm(PLAN.wp[i-1],PLAN.wp[i]);return k}
+function planPaint(){var m=PLAN.map;if(!m)return;var wp=PLAN.wp,n=wp.length,loop=n>2&&wp[0][0]===wp[n-1][0]&&wp[0][1]===wp[n-1][1];
+  m.setMarkers(wp.map(function(p,i){var last=i===n-1&&n>1;if(loop&&last)return null;return {ll:p,cls:'pin-n'+(i===0?' first':last?' last':''),html:i===0&&loop?'1↺':String(i+1),label:(i===0&&loop?'Partenza e arrivo':'Tappa '+(i+1))+': tocca per toglierla',onClick:function(){PLAN.wp.splice(i,1);if(i===0&&loop)PLAN.wp.pop();planCompute();toast('Tappa '+(i+1)+' tolta')}}}).filter(Boolean));
+  m.setLines(PLAN.g&&PLAN.st==='ok'?[{pts:PLAN.g.pts}]:wp.length>1?[{pts:wp,dash:'2 9',w:4,casing:false,color:'#141A22'}]:[]);
+  var st=$('#planStat');if(!st)return;var sp=PLAN.sport||S.sport,n=wp.length,km=planKm(),tmp={sport:sp,id:'_p',km:km,up:PLAN.g&&PLAN.st==='ok'&&PLAN.g.up!=null?PLAN.g.up:0};
+  if(n<2){st.innerHTML='<b>'+(n?'1 tappa: tocca la mappa per la seconda.':'Nessuna tappa: tocca la mappa per la partenza.')+'</b><span class="muted" style="font-size:14px">Servono almeno due tappe.</span>';return}
+  var e=estimateFor(tmp);
+  st.innerHTML='<div class="row" style="gap:16px;flex-wrap:wrap"><span><b class="num" style="font-size:24px">'+rkm1(km)+' km</b></span>'+(PLAN.st==='ok'&&PLAN.g.up!=null?'<span><b class="num" style="font-size:24px">'+PLAN.g.up+' m</b> <span class="muted">di salita</span></span>':'')+'<span><b class="num" style="font-size:24px">'+dur(e.sec)+'</b> <span class="muted">stimati</span></span></div>'+
+    '<span class="muted" style="font-size:14px">'+n+' tappe · '+(PLAN.st==='load'?'calcolo il tracciato…':PLAN.st==='ok'?'tracciato calcolato da BRouter su OpenStreetMap':'tracciato non calcolato (servizio non raggiungibile): linea tratteggiata in linea d\'aria, non è una strada')+'</span>'}
+function planCompute(now){clearTimeout(PLAN.t);PLAN.g=null;if(PLAN.wp.length<2){PLAN.st='';planPaint();return}PLAN.st='load';planPaint();
+  var key=routeKey(PLAN.wp,PLAN.prof),tmp={id:key,wp:PLAN.wp.slice(),prof:PLAN.prof};
+  PLAN.t=setTimeout(function(){routeGeo(tmp).then(function(g){if(S.view!=='plan'||routeKey(PLAN.wp,PLAN.prof)!==key)return;PLAN.g=g;PLAN.st='ok';planPaint()}).catch(function(){if(S.view!=='plan'||routeKey(PLAN.wp,PLAN.prof)!==key)return;PLAN.st='err';planPaint()})},now?0:600)}
+function planSave(){if(PLAN.wp.length<2){toast('Servono almeno due tappe');return}var nm=($('#planName')||{}).value||'';nm=nm.trim()||((PLAN.sport==='run'?'Corsa':'Giro')+' del '+new Date().toLocaleDateString('it-IT',{day:'numeric',month:'short'}));
+  var ok=PLAN.st==='ok'&&PLAN.g,id=routeKey(PLAN.wp,PLAN.prof);
+  var r=saveMyRoute({id:id,sport:PLAN.sport||S.sport,name:nm,wp:PLAN.wp.slice(),prof:PLAN.prof,km:ok?PLAN.g.km:planKm(),up:ok&&PLAN.g.up!=null?PLAN.g.up:0},PLAN.editId);if(!r)return;
+  if(ok)ROUTE_GEO[id]=PLAN.g;S.routeId=id;go('route');toast(ok?'Percorso salvato':'Percorso salvato con le sole tappe: il tracciato si calcolerà quando il servizio risponde')}
+function estimateFor(r){var P=prof(),lv=P.level;if(r.sport==='run'){var p=REF.run[lv];return {sec:r.km*p+r.up/CLIMB.run*60}}return {sec:r.km/REF.bike[lv]*3600+r.up/CLIMB.bike*60}}
+
+/* ---- condividere un percorso ---- */
+function shareRouteDialog(id){var r=famousById(id);if(!r)return;var on=Social.on()&&Social.me,fr=on?Social.friends:[],link=shareLink(r);
+  var body='<p class="muted" style="font-size:14px">Si condividono nome e tappe: chi lo apre vede lo stesso tracciato, ricalcolato da BRouter.</p>'+
+    '<div class="stack" style="gap:8px"><button type="button" class="btn btn-sec" data-sh="link">'+I('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',20)+(navigator.share?'Condividi il link':'Copia il link')+'</button>'+
+    (on?'<button type="button" class="btn btn-sec" data-sh="post">'+ICON.image+'Pubblica in bacheca</button><button type="button" class="btn btn-sec" data-sh="event">'+ICON.cal+'Crea un evento con questo percorso</button>':'<p class="muted" style="font-size:14px">Accedi alla Community per mandarlo in chat, pubblicarlo in bacheca o crearci un evento.</p>')+'</div>'+
+    (on?'<fieldset class="stack" style="border:0;padding:0;margin:0;gap:8px"><legend class="eye" style="margin:8px 0 6px">Manda in chat a</legend>'+(fr.length?fr.map(function(f){return '<button type="button" class="opt" data-sh="dm" data-id="'+f+'" style="min-height:52px"><span class="av" aria-hidden="true" style="width:34px;height:34px">'+esc(Social.nick(f).charAt(0).toUpperCase())+'</span><b>'+esc(Social.nick(f))+'</b></button>'}).join(''):'<p class="muted" style="font-size:14px">Nessun amico ancora: aggiungili dalla Community.</p>')+'</fieldset>':'')+
+    '<label class="fld"><span>Link del percorso</span><input class="inp" id="shLink" readonly value="'+esc(link)+'"></label>';
+  var D=openDialog({title:'Condividi «'+esc(r.name)+'»',body:body});
+  D.box.addEventListener('click',function(e){var b=e.target.closest('[data-sh]');if(!b)return;var k=b.dataset.sh;
+    if(k==='link'){if(navigator.share){navigator.share({title:r.name+' · Trailo',text:'Percorso «'+r.name+'» su Trailo',url:link}).catch(function(){})}else copyText(link,$('#shLink',D.box))}
+    else if(k==='post'){D.close(true);newPostDialog({route:r.id})}
+    else if(k==='event'){D.close(true);newEventDialog({route:r.id})}
+    else if(k==='dm'){b.disabled=true;Social.sendRoute(b.dataset.id,r).then(function(){toast('Percorso mandato a '+Social.nick(b.dataset.id));b.querySelector('b').textContent=Social.nick(b.dataset.id)+' · inviato'}).catch(function(er){b.disabled=false;toast(Social.nice(er))})}})}
+function copyText(t,inp){var done=function(){toast('Link copiato')};try{if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){sel()});return}}catch(e){}sel();
+  function sel(){if(inp){inp.focus();inp.select();try{document.execCommand('copy');done()}catch(e){toast('Seleziona il link e copialo')}}}}
+
+/* ================= METEO (Open-Meteo, senza chiave) ================= */
+var WXC={0:['Sereno','sun'],1:['Quasi sereno','sun'],2:['Poco nuvoloso','pcloud'],3:['Coperto','cloud'],45:['Nebbia','fog'],48:['Nebbia gelata','fog'],51:['Pioviggine debole','rain'],53:['Pioviggine','rain'],55:['Pioviggine intensa','rain'],
+  56:['Pioviggine gelata','rain'],57:['Pioviggine gelata','rain'],61:['Pioggia debole','rain'],63:['Pioggia','rain'],65:['Pioggia forte','rain'],66:['Pioggia gelata','rain'],67:['Pioggia gelata','rain'],71:['Neve debole','snow'],73:['Neve','snow'],75:['Neve forte','snow'],77:['Nevischio','snow'],
+  80:['Rovesci deboli','rain'],81:['Rovesci','rain'],82:['Rovesci violenti','rain'],85:['Rovesci di neve','snow'],86:['Rovesci di neve','snow'],95:['Temporale','storm'],96:['Temporale con grandine','storm'],99:['Temporale con grandine','storm']};
+var WXI={sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
+  pcloud:'<path d="M8 6.5A3.5 3.5 0 0 1 14.6 5"/><path d="M7 19h10a4 4 0 0 0 .6-7.95A5.5 5.5 0 0 0 7 12.5 3.3 3.3 0 0 0 7 19z"/>',cloud:'<path d="M7 19h10a4 4 0 0 0 .6-7.95A5.5 5.5 0 0 0 7 12.5 3.3 3.3 0 0 0 7 19z"/>',
+  fog:'<path d="M4 9h16M3 13h18M5 17h14"/>',rain:'<path d="M7 15h10a4 4 0 0 0 .6-7.95A5.5 5.5 0 0 0 7 8.5 3.3 3.3 0 0 0 7 15z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/>',
+  snow:'<path d="M7 15h10a4 4 0 0 0 .6-7.95A5.5 5.5 0 0 0 7 8.5 3.3 3.3 0 0 0 7 15z"/><path d="M8 19h.01M12 20h.01M16 19h.01"/>',storm:'<path d="M7 15h10a4 4 0 0 0 .6-7.95A5.5 5.5 0 0 0 7 8.5 3.3 3.3 0 0 0 7 15z"/><path d="m12 15-2 4h3l-2 3"/>'};
+function wxIcon(code,day,s){var k=(WXC[code]||['','cloud'])[1];if(k==='sun'&&day===0)k='moon';return I(WXI[k],s||22)}
+function wxLabel(code){return (WXC[code]||['Condizioni non disponibili'])[0]}
+function loadWx(ll){var k='wx.'+ll[0].toFixed(2)+','+ll[1].toFixed(2),c=cacheGet(k,30*60e3);if(c)return Promise.resolve(c);
+  var url='https://api.open-meteo.com/v1/forecast?latitude='+ll[0].toFixed(3)+'&longitude='+ll[1].toFixed(3)+'&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,is_day'+
+    '&hourly=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation_probability,precipitation,weather_code,wind_speed_10m,uv_index,is_day&daily=sunrise,sunset&forecast_days=3&timezone=auto&wind_speed_unit=kmh';
+  return getJSON(url,{},15000).then(function(j){var off=(j.utc_offset_seconds||0)*1000,T=function(s){return Date.parse(s+(s.length===16?':00':'')+'Z')-off},H=j.hourly,C=j.current||{};
+    var d={at:Date.now(),cur:{temp:C.temperature_2m,app:C.apparent_temperature,hum:C.relative_humidity_2m,pr:C.precipitation,code:C.weather_code,wind:C.wind_speed_10m,day:C.is_day},
+      hours:H.time.map(function(t,i){return {t:T(t),temp:H.temperature_2m[i],app:H.apparent_temperature[i],hum:H.relative_humidity_2m[i],pp:H.precipitation_probability?H.precipitation_probability[i]:null,pr:H.precipitation[i],code:H.weather_code[i],wind:H.wind_speed_10m[i],uv:H.uv_index?H.uv_index[i]:null,day:H.is_day?H.is_day[i]:null}}),
+      sun:(j.daily&&j.daily.sunrise||[]).map(function(s,i){return [T(s),T(j.daily.sunset[i])]})};
+    if(!d.hours.length||d.cur.temp==null)throw new Error('dati incompleti');cachePut(k,d);return d})}
+function wxSpan(d,t0,t1){var hs=d.hours.filter(function(h){return h.t>=t0-3600e3&&h.t<=t1});if(!hs.length)return null;
+  var mx=function(k){return Math.max.apply(null,hs.map(function(h){return h[k]==null?-1e9:h[k]}))},mn=function(k){return Math.min.apply(null,hs.map(function(h){return h[k]==null?1e9:h[k]}))};
+  var sun=d.sun.filter(function(s){return s[0]<=t1&&s[1]>=t0}),dark=!sun.length||t0<sun[0][0]||t1>sun[sun.length-1][1];
+  return {tmax:mx('app'),tmin:mn('app'),temp:hs.reduce(function(s,h){return s+h.temp},0)/hs.length,hum:hs.reduce(function(s,h){return s+(h.hum||0)},0)/hs.length,pp:mx('pp'),pr:hs.reduce(function(s,h){return s+(h.pr||0)},0),wind:mx('wind'),uv:mx('uv'),code:hs[Math.floor(hs.length/2)].code,dark:dark,hours:hs.length,
+    sunset:sun.length?sun[sun.length-1][1]:null}}
+var WXLOC=LS.get('wxLoc',null);
+function wxLoc(){return WXLOC&&WXLOC.ll?WXLOC:{ll:S.ex.c,name:'centro della mappa di Esplora',src:'map'}}
+function wxLocate(){if(!navigator.geolocation){toast('Questo browser non fornisce la posizione');return}toast('Cerco la tua posizione…');
+  navigator.geolocation.getCurrentPosition(function(p){var ll=[Math.round(p.coords.latitude*1e3)/1e3,Math.round(p.coords.longitude*1e3)/1e3];WXLOC={ll:ll,name:'la tua posizione',src:'gps'};LS.set('wxLoc',WXLOC);
+      reverseName(ll).then(function(n){if(n){WXLOC.name=n;LS.set('wxLoc',WXLOC)}}).catch(function(){}).then(function(){if(S.view==='home'||S.view==='kit')render(true)})},
+    function(e){toast(e.code===1?'Posizione negata: il meteo resta sul centro della mappa':'Posizione non disponibile')},{enableHighAccuracy:false,timeout:15000,maximumAge:600000})}
+function reverseName(ll){var c=cacheGet('rv.'+ll.join(','),90*864e5);if(c)return Promise.resolve(c);var wait=Math.max(0,1100-(Date.now()-nomLast));
+  return new Promise(function(res){setTimeout(res,wait)}).then(function(){nomLast=Date.now();return getJSON('https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=10&accept-language=it&lat='+ll[0]+'&lon='+ll[1],{},10000)})
+    .then(function(j){var a=j&&j.address||{},n=a.city||a.town||a.village||a.municipality||(j&&j.name)||'';if(n)cachePut('rv.'+ll.join(','),n);return n})}
+function hhmm(t){return new Date(t).toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})}
+
+/* ================= ENERGIA E COSA PORTARE =================
+   Regole dichiarate, per adulti in salute; non sono indicazioni mediche.
+   Corsa: ~1 kcal per kg per km in piano. Bici: MET dalla velocità media (Compendium of Physical Activities) × kg × ore.
+   Salita: lavoro meccanico (peso × 9,81 × dislivello) con rendimento del 24%. Carboidrati durante: linee guida di nutrizione sportiva (ACSM, IOC). */
+function weightKg(){var w=Number(prof().weight);return w>=30&&w<=250?w:null}
+function metBike(v){return v<16?4:v<19.3?6.8:v<22.5?8:v<25.7?10:v<30.6?12:15.8}
+function burn(sp,km,up,sec){var kg=weightKg()||70,h=Math.max(1/60,sec/3600),climb=(kg+(sp==='bike'?9:0))*9.81*(up||0)/(.24*4184),base;
+  if(sp==='run')base=kg*km*1.0;else base=metBike(km/h)*kg*h;var k=Math.round(base+climb);
+  return {kcal:k,perKm:km>0?k/km:0,perH:k/h,kg:kg,assumed:!weightKg(),lo:Math.round(k*.8),hi:Math.round(k*1.2),
+    rule:sp==='run'?'Circa 1 kcal per kg di peso per km, più il lavoro della salita.':'Dispendio dalla velocità media ('+nf(km/h,1)+' km/h, Compendium of Physical Activities) per peso e ore, più il lavoro della salita con bici di 9 kg.'}}
+function carbPlan(sp,h){if(h<=1.05)return {lo:0,hi:0,g:0};var lo=h<=2.5?30:60,hi=h<=2.5?60:(sp==='run'?75:90),g=Math.round((lo+hi)/2*h/5)*5;return {lo:lo,hi:hi,g:g}}
+function waterRate(t,hum){var r=t==null?.55:t<10?.4:t<18?.5:t<24?.6:t<28?.75:.9;if(t!=null&&t>=20&&hum>=70)r+=.1;return Math.min(1,r)}
+/* p: {sport,km,up,sec,start} · sp: meteo dell'intervallo (o null) */
+function kitFor(p,sp){var run=p.sport==='run',h=p.sec/3600,E=burn(p.sport,p.km,p.up,p.sec),C=carbPlan(p.sport,h),t=sp?sp.tmax:null,wr=waterRate(t,sp?sp.hum:0),wl=Math.round(wr*h*10)/10;
+  var gels=0,bars=0,ban=0;if(C.g){if(run){gels=Math.ceil(C.g/25)}else{bars=Math.floor(C.g*.4/40);ban=C.g-bars*40>=50?1:0;gels=Math.max(0,Math.ceil((C.g-bars*40-ban*25)/25))}}
+  var salt=h>=2||(t!=null&&t>=25&&h>=1),G=[],st=new Date(p.start),hr=st.getHours(),end=p.start+p.sec*1000;
+  var drink=[];if(h<.75&&(t==null||t<22))drink.push('Acqua facoltativa per un\'uscita così breve: bevi prima di partire.');
+    else drink.push('Acqua: circa '+nf(wl,1)+' litri ('+nf(wr,1)+' l all\'ora'+(t!=null?' con '+Math.round(t)+' °C percepiti':'')+')'+(run?'':' · '+Math.max(1,Math.ceil(wl/.75))+' borracce da 750 ml')+'.');
+    if(wl>(run?.6:1.5))drink.push('Più di quanto si porta comodamente: pianifica una sosta a una fontanella o a un bar (vedi "Lungo il percorso").');
+  G.push({t:'Da bere',items:drink});
+  var eat=[];if(!C.g)eat.push('Durante non servono carboidrati: sotto l\'ora bastano le scorte del corpo.');
+    else{eat.push('Carboidrati durante: '+C.lo+'–'+C.hi+' g all\'ora, in tutto circa '+C.g+' g (≈'+(C.g*4)+' kcal).');
+      if(run)eat.push(gels+' gel da circa 25 g, uno ogni 30–40 minuti dopo i primi 45.');else eat.push([bars?bars+' barrett'+(bars===1?'a':'e')+' (≈40 g)':'',ban?'1 banana (≈25 g)':'',gels?gels+' gel (≈25 g)':''].filter(Boolean).join(' + ')+': inizia dopo 30–45 minuti, poco e spesso.');
+      if(C.hi>60)eat.push('Oltre 60 g all\'ora solo se lo hai già provato in allenamento: servono prodotti con glucosio e fruttosio.')}
+  G.push({t:'Da mangiare',items:eat});
+  var sup=[];if(salt)sup.push('Sali minerali: bevanda isotonica o compresse, circa 300–600 mg di sodio per litro'+(t!=null&&t>=25?' (fa caldo e si suda molto)':'')+'.');
+    else sup.push('Sali minerali: non necessari per questa durata e temperatura.');
+    sup.push('Altri integratori non servono per uscite come questa. Per esigenze personali chiedi a un medico o a un nutrizionista.');G.push({t:'Sali e integratori',items:sup});
+  var pre=[];if(hr<9)pre.push('Partenza presto: colazione leggera con carboidrati 1–2 ore prima (pane e marmellata, fette biscottate, banana).');else pre.push('Ultimo pasto con carboidrati 2–3 ore prima, poi uno spuntino leggero entro un\'ora dalla partenza.');
+    if(h>=2.5)pre.push('Uscita lunga: cena ricca di carboidrati la sera prima.');G.push({t:'Prima di partire',items:pre});
+  var wear=[];if(sp){if(t<5)wear.push('Freddo ('+Math.round(sp.tmin)+'–'+Math.round(t)+' °C percepiti): strati termici, guanti, '+(run?'cappello':'copriscarpe e scaldacollo')+'.');else if(t<12)wear.push('Fresco: maniche lunghe o manicotti e uno strato antivento.');else if(t>=27)wear.push('Caldo: tessuti leggeri e chiari, cappellino o bandana'+(run?'':' sotto il casco')+'.');
+    if(sp.pp>=40||sp.pr>=1)wear.push('Probabilità di pioggia fino al '+Math.round(sp.pp)+'%: giacca impermeabile leggera'+(run?'':', parafanghi se li hai')+'.');
+    if(sp.wind>=25)wear.push('Vento fino a '+Math.round(sp.wind)+' km/h: giacca antivento'+(run?'':'; occhio alle raffiche in discesa')+'.');
+    if(sp.uv>=6||(t>=24&&!sp.dark))wear.push('Sole forte (UV '+(sp.uv>0?Math.round(sp.uv):'n.d.')+'): crema solare e occhiali'+(t>=28&&hr>=11&&hr<=16?'; se puoi evita le ore 12–16':'')+'.');
+    if(sp.dark)wear.push('Parte al buio o finisce dopo il tramonto'+(sp.sunset?' (alle '+hhmm(sp.sunset)+')':'')+': '+(run?'luce frontale e indumenti riflettenti.':'luci anteriore e posteriore, giubbino riflettente.'))}
+  else wear.push('Meteo non disponibile: controlla le previsioni prima di partire e porta uno strato in più.');
+  G.push({t:'Abbigliamento',items:wear.length?wear:['Abbigliamento tecnico normale per la stagione.']});
+  var gear=run?['Telefono carico e documento','Contanti o carta per una sosta']:['Casco','Camera d\'aria o kit riparazione, pompa o bomboletta, multiattrezzo','Telefono carico, documento, contanti o carta'];
+  if(h>=2)gear.push(run?'Cintura o zainetto per acqua e gel':'Borsello sotto sella o tasche per il cibo');G.push({t:'Attrezzatura',items:gear});
+  var after=h>=1.5?'Dopo: entro un\'ora carboidrati e 20–30 g di proteine (≈'+Math.round(E.kg*1)+'–'+Math.round(E.kg*1.2)+' g di carboidrati nelle prime ore se domani ti alleni ancora).':'Dopo: un pasto normale con carboidrati e proteine basta a recuperare.';
+  return {E:E,C:C,water:{rate:wr,l:wl},gels:gels,bars:bars,ban:ban,salt:salt,groups:G,after:after,end:end}}
+function energyHtml(E,C,compact){var pct=C&&C.g&&E.kcal?Math.round(C.g*4/E.kcal*100):0;
+  return '<div class="kv"><div><b>'+nf(E.kcal)+'</b><span>kcal stimate ('+nf(E.lo)+'–'+nf(E.hi)+')</span></div><div><b>'+nf(E.perKm)+'</b><span>kcal per km</span></div>'+(compact?'':'<div><b>'+nf(E.perH)+'</b><span>kcal all\'ora</span></div><div><b>'+(C&&C.g?C.g+' g':'0 g')+'</b><span>carboidrati da assumere durante'+(pct?' (≈'+pct+'% del consumo)':'')+'</span></div>')+'</div>'+
+    '<p class="muted" style="font-size:13px">'+esc(E.rule)+' Peso '+(E.assumed?'non indicato: uso 70 kg (impostalo dal Profilo).':nf(E.kg)+' kg.')+' Margine ±20%. '+(C&&C.g?'Durante si reintegra solo una parte del consumo: il resto con i pasti normali.':'')+'</p>'}
+
+/* ---- pagina "Cosa portare" ---- */
+var KIT={src:null,at:null,map:null};
+function kitSources(){var sp=S.sport,sg=suggestRoute().r,l=[];if(sg)l.push(['r:'+sg.id,'Proposta di oggi: '+sg.name]);myRoutes(sp).forEach(function(r){l.push(['r:'+r.id,'Tuo: '+r.name])});
+  famousFor(sp).forEach(function(r){if(!sg||r.id!==sg.id)l.push(['r:'+r.id,r.name])});return l}
+function kitInput(){var src=KIT.src||kitSources()[0][0],at=KIT.at,start=Date.now();if(at){var p=at.split(':'),d=new Date();d.setHours(Number(p[0]),Number(p[1]),0,0);if(d.getTime()<Date.now()-15*60e3)d.setDate(d.getDate()+1);start=d.getTime()}
+  if(src.indexOf('h:')===0){var hh=Number(src.slice(2)),lv=prof().level,km=S.sport==='run'?hh*3600/REF.run[lv]:hh*REF.bike[lv];return {sport:S.sport,km:km,up:0,sec:hh*3600,start:start,label:dur(hh*3600)+' in piano',ll:wxLoc().ll,where:wxLoc().name}}
+  var r=famousById(src.slice(2))||suggestRoute().r;return {sport:r.sport,km:rKm(r),up:rUp(r),sec:estimate(r).sec,start:start,label:r.name,ll:r.wp[0],where:'partenza di '+r.name,route:r}}
+function viewKit(){var srcs=kitSources(),cur=KIT.src||srcs[0][0],P=kitInput(),now=new Date(),def=KIT.at||(pad(now.getHours())+':'+pad(now.getMinutes()));
+  return '<button type="button" class="btn-ghost row" data-go="home" style="align-self:flex-start;gap:4px">'+ICON.back+'Home</button>'+
+  '<header><p class="eye">Prepararsi · '+(S.sport==='run'?'Running':'Ciclismo')+'</p><h1 style="font-size:clamp(28px,8vw,34px);margin-top:4px">Cosa portare</h1><p class="muted" style="margin-top:6px">Calcolato da durata, distanza, salita, ora di partenza e meteo previsto lungo l\'uscita.</p></header>'+
+  '<div class="card pad stack" style="gap:12px"><label class="fld"><span>Uscita</span><select class="inp" id="kitSrc"><optgroup label="Percorsi">'+srcs.map(function(s){return '<option value="'+s[0]+'"'+(cur===s[0]?' selected':'')+'>'+esc(s[1])+'</option>'}).join('')+'</optgroup>'+
+    '<optgroup label="Solo durata, in piano">'+[1,1.5,2,3,4,5].map(function(h){return '<option value="h:'+h+'"'+(cur==='h:'+h?' selected':'')+'>'+dur(h*3600)+'</option>'}).join('')+'</optgroup></select></label>'+
+    '<div class="row" style="gap:10px"><label class="fld grow"><span>Partenza</span><input class="inp" id="kitAt" type="time" value="'+def+'"></label><label class="fld grow"><span>Peso (kg)</span><input class="inp" id="kitKg" type="number" min="30" max="250" step="1" inputmode="numeric" value="'+(weightKg()||'')+'" placeholder="70"></label></div>'+
+    '<p class="muted" style="font-size:13px">Il peso serve solo alle calorie e resta in questo browser.</p></div>'+
+  '<div id="kitOut" aria-live="polite"><p class="muted">Carico il meteo…</p></div>'+
+  '<p class="muted" style="font-size:13px">Indicazioni generali per adulti in salute, basate sulle linee guida di nutrizione sportiva (ACSM, IOC). Non sono un consiglio medico: con patologie, gravidanza, diabete o diete particolari chiedi a un medico o a un nutrizionista. Meteo: Open-Meteo.</p>'}
+function afterKit(){paintKit()}
+function paintKit(){var P=kitInput(),box=$('#kitOut');if(!box)return;var key=JSON.stringify([P.label,P.start,weightKg()]);box.dataset.k=key;
+  var draw=function(d,err){if(box.dataset.k!==key)return;var sp=d?wxSpan(d,P.start,P.start+P.sec*1000):null,K=kitFor(P,sp);
+    box.innerHTML='<section class="sect"><h2>'+esc(P.label)+'</h2><p class="sub">'+rkm1(P.km)+' km · '+Math.round(P.up)+' m di salita · '+dur(P.sec)+' · dalle '+hhmm(P.start)+' alle '+hhmm(K.end)+'</p>'+
+      (sp?'<div class="card pad row wxline">'+wxIcon(sp.code,sp.dark?0:1,30)+'<div class="grow"><b>'+wxLabel(sp.code)+' · '+Math.round(sp.tmin)+'–'+Math.round(sp.tmax)+' °C percepiti</b><div class="muted" style="font-size:14px">Pioggia '+(sp.pp>=0?Math.round(sp.pp)+'%':'n.d.')+' · vento fino a '+Math.round(sp.wind)+' km/h · '+esc(P.where)+'</div></div></div>'
+        :banner('info',err?'Meteo non disponibile ('+esc(err)+'): l\'elenco non tiene conto di temperatura e pioggia.':'Previsione non disponibile per quell\'ora (oltre 2 giorni): l\'elenco non tiene conto del meteo.'))+'</section>'+
+      '<section class="sect"><h2>Energia</h2>'+energyHtml(K.E,K.C)+'</section>'+
+      '<section class="sect"><h2>L\'occorrente</h2><div class="card pad stack kit" style="gap:14px">'+K.groups.map(function(g,gi){return '<div><p class="eye">'+g.t+'</p><ul>'+g.items.map(function(it,ii){return '<li><label><input type="checkbox" aria-label="Fatto"><span>'+esc(it)+'</span></label></li>'}).join('')+'</ul></div>'}).join('')+
+      '<p style="font-size:15px">'+esc(K.after)+'</p></div></section>'};
+  loadWx(P.ll).then(function(d){draw(d)}).catch(function(e){draw(null,e&&e.name==='AbortError'?'tempo scaduto':'servizio non raggiungibile')})}
+document.addEventListener('change',function(e){var t=e.target;if(t.id==='kitSrc'){KIT.src=t.value;paintKit()}else if(t.id==='kitAt'){KIT.at=t.value||null;paintKit()}
+  else if(t.id==='kitKg'||t.id==='profKg'){var v=Number(t.value);if(t.value===''){saveProf({weight:null});if(t.id==='kitKg')paintKit();return}if(!(v>=30&&v<=250)){toast('Peso tra 30 e 250 kg');return}saveProf({weight:Math.round(v)});toast('Peso salvato in questo browser');if(t.id==='kitKg')paintKit()}
+  else if(t.name==='pprof'&&S.view==='plan'){PLAN.prof=t.value;planCompute()}});
+document.addEventListener('submit',function(e){if(e.target.id!=='planFind')return;e.preventDefault();var q=($('#planQ')||{}).value||'';if(q.trim().length<3){toast('Scrivi almeno 3 lettere');return}
+  searchPlaces(q).then(function(pl){if(!pl.length){toast('Nessun luogo trovato');return}if(PLAN.map){if(pl[0].bb)PLAN.map.fit(pl[0].bb,20);else PLAN.map.setView(pl[0].ll,13);if(PLAN.map.z<11)PLAN.map.setView(PLAN.map.c,11)}toast(pl[0].name)}).catch(function(){toast('Ricerca luoghi non disponibile in questo momento')})});
+
+/* ---- Home: meteo e riepilogo ---- */
+function homeWx(){return '<section class="sect" aria-labelledby="hWxT"><div class="row"><h2 id="hWxT" class="grow">Meteo e cosa portare</h2><button type="button" class="btn-ghost" data-go="kit">Tutto l\'occorrente</button></div><div class="card pad stack" id="wxBox" style="gap:12px" aria-live="polite"><p class="muted">Carico il meteo…</p></div></section>'}
+function afterHome(){var box=$('#wxBox');if(!box)return;var L=wxLoc(),sg=suggestRoute().r;
+  loadWx(L.ll).then(function(d){if(!$('#wxBox'))return;var c=d.cur,now=Date.now(),nx=d.hours.filter(function(h){return h.t>now-1800e3}).slice(0,7);
+    var h='<div class="row wxnow">'+wxIcon(c.code,c.day,40)+'<div class="grow"><b class="num" style="font-size:34px;line-height:1">'+Math.round(c.temp)+' °C</b><div style="font-weight:700">'+wxLabel(c.code)+'</div><div class="muted" style="font-size:14px">Percepiti '+Math.round(c.app)+' °C · vento '+Math.round(c.wind)+' km/h · umidità '+Math.round(c.hum)+'%</div></div></div>'+
+      '<div class="hstrip" role="list" aria-label="Prossime ore">'+nx.map(function(x){return '<div role="listitem"><span>'+hhmm(x.t).slice(0,2)+'</span>'+wxIcon(x.code,x.day,22)+'<b>'+Math.round(x.temp)+'°</b><small>'+(x.pp!=null?Math.round(x.pp)+'%':'')+'</small></div>'}).join('')+'</div>'+
+      '<p class="muted" style="font-size:13px">Meteo per '+esc(L.name)+' · Open-Meteo. <button type="button" class="link" data-act="wxLocate" style="font-size:13px;min-height:32px">'+(L.src==='gps'?'Aggiorna la posizione':'Usa la mia posizione')+'</button></p>';
+    if(sg){var P={sport:sg.sport,km:rKm(sg),up:rUp(sg),sec:estimate(sg).sec,start:now},K=kitFor(P,wxSpan(d,now,now+P.sec*1000));
+      h+='<div class="kitsum"><p class="eye">Per «'+esc(sg.name)+'» adesso · '+dur(P.sec)+'</p><ul><li>'+ICON.drop+'<span>'+(K.water.l<.4?'Acqua facoltativa':'Acqua circa '+nf(K.water.l,1)+' l')+'</span></li><li>'+ICON.gel+'<span>'+(K.C.g?K.C.g+' g di carboidrati'+(K.gels?' · ≈'+K.gels+' gel':''):'Nessun carboidrato durante')+'</span></li><li>'+ICON.flame+'<span>≈ '+nf(K.E.kcal)+' kcal · '+nf(K.E.perKm)+' per km</span></li></ul>'+
+        '<button type="button" class="btn btn-sec" data-go="kit">Elenco completo e altri orari</button></div>'}
+    box.innerHTML=h}).catch(function(e){var b=$('#wxBox');if(b)b.innerHTML='<p>Meteo non disponibile in questo momento ('+(e&&e.name==='AbortError'?'tempo scaduto':'servizio non raggiungibile')+').</p><button type="button" class="btn btn-sec" data-go="kit">Cosa portare (senza meteo)</button>'})}
+
+/* ---- energia nel dettaglio percorso e attività ---- */
+function routeKitHtml(){return '<section class="sect" aria-labelledby="rkT"><div class="row"><h2 id="rkT" class="grow">Prepararsi</h2><button type="button" class="btn-ghost" data-act="kitFor">Cosa portare</button></div><div id="rdKit"><p class="muted">Calcolo…</p></div></section>'}
+function paintRouteKit(r){var box=$('#rdKit');if(!box)return;var now=Date.now(),P={sport:r.sport,km:rKm(r),up:rUp(r),sec:estimate(r).sec,start:now},id=r.id;
+  var draw=function(d){if(S.view!=='route'||S.routeId!==id||!$('#rdKit'))return;var sp=d?wxSpan(d,now,now+P.sec*1000):null,K=kitFor(P,sp);
+    $('#rdKit').innerHTML=energyHtml(K.E,K.C)+'<div class="kitsum" style="margin-top:10px"><p class="eye">Se parti adesso'+(sp?' · '+wxLabel(sp.code).toLowerCase()+', '+Math.round(sp.tmin)+'–'+Math.round(sp.tmax)+' °C percepiti alla partenza':'')+'</p><ul><li>'+ICON.drop+'<span>'+(K.water.l<.4?'Acqua facoltativa':'Acqua circa '+nf(K.water.l,1)+' l')+'</span></li><li>'+ICON.gel+'<span>'+(K.C.g?K.C.g+' g di carboidrati'+(K.gels?' · ≈'+K.gels+' gel':''):'Nessun carboidrato durante')+'</span></li>'+(K.salt?'<li>'+ICON.drop+'<span>Sali minerali</span></li>':'')+'</ul></div>'};
+  loadWx(r.wp[0]).then(draw).catch(function(){draw(null)})}
+function actEnergy(a){var E=burn(a.sport,a.distanceKm,a.ascentM||0,a.movingSec),h=a.movingSec/3600,C=carbPlan(a.sport,h);
+  return '<section class="sect" aria-labelledby="enT"><h2 id="enT">Energia</h2>'+energyHtml(E,C)+'<p style="font-size:15px">'+(h>=1.5?'Per recuperare: carboidrati e 20–30 g di proteine entro un\'ora; se domani ti alleni ancora, circa '+Math.round(E.kg)+'–'+Math.round(E.kg*1.2)+' g di carboidrati nelle ore successive.':'Per recuperare basta un pasto normale con carboidrati e proteine.')+'</p>'+
+    (a.source!=='gps'?'<p class="muted" style="font-size:13px">'+(a.source==='sim'?'Attività simulata':'Attività dimostrativa')+': valori solo indicativi.</p>':'')+'</section>'}
+
+/* ================= FOTO E AUDIO (Supabase Storage, spazio privato "media") =================
+   Ognuno carica solo nella cartella col proprio id. I file si leggono con link firmati che scadono dopo un'ora. */
+var MEDIA={urls:{},pend:{}};
+Object.assign(Social,{
+  upload:function(blob,ext){var self=this,path=this.uid()+'/'+Date.now().toString(36)+Math.random().toString(36).slice(2,8)+'.'+ext,type=(blob.type||'application/octet-stream').split(';')[0];
+    var pre=(this.sess.expires_at&&this.sess.expires_at-60<Date.now()/1000)?this.refreshToken():Promise.resolve();
+    return pre.then(function(){return getRaw(SB_URL+'/storage/v1/object/media/'+path,{method:'POST',headers:{apikey:SB_KEY,Authorization:'Bearer '+self.sess.access_token,'Content-Type':type,'x-upsert':'false','cache-control':'3600'},body:blob})})
+      .then(function(r){if(r.ok)return path;return r.text().then(function(t){var j={};try{j=JSON.parse(t)}catch(e){}var m=j.message||j.error||'';
+        throw new Error(/size|too large|413/i.test(m+r.status)?'File troppo grande (massimo 10 MB).':/mime|type/i.test(m)?'Formato non accettato.':/bucket/i.test(m)?'Spazio per foto e audio non ancora attivo sul server.':'Caricamento non riuscito'+(m?': '+m:' (HTTP '+r.status+')'))})})},
+  sign:function(paths){var self=this,now=Date.now(),need=paths.filter(function(p,i,a){var u=MEDIA.urls[p];return p&&a.indexOf(p)===i&&!(u&&u.exp>now)&&!MEDIA.pend[p]});if(!need.length||!this.on())return Promise.resolve();
+    need.forEach(function(p){MEDIA.pend[p]=1});
+    return this.fetch('/storage/v1/object/sign/media',{method:'POST',body:{expiresIn:3600,paths:need}}).then(function(a){(a||[]).forEach(function(x){if(x&&x.signedURL)MEDIA.urls[x.path]={u:SB_URL+'/storage/v1'+x.signedURL,exp:now+50*60e3};else if(x&&x.path)MEDIA.urls[x.path]={err:true,exp:now+60e3}})})
+      .catch(function(){}).then(function(){need.forEach(function(p){delete MEDIA.pend[p]})})},
+  sendMedia:function(to,kind,blob,secs){var self=this,ext=kind==='image'?'jpg':/mp4|aac/.test(blob.type)?'m4a':/ogg/.test(blob.type)?'ogg':'webm';
+    return this.upload(blob,ext).then(function(path){return self.post('messages',{sender:self.uid(),recipient:to,body:kind==='image'?'📷 Foto':'🎙 Messaggio vocale'+(secs?' ('+clock(secs)+')':''),media_path:path,media_type:kind},true)})
+      .then(function(a){if(a&&a[0])self.msgs.push(a[0]);return a}).catch(function(e){if(/column|schema cache|PGRST204/i.test(String(e.message)+e.code))throw new Error('Foto e audio in chat richiedono l\'aggiornamento del database.');throw e})},
+  sendRoute:function(to,r){var self=this;return this.post('messages',{sender:this.uid(),recipient:to,body:'🗺 Percorso: '+r.name+' · '+rkm1(rKm(r))+' km',route:routeObj(r)},true).then(function(a){if(a&&a[0])self.msgs.push(a[0]);return a})}});
+function mediaUrl(p){var u=MEDIA.urls[p];return u&&u.u&&u.exp>Date.now()?u.u:null}
+/* riempie immagini e audio con i link firmati (chiede quelli mancanti in un'unica richiesta) */
+function fillMedia(root){if(!root||!Social.on())return;var els=$$('[data-media]',root);if(!els.length)return;var set=function(){els.forEach(function(el){var u=mediaUrl(el.dataset.media);if(u&&el.getAttribute('src')!==u){el.src=u;el.classList.remove('ld')}
+    else if(!u&&MEDIA.urls[el.dataset.media]&&MEDIA.urls[el.dataset.media].err){el.classList.add('gone');el.setAttribute('aria-label','File non disponibile')}})};
+  set();var miss=els.map(function(el){return el.dataset.media}).filter(function(p){return !mediaUrl(p)});if(miss.length)Social.sign(miss).then(set)}
+/* foto: ridotta a 1600 px e ricodificata in JPEG (così si tolgono anche i dati di posizione dello scatto) */
+function shrinkImage(file,max,q){return new Promise(function(res,rej){if(!file||!/^image\//.test(file.type||'image/')){rej(new Error('Il file scelto non è un\'immagine.'));return}
+  var u=URL.createObjectURL(file),im=new Image();im.onload=function(){var s=Math.min(1,(max||1600)/Math.max(im.naturalWidth,im.naturalHeight)),w=Math.max(1,Math.round(im.naturalWidth*s)),h=Math.max(1,Math.round(im.naturalHeight*s)),c=document.createElement('canvas');c.width=w;c.height=h;
+    c.getContext('2d').drawImage(im,0,0,w,h);URL.revokeObjectURL(u);c.toBlob(function(b){b?res(b):rej(new Error('Conversione della foto non riuscita.'))},'image/jpeg',q||.82)};
+  im.onerror=function(){URL.revokeObjectURL(u);rej(new Error('Questo browser non riesce a leggere la foto (formato non supportato).'))};im.src=u})}
+function viewImg(src,alt){openDialog({title:'Foto',body:'<img src="'+esc(src)+'" alt="'+esc(alt||'Foto')+'" style="width:100%;border-radius:14px;display:block">'})}
+
+/* ---- messaggi vocali ---- */
+var REC=null;
+function recSupported(){return !!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder)}
+function recStart(onDone){if(REC)return;if(!recSupported()){toast('Questo browser non registra audio');return}
+  navigator.mediaDevices.getUserMedia({audio:true}).then(function(st){var mt='',ty=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus'];for(var i=0;i<ty.length;i++)if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(ty[i])){mt=ty[i];break}
+    var mr;try{mr=new MediaRecorder(st,mt?{mimeType:mt}:undefined)}catch(e){st.getTracks().forEach(function(t){t.stop()});toast('Registrazione audio non disponibile');return}
+    var R={mr:mr,st:st,chunks:[],t0:Date.now(),cancel:false};REC=R;mr.ondataavailable=function(e){if(e.data&&e.data.size)R.chunks.push(e.data)};
+    mr.onstop=function(){st.getTracks().forEach(function(t){t.stop()});clearInterval(R.iv);REC=null;paintRec();if(R.cancel)return;var type=(mr.mimeType||mt||'audio/webm').split(';')[0],blob=new Blob(R.chunks,{type:type}),secs=(Date.now()-R.t0)/1000;
+      if(secs<1||!blob.size){toast('Messaggio troppo corto');return}onDone(blob,secs)};
+    mr.start(250);R.iv=setInterval(function(){if(Date.now()-R.t0>=120000){toast('Massimo 2 minuti');recStop(false)}else paintRec()},250);paintRec()})
+  .catch(function(e){toast(e&&e.name==='NotAllowedError'?'Microfono non autorizzato: puoi permetterlo nelle impostazioni del browser':'Microfono non disponibile')})}
+function recStop(cancel){if(!REC)return;REC.cancel=!!cancel;try{REC.mr.stop()}catch(e){REC=null;paintRec()}}
+function paintRec(){var bar=$('#recBar');if(!bar)return;if(!REC){bar.hidden=true;bar.innerHTML='';return}bar.hidden=false;var s=(Date.now()-REC.t0)/1000;
+  var t=bar.querySelector('.rt');if(t){t.textContent=clock(s);return}
+  bar.innerHTML='<span class="rdot" aria-hidden="true"></span><span class="grow">Registrazione <b class="rt num">'+clock(s)+'</b> · massimo 2 min</span><button type="button" class="btn btn-sec sm" data-act="recCancel">Annulla</button><button type="button" class="btn btn-ink sm" data-act="recSend">Invia</button>'}
+
+/* ---- contenuto dei messaggi in chat ---- */
+function msgBody(m,mine){if(m.media_type==='image'&&m.media_path)return '<button type="button" class="bimgb" data-act="viewImg" aria-label="Apri la foto"><img class="bimg ld" data-media="'+esc(m.media_path)+'" alt="Foto inviata'+(mine?' da te':'')+'"></button>';
+  if(m.media_type==='audio'&&m.media_path)return '<span class="baud"><audio controls preload="none" data-media="'+esc(m.media_path)+'"></audio><span>'+esc(m.body)+'</span></span>';
+  if(m.route){var r=routeFromObj(m.route,mine?null:Social.nick(m.sender));if(r)return routeChip(r,'Percorso')}
+  return esc(m.body)}
+
+/* ================= BACHECA ================= */
+var PSEL='select=*,post_likes(user_id),post_tags(user_id),post_comments(count)';
+Object.assign(Social,{posts:[],pmap:{},boardLoaded:false,boardErr:'',boardLoading:false,
+  keepPosts:function(a){var self=this;(a||[]).forEach(function(p){self.pmap[p.id]=p});return a||[]},
+  withExtras:function(list){var self=this,miss=list.filter(function(p){return p.repost_of&&!self.pmap[p.repost_of]}).map(function(p){return p.repost_of}).filter(function(x,i,a){return a.indexOf(x)===i});
+    return (miss.length?this.get('posts',PSEL+'&id=in.('+miss.join(',')+')').then(function(b){self.keepPosts(b)}):Promise.resolve()).then(function(){var ids=[],paths=[];
+      list.concat(list.map(function(p){return self.pmap[p.repost_of]}).filter(Boolean)).forEach(function(p){ids.push(p.user_id);(p.post_tags||[]).forEach(function(t){ids.push(t.user_id)});if(p.media_path)paths.push(p.media_path)});
+      return Promise.all([self.loadPeople(ids),self.sign(paths)])}).then(function(){return list})},
+  loadBoard:function(){var self=this;this.boardLoading=true;return this.get('posts',PSEL+'&order=created_at.desc&limit=40').then(function(a){a=self.keepPosts(a);return self.withExtras(a)}).then(function(a){self.posts=a;self.boardLoaded=true;self.boardErr='';self.boardLoading=false;return a})
+    .catch(function(e){self.boardLoading=false;self.boardLoaded=true;self.boardErr=/posts|PGRST205|relation/i.test(String(e.message)+e.code)?'La bacheca richiede l\'aggiornamento del database.':self.nice(e);throw e})},
+  userPosts:function(uid){var self=this;return Promise.all([this.get('posts',PSEL+'&user_id=eq.'+uid+'&order=created_at.desc&limit=60'),this.get('post_tags','select=post_id&user_id=eq.'+uid)]).then(function(r){var own=self.keepPosts(r[0]),tids=(r[1]||[]).map(function(t){return t.post_id});
+      return (tids.length?self.get('posts',PSEL+'&id=in.('+tids.join(',')+')&order=created_at.desc'):Promise.resolve([])).then(function(tg){tg=self.keepPosts(tg);return self.withExtras(own.concat(tg)).then(function(){return {own:own,tagged:tg}})})})},
+  onePost:function(id){var self=this;return this.get('posts',PSEL+'&id=eq.'+id).then(function(a){a=self.keepPosts(a);return self.withExtras(a)}).then(function(a){return a[0]||null})},
+  createPost:function(d){var self=this,row={user_id:this.uid(),body:d.body||null,media_path:d.media||null,route:d.route||null,visibility:d.vis==='friends'?'friends':'public',repost_of:d.repost||null};
+    return this.post('posts',row,true).then(function(a){var p=a&&a[0];if(!p)throw new Error('Post non pubblicato');var tags=(d.tags||[]).filter(function(t){return self.friends.indexOf(t)>=0});
+      return (tags.length?self.post('post_tags',tags.map(function(t){return {post_id:p.id,user_id:t}})).catch(function(){toast('Post pubblicato, ma i tag non sono stati salvati')}):Promise.resolve()).then(function(){return self.loadBoard().catch(function(){})}).then(function(){return p})})},
+  like:function(p,on){var self=this;return (on?this.post('post_likes',{post_id:p.id,user_id:this.uid()}):this.del('post_likes','post_id=eq.'+p.id+'&user_id=eq.'+this.uid())).then(function(){var l=(p.post_likes||[]).filter(function(x){return x.user_id!==self.uid()});if(on)l.push({user_id:self.uid()});p.post_likes=l})},
+  comments:function(id){var self=this;return this.get('post_comments','select=*&post_id=eq.'+id+'&order=created_at.asc&limit=300').then(function(a){a=a||[];return self.loadPeople(a.map(function(c){return c.user_id})).then(function(){return a})})},
+  comment:function(id,body){return this.post('post_comments',{post_id:id,user_id:this.uid(),body:body},true)},
+  delComment:function(cid){return this.del('post_comments','id=eq.'+cid)},
+  delPost:function(p){var self=this;return this.del('posts','id=eq.'+p.id).then(function(){delete self.pmap[p.id];self.posts=self.posts.filter(function(x){return x.id!==p.id&&x.repost_of!==p.id});if(p.media_path)self.fetch('/storage/v1/object/media',{method:'DELETE',body:{prefixes:[p.media_path]}}).catch(function(){})})}});
+function ago(iso){var s=(Date.now()-new Date(iso))/1000;if(s<60)return 'adesso';if(s<3600)return Math.floor(s/60)+' min fa';if(s<86400)return Math.floor(s/3600)+' h fa';if(s<7*86400)return Math.floor(s/86400)+' g fa';return dateTxt(iso)}
+function avBtn(id,size){var n=Social.nick(id);return '<button type="button" class="av" data-act="openUser" data-id="'+id+'" aria-label="Profilo di '+esc(n)+'"'+(size?' style="width:'+size+'px;height:'+size+'px"':'')+'>'+esc((n||'?').charAt(0).toUpperCase())+'</button>'}
+function nickBtn(id){return '<button type="button" class="nlink" data-act="openUser" data-id="'+id+'">'+esc(Social.nick(id))+'</button>'}
+function postInner(p){var tags=(p.post_tags||[]).map(function(t){return t.user_id}),r=p.route?routeFromObj(p.route,p.user_id===Social.uid()?null:Social.nick(p.user_id)):null;
+  return (p.body?'<p class="pbody">'+esc(p.body)+'</p>':'')+(p.media_path?'<button type="button" class="pimgb" data-act="viewImg" aria-label="Apri la foto"><img class="pimg ld" data-media="'+esc(p.media_path)+'" alt="Foto di '+esc(Social.nick(p.user_id))+(tags.length?' con '+esc(tags.map(function(t){return Social.nick(t)}).join(', ')):'')+'" loading="lazy"></button>':'')+
+    (r?routeChip(r,'Percorso'):'')+(tags.length?'<p class="ptags">'+ICON.tagu+'<span>con '+tags.map(nickBtn).join(', ')+'</span></p>':'')}
+function postCard(p,full){var me=Social.uid(),likes=(p.post_likes||[]).map(function(x){return x.user_id}),liked=likes.indexOf(me)>=0,nc=p.post_comments&&p.post_comments[0]?p.post_comments[0].count:0,
+  orig=p.repost_of?Social.pmap[p.repost_of]:null,tagged=(p.post_tags||[]).some(function(t){return t.user_id===me}),own=p.user_id===me;
+  var h='<article class="card pad stack post" style="gap:10px" data-pid="'+p.id+'"><div class="row" style="gap:10px">'+avBtn(p.user_id)+'<div class="grow">'+nickBtn(p.user_id)+(p.repost_of?' <span class="muted" style="font-size:14px">ha ripubblicato</span>':'')+
+    '<div class="muted" style="font-size:13px">'+ago(p.created_at)+' · '+(p.visibility==='friends'?'solo amici':'pubblico')+'</div></div>'+(tagged?'<span class="tag gps">Ti ha taggato</span>':'')+
+    (own?'<button type="button" class="icon-btn" data-act="delPost" data-id="'+p.id+'" aria-label="Elimina il post">'+ICON.trash+'</button>':'')+'</div>';
+  if(p.repost_of){h+=(p.body?'<p class="pbody">'+esc(p.body)+'</p>':'')+(orig?'<div class="quote"><div class="row" style="gap:8px">'+avBtn(orig.user_id,30)+'<div>'+nickBtn(orig.user_id)+'<div class="muted" style="font-size:12px">'+ago(orig.created_at)+'</div></div></div>'+postInner(orig)+'</div>':'<div class="empty">Post originale non più disponibile.</div>')}
+  else h+=postInner(p);
+  var tgt=orig||p;
+  h+='<div class="row pact" style="gap:6px"><button type="button" class="btn btn-sec sm" data-act="like" data-id="'+p.id+'" aria-pressed="'+liked+'">'+ICON.heart+'<span>'+(liked?'Ti piace':'Mi piace')+(likes.length?' · '+likes.length:'')+'</span></button>'+
+    (full?'':'<button type="button" class="btn btn-sec sm" data-act="openPost" data-id="'+p.id+'">'+ICON.chat+'<span>Commenta'+(nc?' · '+nc:'')+'</span></button>')+
+    (tgt.user_id!==me?'<button type="button" class="btn btn-sec sm" data-act="repost" data-id="'+tgt.id+'">'+ICON.repost+'<span>Ripubblica</span></button>':'')+'</div></article>';
+  return h}
+function boardHtml(){var h='<button type="button" class="btn btn-ink" data-act="newPost">'+ICON.image+'Nuovo post</button>';
+  if(Social.boardErr)h+=banner('err',esc(Social.boardErr)+' <button type="button" class="link" data-act="boardRetry">Riprova</button>');
+  if(!Social.boardLoaded)return h+'<p class="muted">Carico la bacheca…</p>';
+  var items=Social.posts.map(function(p){return {t:p.created_at,h:postCard(p)}}).concat(Social.feed.map(function(a){return {t:a.ride_date,h:actCard(a)}})).sort(function(a,b){return a.t<b.t?1:-1});
+  return h+(items.length?'<div class="stack" style="gap:12px">'+items.map(function(x){return x.h}).join('')+'</div>':'<div class="empty">La bacheca è vuota. Pubblica una foto della tua uscita, tagga gli amici che erano con te o condividi un percorso.</div>')+
+    '<p class="muted" style="font-size:13px">Vedi i post pubblici di tutta la Community, quelli "solo amici" dei tuoi amici e quelli in cui sei taggato, più le attività che i tuoi amici condividono.</p>'}
+function actCard(a){var me2=Social.uid(),k=(a.kudos||[]).map(function(x){return x.user_id}),mine=k.indexOf(me2)>=0,sp=a.minutes?a.km/(a.minutes/60):0;
+  return '<article class="card pad stack" style="gap:6px"><div class="row">'+avBtn(a.user_id)+'<div class="grow">'+nickBtn(a.user_id)+' <span class="muted" style="font-size:14px">ha condiviso un\'attività</span><div class="muted" style="font-size:13px">'+dateTxt(a.ride_date)+' · '+(a.sport==='run'?'Running':'Ciclismo')+'</div></div></div>'+
+    '<b style="font-size:18px">'+esc(a.name)+'</b><p class="num" style="font-size:16px;color:var(--ink2)">'+nf(a.km,1)+' km · '+dur((a.minutes||0)*60)+(sp?' · '+(a.sport==='run'?paceStr(3600/sp)+' /km':nf(sp,1)+' km/h'):'')+(a.up?' · '+a.up+' m':'')+'</p>'+
+    '<button type="button" class="btn btn-sec sm" data-act="kudo" data-id="'+a.id+'" aria-pressed="'+mine+'" style="align-self:flex-start">'+ICON.heart+(mine?'Applaudito':'Applaudi')+(k.length?' · '+k.length:'')+'</button></article>'}
+
+/* ---- nuovo post ---- */
+function newPostDialog(o){o=o||{};if(!Social.on()||!Social.me){toast('Accedi alla Community per pubblicare');go('social');return}var fr=Social.friends,sp=S.sport,pre=o.route?famousById(o.route):null;
+  var rs=[];if(pre)rs.push(pre);myRoutes().concat(famousFor(sp)).forEach(function(r){if(!pre||r.id!==pre.id)rs.push(r)});var file=null;
+  var body='<form id="postForm" class="stack" style="gap:12px" novalidate><label class="fld"><span>Testo</span><textarea class="inp" name="body" rows="3" maxlength="2000" placeholder="Com\'è andata?"></textarea></label>'+
+    '<div class="stack" style="gap:8px"><label class="btn btn-sec" style="position:relative">'+ICON.image+'<span id="pPick">Aggiungi una foto</span><input type="file" name="photo" accept="image/*" class="fileinp"></label><div id="pPrev"></div></div>'+
+    '<label class="fld"><span>Percorso (facoltativo)</span><select class="inp" name="route"><option value="">Nessuno</option>'+rs.map(function(r){return '<option value="'+r.id+'"'+(pre&&pre.id===r.id?' selected':'')+'>'+esc(r.name)+(r.custom?' (tuo)':'')+'</option>'}).join('')+'</select></label>'+
+    '<fieldset class="stack" style="border:0;padding:0;margin:0;gap:6px"><legend class="eye" style="margin-bottom:6px">Tagga chi era con te</legend>'+(fr.length?'<div class="tagpick">'+fr.map(function(f){return '<label class="chip tagc"><input type="checkbox" name="tag" value="'+f+'"><span>'+esc(Social.nick(f))+'</span></label>'}).join('')+'</div><p class="muted" style="font-size:13px">Si possono taggare solo gli amici. Chi è taggato vede il post anche se è "solo amici" e lo trova nel suo profilo.</p>':'<p class="muted" style="font-size:14px">Aggiungi amici per poterli taggare.</p>')+'</fieldset>'+
+    '<fieldset class="stack" style="border:0;padding:0;margin:0;gap:8px"><legend class="eye" style="margin-bottom:6px">Chi può vederlo</legend><label class="opt"><input type="radio" name="vis" value="public" checked><span><b>Tutti</b><span class="muted" style="display:block;font-size:13px">Chiunque abbia un account</span></span></label><label class="opt"><input type="radio" name="vis" value="friends"><span><b>Solo amici</b><span class="muted" style="display:block;font-size:13px">I tuoi amici e chi tagghi</span></span></label></fieldset>'+
+    '<p class="ferr" id="pErr" role="alert"></p></form>';
+  var D=openDialog({title:'Nuovo post',body:body,initial:'[name=body]',actions:[{label:'Pubblica',cls:'btn-ink',id:'pPub',onClick:function(D,b){var f=$('#postForm',D.box),fd=new FormData(f),err=$('#pErr',D.box),tx=String(fd.get('body')||'').trim(),rid=fd.get('route'),rr=rid?famousById(rid):null;
+      if(!tx&&!file&&!rr){err.textContent='Scrivi qualcosa, aggiungi una foto o un percorso.';return}
+      b.disabled=true;err.textContent='';b.textContent=file?'Carico la foto…':'Pubblico…';
+      (file?shrinkImage(file,1600,.82).then(function(bl){return Social.upload(bl,'jpg')}):Promise.resolve(null)).then(function(path){b.textContent='Pubblico…';return Social.createPost({body:tx,media:path,route:rr?routeObj(rr):null,vis:fd.get('vis'),tags:fd.getAll('tag')})})
+        .then(function(){D.close(true);S.soc='feed';LS.set('soc','feed');if(S.view==='social')render(true);else go('social');toast('Pubblicato')}).catch(function(e){b.disabled=false;b.textContent='Pubblica';err.textContent=Social.nice(e)})}}]});
+  $('[name=photo]',D.box).addEventListener('change',function(){file=this.files&&this.files[0]||null;var pv=$('#pPrev',D.box);if(!file){pv.innerHTML='';return}
+    var u=URL.createObjectURL(file);pv.innerHTML='<div class="ppv"><img src="'+u+'" alt="Anteprima della foto scelta"><button type="button" class="icon-btn" data-rm aria-label="Togli la foto">'+ICON.close+'</button></div>';$('#pPick',D.box).textContent='Cambia foto';
+    $('[data-rm]',pv).addEventListener('click',function(){file=null;pv.innerHTML='';$('[name=photo]',D.box).value='';$('#pPick',D.box).textContent='Aggiungi una foto'})})}
+function repostDialog(id){var p=Social.pmap[id];if(!p)return;
+  var D=openDialog({title:'Ripubblica nel tuo profilo',body:'<div class="quote" style="pointer-events:none">'+'<b>'+esc(Social.nick(p.user_id))+'</b>'+postInner(p)+'</div><form id="rpForm" class="stack" style="gap:12px"><label class="fld"><span>Aggiungi un commento (facoltativo)</span><textarea class="inp" name="body" rows="2" maxlength="2000"></textarea></label>'+
+    '<fieldset class="stack" style="border:0;padding:0;margin:0;gap:8px"><legend class="eye" style="margin-bottom:6px">Chi può vederlo</legend><label class="opt"><input type="radio" name="vis" value="public"'+(p.visibility==='friends'?' disabled':' checked')+'><span><b>Tutti</b>'+(p.visibility==='friends'?'<span class="muted" style="display:block;font-size:13px">Il post originale è solo per amici</span>':'')+'</span></label><label class="opt"><input type="radio" name="vis" value="friends"'+(p.visibility==='friends'?' checked':'')+'><span><b>Solo amici</b></span></label></fieldset><p class="ferr" id="rpErr" role="alert"></p></form>',
+    actions:[{label:'Ripubblica',cls:'btn-ink',onClick:function(D,b){var fd=new FormData($('#rpForm',D.box));b.disabled=true;Social.createPost({body:String(fd.get('body')||'').trim(),repost:p.id,vis:fd.get('vis')}).then(function(){D.close(true);toast('Ripubblicato nel tuo profilo');render(true)}).catch(function(e){b.disabled=false;$('#rpErr',D.box).textContent=Social.nice(e)})}}]})}
+
+/* ---- dettaglio post e commenti ---- */
+function viewPost(){var p=Social.pmap[S.postId];var back='<button type="button" class="btn-ghost row" data-act="backBoard" style="align-self:flex-start;gap:4px">'+ICON.back+'Bacheca</button>';
+  if(!p)return back+'<p class="muted" id="postLoad">Carico…</p>';
+  return back+postCard(p,true)+'<section class="sect" aria-labelledby="cmT"><h2 id="cmT">Commenti</h2><div id="cmList" class="stack" style="gap:8px" aria-live="polite"><p class="muted">Carico…</p></div>'+
+    '<form class="sendrow" id="cmSay"><label class="sr" for="cmMsg">Commento</label><input id="cmMsg" class="inp grow" maxlength="1000" autocomplete="off" placeholder="Scrivi un commento"><button type="submit" class="btn btn-ink" aria-label="Pubblica il commento">'+ICON.send+'</button></form></section>'}
+function afterPost(){var id=S.postId;if(!Social.pmap[id]){Social.onePost(id).then(function(p){if(S.view!=='post'||S.postId!==id)return;if(p)render(true);else{var l=$('#postLoad');if(l)l.textContent='Post non trovato: potrebbe essere stato eliminato o non essere visibile per te.'}}).catch(function(e){var l=$('#postLoad');if(l)l.textContent=Social.nice(e)});return}
+  loadComments(id)}
+function loadComments(id){Social.comments(id).then(function(a){var box=$('#cmList');if(!box||S.postId!==id)return;var me=Social.uid(),p=Social.pmap[id],ownP=p&&p.user_id===me;
+  box.innerHTML=a.length?a.map(function(c){return '<div class="cmt row" style="gap:10px;align-items:flex-start">'+avBtn(c.user_id,34)+'<div class="grow"><div>'+nickBtn(c.user_id)+' <span class="muted" style="font-size:12px">'+ago(c.created_at)+'</span></div><p style="white-space:pre-wrap">'+esc(c.body)+'</p></div>'+
+    (c.user_id===me||ownP?'<button type="button" class="icon-btn" style="width:36px;height:36px" data-act="delCmt" data-id="'+c.id+'" aria-label="Elimina il commento">'+ICON.trash+'</button>':'')+'</div>'}).join(''):'<p class="muted">Nessun commento. Scrivi tu il primo.</p>';
+  if(p&&p.post_comments)p.post_comments=[{count:a.length}]}).catch(function(e){var box=$('#cmList');if(box)box.innerHTML='<p class="ferr">'+esc(Social.nice(e))+'</p>'})}
+
+/* ---- profilo di una persona ---- */
+var UP={uid:null,data:null,err:''};S.utab='posts';
+function viewUser(){var id=S.userId,me=Social.uid(),p=Social.people[id]||{},isMe=id===me,d=UP.uid===id?UP.data:null;
+  var rel=isMe?'<button type="button" class="btn btn-sec grow" data-act="editMe">Modifica profilo</button><button type="button" class="btn btn-ink grow" data-act="newPost">Nuovo post</button>':
+    Social.friends.indexOf(id)>=0?'<span class="tag gps" style="align-self:center">Amici</span><button type="button" class="btn btn-ink grow" data-act="openChat" data-id="'+id+'">'+ICON.chat+'Scrivi</button>':
+    Social.outgoing.indexOf(id)>=0?'<span class="tag">Richiesta inviata</span>':Social.incoming.indexOf(id)>=0?'<button type="button" class="btn btn-ink grow" data-act="accept" data-id="'+id+'">Accetta l\'amicizia</button>':'<button type="button" class="btn btn-ink grow" data-act="addFriend" data-id="'+id+'">Aggiungi agli amici</button>';
+  var photos=d?d.own.filter(function(x){return x.media_path||(x.repost_of&&Social.pmap[x.repost_of]&&Social.pmap[x.repost_of].media_path)}):[];
+  var h='<button type="button" class="btn-ghost row" data-act="backBoard" style="align-self:flex-start;gap:4px">'+ICON.back+'Community</button>'+
+    '<header class="uhead"><span class="av big" aria-hidden="true">'+esc((p.nick||Social.nick(id)||'?').charAt(0).toUpperCase())+'</span><div class="grow"><h1 style="font-size:28px">'+esc(isMe?(Social.me&&Social.me.nick)||'Tu':Social.nick(id))+'</h1><p class="muted">'+esc(p.zone||'Zona non indicata')+'</p></div></header>'+
+    (d?'<div class="row ustats"><span><b class="num">'+d.own.length+'</b> post</span><span><b class="num">'+photos.length+'</b> foto</span><span><b class="num">'+d.tagged.length+'</b> in cui '+(isMe?'sei':'è')+' taggato</span></div>':'')+
+    '<div class="row" style="gap:8px;flex-wrap:wrap">'+rel+'</div>'+
+    '<div class="seg" role="tablist" aria-label="Contenuti del profilo">'+[['posts','Post'],['photos','Foto'],['tagged','Taggato']].map(function(t){return '<button type="button" role="tab" data-utab="'+t[0]+'" aria-selected="'+(S.utab===t[0])+'" aria-pressed="'+(S.utab===t[0])+'">'+t[1]+'</button>'}).join('')+'</div>';
+  if(UP.err&&UP.uid===id)return h+banner('err',esc(UP.err));
+  if(!d)return h+'<p class="muted">Carico…</p>';
+  if(S.utab==='photos')h+=photos.length?'<div class="pgrid">'+photos.map(function(x){var o=x.media_path?x:Social.pmap[x.repost_of];return '<button type="button" data-act="openPost" data-id="'+x.id+'" aria-label="Apri il post"><img class="ld" data-media="'+esc(o.media_path)+'" alt="Foto di '+esc(Social.nick(o.user_id))+'" loading="lazy"></button>'}).join('')+'</div>':'<div class="empty">Nessuna foto'+(isMe?': pubblica la prima dalla bacheca.':'.')+'</div>';
+  else{var l=S.utab==='tagged'?d.tagged:d.own;h+=l.length?'<div class="stack" style="gap:12px">'+l.map(function(x){return postCard(x)}).join('')+'</div>':'<div class="empty">'+(S.utab==='tagged'?'Nessun post in cui '+(isMe?'sei':'è')+' taggato.':'Nessun post'+(isMe?'.':' visibile per te.'))+'</div>'}
+  if(!isMe&&Social.friends.indexOf(id)<0)h+='<p class="muted" style="font-size:13px">Vedi solo i post pubblici: i post "solo amici" compaiono quando siete amici.</p>';
+  return h}
+function afterUser(){var id=S.userId;if(UP.uid===id&&UP.data&&Date.now()-UP.at<15000)return;UP={uid:id,data:UP.uid===id?UP.data:null,err:'',at:Date.now()};
+  Social.loadPeople([id]).then(function(){return Social.userPosts(id)}).then(function(d){if(UP.uid!==id)return;UP.data=d;UP.at=Date.now();if(S.view==='user'&&S.userId===id)render(true)}).catch(function(e){if(UP.uid!==id)return;UP.err=Social.nice(e);if(S.view==='user')render(true)})}
+
+/* ---- azioni ---- */
+function findPost(id){return Social.pmap[id]||null}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-act]');if(!b)return;var a=b.dataset.act;
+  if(a==='newPost')newPostDialog();
+  else if(a==='boardRetry'){Social.boardErr='';Social.boardLoaded=false;render(true)}
+  else if(a==='openPost'){S.postId=b.dataset.id;go('post')}
+  else if(a==='backBoard'){S.soc='feed';go('social')}
+  else if(a==='openUser'){S.userId=b.dataset.id;S.utab='posts';go('user')}
+  else if(a==='repost')repostDialog(b.dataset.id);
+  else if(a==='like'){var p=findPost(b.dataset.id);if(!p)return;var on=!(p.post_likes||[]).some(function(x){return x.user_id===Social.uid()});b.disabled=true;Social.like(p,on).then(function(){render(true);refocus('[data-act=like][data-id="'+p.id+'"]')}).catch(function(e2){b.disabled=false;toast(Social.nice(e2))})}
+  else if(a==='delPost'){var dp=findPost(b.dataset.id);if(!dp)return;confirmDlg('Eliminare il post?','Verranno tolti anche like, commenti, tag e le ripubblicazioni degli altri.','Elimina',function(){Social.delPost(dp).then(function(){toast('Post eliminato');UP.at=0;if(S.view==='post')go('social');else{render(true);afterUser&&S.view==='user'&&afterUser()}}).catch(function(e2){toast(Social.nice(e2))})})}
+  else if(a==='delCmt'){var cid=b.dataset.id;confirmDlg('Eliminare il commento?','Non si può annullare.','Elimina',function(){Social.delComment(cid).then(function(){toast('Commento eliminato');loadComments(S.postId)}).catch(function(e2){toast(Social.nice(e2))})})}
+  else if(a==='viewImg'){var im=b.querySelector('img');if(im&&im.src)viewImg(im.src,im.alt)}
+  else if(a==='dmRec'){recStart(function(blob,secs){var to=S.chatWith;toast('Invio il messaggio vocale…');Social.sendMedia(to,'audio',blob,secs).then(function(){drawThread()}).catch(function(e2){toast(Social.nice(e2))})})}
+  else if(a==='recCancel')recStop(true);
+  else if(a==='recSend')recStop(false);
+  else if(a==='dmRoute')pickRouteDialog(function(r){Social.sendRoute(S.chatWith,r).then(function(){drawThread()}).catch(function(e2){toast(Social.nice(e2))})});
+});
+document.addEventListener('click',function(e){var t=e.target.closest('[data-utab]');if(!t)return;S.utab=t.dataset.utab;render(true);refocus('[data-utab="'+S.utab+'"]')});
+document.addEventListener('change',function(e){if(e.target.id!=='dmPhoto')return;var f=e.target.files&&e.target.files[0];e.target.value='';if(!f)return;var to=S.chatWith;toast('Invio la foto…');
+  shrinkImage(f,1600,.82).then(function(bl){return Social.sendMedia(to,'image',bl)}).then(function(){drawThread()}).catch(function(e2){toast(Social.nice(e2))})});
+document.addEventListener('submit',function(e){if(e.target.id!=='cmSay')return;e.preventDefault();var inp=$('#cmMsg'),tx=inp.value.trim(),id=S.postId;if(!tx)return;inp.value='';
+  Social.comment(id,tx).then(function(){loadComments(id)}).catch(function(e2){inp.value=tx;toast(Social.nice(e2))})});
+function pickRouteDialog(fn){var l=myRoutes().concat(famousFor(S.sport));
+  var D=openDialog({title:'Manda un percorso',body:(myRoutes().length?'':'<p class="muted" style="font-size:14px">Non hai ancora percorsi tuoi: puoi crearne uno da Esplora. Intanto puoi mandare un percorso famoso.</p>')+'<div class="stack" style="gap:8px">'+l.map(function(r){return '<button type="button" class="opt" data-pick="'+r.id+'">'+sportIcon(r.sport)+'<span><b>'+esc(r.name)+'</b><span class="muted" style="display:block;font-size:13px">'+rkm1(rKm(r))+' km · '+(r.custom?'tuo':'famoso')+'</span></span></button>'}).join('')+'</div>'});
+  D.box.addEventListener('click',function(e){var b=e.target.closest('[data-pick]');if(!b)return;D.close();fn(famousById(b.dataset.pick))})}
 
 /* ================= AVVIO ================= */
 function openStart(routeId){if(M)return;var r=routeId?famousById(routeId):null,sug=suggestRoute().r;
@@ -1513,8 +1991,8 @@ function download(data,name){try{var blob=new Blob([JSON.stringify({app:'Trailo 
 /* percorso per la simulazione: tracciato calcolato, oppure le tappe in linea retta se il calcolo non è disponibile */
 function simRoute(r){return routeGeo(r).catch(function(){return wpGeo(r)}).then(function(g){return {id:r.id,name:r.name,km:g.km,dist:g.dist,ele:g.ele||g.dist.map(function(){return 0}),eleOk:!!g.ele,pts:g.pts,straight:!!g.straight}})}
 
-var VIEWS={home:viewHome,explore:viewExplore,route:viewRoute,place:viewPlace,evolve:viewEvolve,act:viewAct,profile:viewProfile,system:viewSystem,social:viewSocial,event:viewEvent,chat:viewChat};
-var AFTER={explore:afterExplore,route:afterRoute,place:afterPlace,act:afterAct,social:afterSocial,event:afterEvent,chat:afterChat};
+var VIEWS={home:viewHome,explore:viewExplore,route:viewRoute,place:viewPlace,evolve:viewEvolve,act:viewAct,profile:viewProfile,system:viewSystem,social:viewSocial,event:viewEvent,chat:viewChat,plan:viewPlan,kit:viewKit,post:viewPost,user:viewUser};
+var AFTER={home:afterHome,plan:afterPlan,kit:afterKit,post:afterPost,user:afterUser,explore:afterExplore,route:afterRoute,place:afterPlace,act:afterAct,social:afterSocial,event:afterEvent,chat:afterChat};
 
 /* ================= eventi ================= */
 function refocus(sel){var n=$(sel);if(n)n.focus()}
@@ -1591,6 +2069,18 @@ document.addEventListener('click',function(e){
   else if(act==='logout'){Social.signOut().then(function(){toast('Sei uscito dall\'account');render(true)})}
   else if(act==='editMe')editMeDialog();
   else if(act==='profile')go('profile');
+  else if(act==='plan')openPlan(null);
+  else if(act==='editRoute')openPlan(b.dataset.route);
+  else if(act==='planUndo'){if(PLAN.wp.length){PLAN.wp.pop();planCompute()}}
+  else if(act==='planClear'){if(PLAN.wp.length)confirmDlg('Ricominciare?','Tutte le tappe verranno tolte.','Togli le tappe',function(){PLAN.wp=[];planCompute()})}
+  else if(act==='planLoop'){if(PLAN.wp.length<2){toast('Servono almeno due tappe');return}var f0=PLAN.wp[0],l0=PLAN.wp[PLAN.wp.length-1];if(f0[0]===l0[0]&&f0[1]===l0[1]){toast('Il percorso torna già alla partenza');return}planAdd(f0);toast('Aggiunto il ritorno alla partenza')}
+  else if(act==='planLocate'){if(!navigator.geolocation){toast('Questo browser non fornisce la posizione');return}navigator.geolocation.getCurrentPosition(function(p){if(PLAN.map){PLAN.map.setView([p.coords.latitude,p.coords.longitude],14);PLAN.map.setDot([p.coords.latitude,p.coords.longitude])}},function(e2){toast(e2.code===1?'Posizione negata':'Posizione non disponibile')},{timeout:15000,maximumAge:300000})}
+  else if(act==='planSave')planSave();
+  else if(act==='shareRoute')shareRouteDialog(b.dataset.route);
+  else if(act==='saveShared'){var sr=famousById(b.dataset.route);if(sr){var nr=saveMyRoute(sr);if(nr){S.routeId=nr.id;render(true);toast('Salvato nei tuoi percorsi')}}}
+  else if(act==='delRoute'){var dr=famousById(b.dataset.route);confirmDlg('Eliminare il percorso?','«'+esc(dr.name)+'» verrà tolto da questo browser. Chi l\'ha ricevuto in chat o da un link lo conserva.','Elimina',function(){delMyRoute(dr.id);go('explore');toast('Percorso eliminato')})}
+  else if(act==='kitFor'){KIT.src='r:'+S.routeId;go('kit')}
+  else if(act==='wxLocate')wxLocate();
   else if(act==='resetAll')confirmDlg('Ricominciare da capo?','Preferenze, attività salvate e impostazioni del prototipo verranno cancellate da questo browser.','Cancella tutto',function(){try{Object.keys(localStorage).forEach(function(k){if(k.indexOf(NS)===0)localStorage.removeItem(k)})}catch(err){}location.reload()});
 });
 var qT;document.addEventListener('input',function(e){if(e.target.id!=='q')return;clearTimeout(qT);var v=e.target.value;qT=setTimeout(function(){exSearch(v)},150)});
@@ -1695,10 +2185,15 @@ function boot(){document.body.classList.toggle('run',S.sport==='run');
   var need=2,started=false,fail=false;function ready(){if(started)return;if(fail){started=true;endIntro();return}if(--need===0){started=true;playIntro(kind,first?function(){return {sym:$('#welSym'),wm:$('#welWm')}}:function(){return {sym:$('#hdrSym'),wm:$('#hdrWm')}})}}
   ['assets/trailo-simbolo.png','assets/trailo-wordmark.png'].forEach(function(src){var im=new Image();im.onload=ready;im.onerror=function(){fail=true;ready()};im.src=src});
   setTimeout(function(){if(!started){started=true;endIntro()}},700)}
+/* percorso aperto da un link condiviso (#r=…) */
+function openLinked(){var r=routeFromLink(location.hash);if(!/[#&]r=/.test(location.hash))return;try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
+  if(!r){toast('Link del percorso non valido');return}S.pendingRoute=r.id;if(S.view!=='onb')openPending()}
+function openPending(){var id=S.pendingRoute;if(!id)return;S.pendingRoute=null;var r=famousById(id);if(!r)return;if(r.sport!==S.sport)setSport(r.sport,true);S.routeId=id;go('route')}
+window.addEventListener('hashchange',function(){if(/[#&]r=/.test(location.hash))openLinked()});
 function socialBoot(){if(!Social.on())return;Social.loading=true;Social.ensureProfile().then(function(){return Social.refresh()}).then(function(){Social.loading=false;Social.startPoll();if(['home','social','explore'].indexOf(S.view)>=0&&!M)softRefresh()}).catch(function(){Social.loading=false})}
-try{boot();socialBoot()}catch(err){endIntro();try{enterApp()}catch(e2){}if(window.console)console.error(err)}
+try{boot();socialBoot();openLinked()}catch(err){endIntro();try{enterApp()}catch(e2){}if(window.console)console.error(err)}
 window.TRAILO_PROTO={S:S,Store:Store,T:T,go:go,setSport:setSport,Social:Social,FAMOUS:FAMOUS,ROUTE_GEO:ROUTE_GEO,exMap:function(){return EXMAP},rdMap:function(){return RD.map},startMove:function(rid,src){var r=rid?famousById(rid):suggestRoute().r;if((src||'sim')==='gps')return startMove({id:r.id,name:r.name},'gps',false);return simRoute(r).then(function(sr){startMove(sr,'sim',false)})},M:function(){return M},endMove:function(){if(M)endMove()},
-  playIntro:playIntro,DEMO:DEMO,filtered:filtered,dataset:dataset,estimate:estimate,dur:dur,inBand:inBand,openStart:openStart,LAYERS:LAYERS,tab:function(){return tabIdx}};
+  playIntro:playIntro,DEMO:DEMO,filtered:filtered,dataset:dataset,estimate:estimate,dur:dur,inBand:inBand,openStart:openStart,LAYERS:LAYERS,tab:function(){return tabIdx},PLAN:function(){return PLAN},planMap:function(){return PLAN.map},myRoutes:function(){return MYR},shareLink:function(id){return shareLink(famousById(id))},kitFor:kitFor,burn:burn,wxSpan:wxSpan,loadWx:loadWx,MEDIA:MEDIA,famousById:function(id){return famousById(id)}};
 
 })();
 </script>
